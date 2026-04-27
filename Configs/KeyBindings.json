@@ -5,27 +5,8 @@
     "key": "shift+alt+cmd+b",
     "command": "workbench.action.toggleActivityBarVisibility"
   },
-  {
-    "key": "shift+alt+cmd+e",
-    "command": "extension.installCustomCSS"
-  },
-  {
-    "key": "shift+alt+cmd+d",
-    "command": "extension.uninstallCustomCSS"
-  },
-  {
-    "key": "ctrl+cmd+j",
-    "command": "workbench.action.toggleMaximizedPanel"
-  },
-  {
-    "key": "alt+cmd+n",
-    "command": "-extension.advancedNewFile"
-  },
-  {
-    "key": "shift+alt+cmd+n",
-    "command": "extension.advancedNewFile"
-  },
   // Right now, Using AI in every folder
+  // Advanced New File
   // {
   //   "key": "shift+alt+c",
   //   "command": "github.copilot.completions.toggle"
@@ -50,12 +31,7 @@
     "command": "-workbench.action.replaceInFiles"
   },
   {
-    "key": "ctrl+shift+cmd+r",
-    "command": "workbench.action.reloadWindow"
-  },
-  {
-    "key": "cmd+r",
-    "command": "-workbench.action.reloadWindow",
-    "when": "isDevelopment"
+    "key": "cmd+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
   }
 ]
