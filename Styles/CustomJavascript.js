@@ -1,135 +1,270 @@
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                 🎭 FIXED COMMAND PALETTE BLUR                   │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* ╔══════════════════════════════════════════════════════════════════╗ */
+/* ║             🚀 MrDib's CUSTOM JAVASCRIPT - v5.0 🚀                ║ */
+/* ║      JARVIS Boot + Neural Glyph + Command Blur + Editor Fix      ║ */
+/* ╚══════════════════════════════════════════════════════════════════╝ */
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Create styles once
-  const blurStyles = document.createElement("style");
-  blurStyles.id = "command-blur-styles";
-  blurStyles.textContent = `
-    /* Blur ONLY the editor and panels, NOT the command palette */
-    body.command-palette-open .monaco-workbench .part.editor,
-    body.command-palette-open .monaco-workbench .part.sidebar,
-    body.command-palette-open .monaco-workbench .part.panel,
-    body.command-palette-open .monaco-workbench .part.activitybar,
-    body.command-palette-open .monaco-workbench .part.titlebar,
-    body.command-palette-open .monaco-workbench .part.statusbar {
-      filter: blur(5px) brightness(0.7);
-      transition: filter 0.3s ease-in-out;
+/* ┌──────────────────────────────────────────────────────────────────┐ */
+/* │   🛠️ MODULE 1: SPECIAL EDITOR DETECTOR                          │ */
+/* └──────────────────────────────────────────────────────────────────┘ */
+
+(function initSpecialEditorDetector() {
+  const SPECIAL_EDITORS = [
+    { selector: ".settings-editor", bodyClass: "has-settings-editor" },
+    { selector: ".keybindings-editor", bodyClass: "has-keybindings-editor" },
+    { selector: ".gettingStartedContainer", bodyClass: "has-welcome-editor" },
+    { selector: ".extension-editor", bodyClass: "has-extension-editor" },
+    { selector: ".notebookOverlay", bodyClass: "has-notebook-editor" },
+    { selector: ".webview", bodyClass: "has-webview-editor" },
+    { selector: ".markdown-body", bodyClass: "has-markdown-preview" },
+  ];
+
+  function syncEditorClasses() {
+    SPECIAL_EDITORS.forEach(({ selector, bodyClass }) => {
+      document.body.classList.toggle(
+        bodyClass,
+        !!document.querySelector(selector),
+      );
+    });
+  }
+
+  /* ── Run immediately ── */
+  syncEditorClasses();
+
+  /* ── MutationObserver watches for DOM changes ── */
+  new MutationObserver(syncEditorClasses).observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  /* ── Polling fallback every 300ms ──
+       Catches lazy-loaded editors that MutationObserver misses */
+  setInterval(syncEditorClasses, 300);
+
+  /* ── Also re-check when tabs are clicked ── */
+  document.addEventListener("click", () => setTimeout(syncEditorClasses, 100));
+  document.addEventListener("keyup", () => setTimeout(syncEditorClasses, 100));
+
+  console.log("🛠️ MrDib: Special Editor Detector — ONLINE ✅");
+})();
+
+/* ┌──────────────────────────────────────────────────────────────────┐ */
+/* │   🪟 MODULE 1.5: SPECIAL EDITOR FULLSCREEN GLASS                │ */
+/* │   Same strategy as Command Palette — blur the WHOLE window      │ */
+/* │   when Settings / Keybindings / Welcome etc. are open           │ */
+/* └──────────────────────────────────────────────────────────────────┘ */
+
+(function initSpecialEditorGlass() {
+  /* ── Theme config per editor type ── */
+  const EDITOR_THEMES = {
+    "has-settings-editor": {
+      tint: "rgba(10, 10, 20, 0.85)",
+      glow: "rgba(255, 215, 0, 0.08)",
+      border: "rgba(255, 215, 0, 0.25)",
+    },
+    "has-keybindings-editor": {
+      tint: "rgba(5, 15, 8, 0.85)",
+      glow: "rgba(0, 255, 136, 0.08)",
+      border: "rgba(0, 255, 136, 0.25)",
+    },
+    "has-welcome-editor": {
+      tint: "rgba(10, 5, 20, 0.85)",
+      glow: "rgba(170, 0, 255, 0.08)",
+      border: "rgba(170, 0, 255, 0.25)",
+    },
+    "has-extension-editor": {
+      tint: "rgba(5, 10, 20, 0.85)",
+      glow: "rgba(30, 144, 255, 0.08)",
+      border: "rgba(30, 144, 255, 0.25)",
+    },
+    "has-markdown-preview": {
+      tint: "rgba(8, 8, 20, 0.85)",
+      glow: "rgba(255, 255, 255, 0.04)",
+      border: "rgba(255, 255, 255, 0.15)",
+    },
+  };
+
+  /* ── Inject base styles ── */
+  if (!document.getElementById("special-editor-glass-styles")) {
+    const s = document.createElement("style");
+    s.id = "special-editor-glass-styles";
+    s.textContent = `
+  .special-editor-glass-overlay {
+    position: fixed !important;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out;
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  }
+
+  body.special-editor-active .monaco-workbench .part.editor {
+    position: relative;
+    z-index: 6;
+  }
+
+  body.special-editor-active .monaco-workbench .part.sidebar,
+  body.special-editor-active .monaco-workbench .part.panel,
+  body.special-editor-active .monaco-workbench .part.activitybar,
+  body.special-editor-active .monaco-workbench .part.auxiliarybar {
+    filter: blur(3px) brightness(0.6);
+    transition: filter 0.4s ease-in-out;
+  }
+
+  body:not(.special-editor-active) .monaco-workbench .part.sidebar,
+  body:not(.special-editor-active) .monaco-workbench .part.panel,
+  body:not(.special-editor-active) .monaco-workbench .part.activitybar,
+  body:not(.special-editor-active) .monaco-workbench .part.auxiliarybar {
+    filter: none;
+    transition: filter 0.4s ease-in-out;
+  }
+`;
+    document.head.appendChild(s);
+  }
+
+  let overlay = null;
+  let currentTheme = null;
+
+  function activateGlass(themeKey) {
+    const theme = EDITOR_THEMES[themeKey];
+    if (!theme) return;
+
+    /* Avoid re-creating if same theme */
+    if (currentTheme === themeKey) return;
+    currentTheme = themeKey;
+
+    document.body.classList.add("special-editor-active");
+
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.className = "special-editor-glass-overlay";
+      /* Insert BEFORE .monaco-workbench's children but after ::before wallpaper */
+      const workbench = document.querySelector(".monaco-workbench");
+      if (workbench) {
+        workbench.appendChild(overlay);
+      } else {
+        document.body.appendChild(overlay);
+      }
     }
 
-    /* Dark overlay behind palette */
-    .command-dark-overlay {
-      position: fixed !important;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999; /* Below command palette */
-      pointer-events: none;
-      transition: opacity 0.3s ease-in-out;
+    overlay.style.background = theme.tint;
+    overlay.style.boxShadow = `0 0 80px ${theme.glow} inset`;
+    overlay.style.borderTop = `1px solid ${theme.border}`;
+    overlay.style.opacity = "1";
+  }
+
+  function deactivateGlass() {
+    if (!currentTheme) return;
+    currentTheme = null;
+
+    document.body.classList.remove("special-editor-active");
+
+    if (overlay) {
+      overlay.style.opacity = "0";
+      setTimeout(() => {
+        overlay?.remove();
+        overlay = null;
+      }, 400);
     }
+  }
 
-    /* Make sure command palette is NOT blurred and on top */
-    body.command-palette-open .quick-input-widget {
-      filter: none !important;
-      position: relative;
-      z-index: 10000 !important;
-      box-shadow:
-        0 0 50px rgba(0, 255, 136, 0.4),
-        0 0 100px rgba(0, 255, 136, 0.2) !important;
+  function syncGlass() {
+    /* Check which special editor is active (priority order) */
+    for (const themeKey of Object.keys(EDITOR_THEMES)) {
+      if (document.body.classList.contains(themeKey)) {
+        activateGlass(themeKey);
+        return;
+      }
     }
+    /* No special editor active */
+    deactivateGlass();
+  }
 
-    /* Green theme styling */
-    body.command-palette-open .quick-input-widget {
-      background: rgba(10, 30, 10, 0.98) !important;
-      border: 2px solid rgba(0, 255, 136, 0.5) !important;
+  /* ── Sync whenever Module 1 updates body classes ── */
+  new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.type === "attributes" && m.attributeName === "class") {
+        syncGlass();
+        return;
+      }
     }
+  }).observe(document.body, { attributes: true });
 
-    body.command-palette-open .quick-input-widget input {
-      background: rgba(0, 40, 0, 0.9) !important;
-      color: #00ff88 !important;
-      caret-color: #00ff88 !important;
-      border: 1px solid rgba(0, 255, 136, 0.3) !important;
-    }
+  /* ── Polling fallback ── */
+  setInterval(syncGlass, 500);
 
-    body.command-palette-open .quick-input-list {
-      background: transparent !important;
-    }
+  /* ── Initial check ── */
+  syncGlass();
 
-    body.command-palette-open .monaco-list-row {
-      color: #00ff88 !important;
-    }
+  console.log("🪟 MrDib: Special Editor Glass Overlay — ONLINE ✅");
+})();
 
-    body.command-palette-open .monaco-list-row.focused {
-      background: rgba(0, 255, 136, 0.15) !important;
-      border: 1px solid rgba(0, 255, 136, 0.3) !important;
-    }
+/* ┌──────────────────────────────────────────────────────────────────┐ */
+/* │   🎭 MODULE 2: COMMAND PALETTE BLUR EFFECT                      │ */
+/* │   ⚠️  NO DOMContentLoaded wrapper — runs immediately!           │ */
+/* └──────────────────────────────────────────────────────────────────┘ */
 
-    body.command-palette-open .label-name {
-      color: #00ff88 !important;
-    }
-
-    body.command-palette-open .label-description {
-      color: rgba(0, 255, 136, 0.7) !important;
-    }
-
-    body.command-palette-open .codicon {
-      color: #00ff88 !important;
-    }
-  `;
-  document.head.appendChild(blurStyles);
-
-  const checkElement = setInterval(() => {
-    const commandDialog = document.querySelector(".quick-input-widget");
-
-    if (commandDialog) {
-      if (commandDialog.style.display !== "none") {
-        activatePaletteMode();
+(function initCommandPaletteBlur() {
+  /* ── Inject styles immediately (no DOMContentLoaded!) ── */
+  if (!document.getElementById("command-blur-styles")) {
+    const blurStyles = document.createElement("style");
+    blurStyles.id = "command-blur-styles";
+    blurStyles.textContent = `
+      body.command-palette-open .monaco-workbench .part.editor,
+      body.command-palette-open .monaco-workbench .part.sidebar,
+      body.command-palette-open .monaco-workbench .part.panel,
+      body.command-palette-open .monaco-workbench .part.activitybar,
+      body.command-palette-open .monaco-workbench .part.titlebar,
+      body.command-palette-open .monaco-workbench .part.statusbar {
+        filter: blur(5px) brightness(0.7);
+        transition: filter 0.3s ease-in-out;
       }
 
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (
-            mutation.type === "attributes" &&
-            mutation.attributeName === "style"
-          ) {
-            if (commandDialog.style.display === "none") {
-              deactivatePaletteMode();
-            } else {
-              activatePaletteMode();
-            }
-          }
-        });
-      });
+      .command-dark-overlay {
+        position: fixed !important;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+      }
 
-      observer.observe(commandDialog, { attributes: true });
-      clearInterval(checkElement);
-    }
-  }, 500);
+      body.command-palette-open .quick-input-widget {
+        filter: none !important;
+        z-index: 10000 !important;
+        box-shadow:
+          0 0 50px rgba(0, 255, 136, 0.4),
+          0 0 100px rgba(0, 255, 136, 0.2) !important;
+        background: rgba(10, 30, 10, 0.98) !important;
+        border: 2px solid rgba(0, 255, 136, 0.5) !important;
+      }
 
-  // Keyboard shortcuts
-  document.addEventListener("keydown", function (event) {
-    if ((event.metaKey || event.ctrlKey) && event.key === "p") {
-      setTimeout(activatePaletteMode, 50);
-    } else if (event.key === "Escape") {
-      deactivatePaletteMode();
-    }
-  });
+      body.command-palette-open .quick-input-widget input {
+        background: rgba(0, 40, 0, 0.9) !important;
+        color: #00ff88 !important;
+        caret-color: #00ff88 !important;
+        border: 1px solid rgba(0, 255, 136, 0.3) !important;
+      }
+
+      body.command-palette-open .quick-input-list      { background: transparent !important; }
+      body.command-palette-open .monaco-list-row       { color: #00ff88 !important; }
+      body.command-palette-open .label-name            { color: #00ff88 !important; }
+      body.command-palette-open .label-description     { color: rgba(0, 255, 136, 0.7) !important; }
+      body.command-palette-open .codicon               { color: #00ff88 !important; }
+
+      body.command-palette-open .monaco-list-row.focused {
+        background: rgba(0, 255, 136, 0.15) !important;
+        border: 1px solid rgba(0, 255, 136, 0.3) !important;
+      }
+    `;
+    document.head.appendChild(blurStyles);
+  }
 
   let darkOverlay = null;
 
   function activatePaletteMode() {
-    // Add class to body
     document.body.classList.add("command-palette-open");
-
-    // Disable cursor animation
-    if (typeof CURSOR_CONFIG !== "undefined") {
-      CURSOR_CONFIG.enabled = false;
-    }
-
-    // Create dark overlay (not blur)
+    if (typeof CURSOR_CONFIG !== "undefined") CURSOR_CONFIG.enabled = false;
     if (!darkOverlay) {
       darkOverlay = document.createElement("div");
       darkOverlay.className = "command-dark-overlay";
@@ -138,34 +273,58 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function deactivatePaletteMode() {
-    // Remove class
     document.body.classList.remove("command-palette-open");
-
-    // Re-enable cursor animation
-    if (typeof CURSOR_CONFIG !== "undefined") {
-      CURSOR_CONFIG.enabled = true;
-    }
-
-    // Remove overlay
+    if (typeof CURSOR_CONFIG !== "undefined") CURSOR_CONFIG.enabled = true;
     if (darkOverlay) {
       darkOverlay.style.opacity = "0";
       setTimeout(() => {
-        if (darkOverlay && darkOverlay.parentNode) {
-          darkOverlay.remove();
-          darkOverlay = null;
-        }
+        darkOverlay?.remove();
+        darkOverlay = null;
       }, 300);
     }
   }
-});
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │          🔧 JARVIS BOOT SEQUENCE (Arc Reactor Edition)          │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+  /* ── Keyboard shortcut detection — added immediately ── */
+  document.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "p") {
+      setTimeout(activatePaletteMode, 50);
+    } else if (e.key === "Escape") {
+      deactivatePaletteMode();
+    }
+  });
+
+  /* ── Poll for the palette widget (can't use DOMContentLoaded!) ── */
+  const checkPalette = setInterval(() => {
+    const palette = document.querySelector(".quick-input-widget");
+    if (!palette) return;
+
+    clearInterval(checkPalette);
+    console.log("🎭 MrDib: Command Palette found — attaching observer ✅");
+
+    /* Check if already visible */
+    if (palette.style.display !== "none") activatePaletteMode();
+
+    /* Watch for show/hide changes */
+    new MutationObserver((mutations) => {
+      mutations.forEach((m) => {
+        if (m.type === "attributes" && m.attributeName === "style") {
+          palette.style.display === "none"
+            ? deactivatePaletteMode()
+            : activatePaletteMode();
+        }
+      });
+    }).observe(palette, { attributes: true });
+  }, 300);
+
+  console.log("🎭 MrDib: Command Palette Blur — ONLINE ✅");
+})();
+
+/* ┌──────────────────────────────────────────────────────────────────┐ */
+/* │   🔧 MODULE 3: JARVIS BOOT SEQUENCE (Arc Reactor Edition)        │ */
+/* └──────────────────────────────────────────────────────────────────┘ */
 
 const jarvisStyle = document.createElement("style");
 jarvisStyle.textContent = `
-  /* Arc Reactor Core Aesthetics */
   :root {
     --stark-blue: #00d4ff;
     --arc-white: #ffffff;
@@ -176,268 +335,129 @@ jarvisStyle.textContent = `
   }
 
   @keyframes arcReactorBoot {
-    0% {
-      transform: translate(-50%, -50%) scale(0) rotate(0deg);
-      opacity: 0;
-      filter: brightness(2) blur(10px);
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1) rotate(180deg);
-      opacity: 1;
-      filter: brightness(1.5) blur(0px);
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1) rotate(360deg);
-      filter: brightness(1) blur(0px);
-    }
+    0%   { transform: translate(-50%, -50%) scale(0) rotate(0deg);   opacity: 0; filter: brightness(2) blur(10px); }
+    50%  { transform: translate(-50%, -50%) scale(1) rotate(180deg); opacity: 1; filter: brightness(1.5) blur(0px); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(360deg);             filter: brightness(1) blur(0px); }
   }
 
   @keyframes hologramBoot {
-    0% {
-      transform: translate(-50%, -50%) rotateX(90deg) scale(0);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(-50%, -50%) rotateX(0deg) scale(1);
-      opacity: 1;
-    }
+    0%   { transform: translate(-50%, -50%) rotateX(90deg) scale(0); opacity: 0; }
+    100% { transform: translate(-50%, -50%) rotateX(0deg) scale(1);  opacity: 1; }
   }
 
   @keyframes dataStream {
-    0% {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
+    0%   { transform: translateY(100%);  opacity: 0; }
+    50%  {                               opacity: 1; }
+    100% { transform: translateY(-100%); opacity: 0; }
   }
 
   @keyframes hudFrame {
-    0% {
-      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-      opacity: 0;
-    }
-    25% {
-      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-      opacity: 1;
-    }
-    50% {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
-    }
-    75% {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-    100% {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-      opacity: 1;
-    }
+    0%   { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);           opacity: 0; }
+    25%  { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);           opacity: 1; }
+    50%  { clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);              }
+    75%  { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);                 }
+    100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);     opacity: 1; }
   }
 
   @keyframes powerUp {
-    0% {
-      box-shadow: 0 0 0 0 var(--stark-blue);
-    }
-    50% {
-      box-shadow: 0 0 20px 10px transparent;
-    }
-    100% {
-      box-shadow: 0 0 0 0 transparent;
-    }
+    0%   { box-shadow: 0 0 0 0 var(--stark-blue); }
+    50%  { box-shadow: 0 0 20px 10px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
   }
 
   @keyframes textHologram {
-    0% {
-      opacity: 0;
-      transform: translateZ(-100px) rotateY(90deg);
-      filter: blur(5px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateZ(0) rotateY(0deg);
-      filter: blur(0px);
-    }
+    0%   { opacity: 0; transform: translateZ(-100px) rotateY(90deg); filter: blur(5px); }
+    100% { opacity: 1; transform: translateZ(0) rotateY(0deg);       filter: blur(0px); }
   }
 
   @keyframes textGlow {
     0%, 100% {
       text-shadow:
-        0 0 10px var(--text-glow),
-        0 0 20px var(--text-glow),
-        0 0 30px var(--text-glow),
-        0 0 40px var(--text-accent);
+        0 0 10px var(--text-glow), 0 0 20px var(--text-glow),
+        0 0 30px var(--text-glow), 0 0 40px var(--text-accent);
     }
     50% {
       text-shadow:
-        0 0 20px var(--text-glow),
-        0 0 30px var(--text-glow),
-        0 0 40px var(--text-glow),
-        0 0 50px var(--text-accent),
+        0 0 20px var(--text-glow), 0 0 30px var(--text-glow),
+        0 0 40px var(--text-glow), 0 0 50px var(--text-accent),
         0 0 60px var(--text-accent);
     }
   }
 
   @keyframes textPanel {
-    0% {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    100% {
-      opacity: 1;
-      transform: scaleX(1);
-    }
+    0%   { opacity: 0; transform: scaleX(0); }
+    100% { opacity: 1; transform: scaleX(1); }
   }
 
-  /* Main container */
+  @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
   .jarvis-boot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: fixed; inset: 0;
     z-index: 100000;
-    background: radial-gradient(ellipse at center,
-      rgba(0, 0, 0, 0.95) 0%,
-      rgba(0, 0, 0, 1) 100%);
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,1) 100%);
     pointer-events: none;
     perspective: 1000px;
     overflow: hidden;
   }
 
-  /* Arc Reactor Core */
   .arc-reactor {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    height: 200px;
+    position: fixed; top: 50%; left: 50%;
+    width: 200px; height: 200px;
     transform: translate(-50%, -50%);
     animation: arcReactorBoot 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   .reactor-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     border: 2px solid var(--stark-blue);
     border-radius: 50%;
-    box-shadow:
-      0 0 20px var(--stark-blue),
-      inset 0 0 20px var(--stark-blue);
+    box-shadow: 0 0 20px var(--stark-blue), inset 0 0 20px var(--stark-blue);
   }
 
-  .reactor-ring:nth-child(1) {
-    width: 100%;
-    height: 100%;
-    animation: powerUp 1.8s ease-out infinite;
-  }
-
-  .reactor-ring:nth-child(2) {
-    width: 70%;
-    height: 70%;
-    animation: powerUp 1.8s ease-out 0.2s infinite;
-  }
-
+  .reactor-ring:nth-child(1) { width: 100%; height: 100%; animation: powerUp 1.8s ease-out infinite; }
+  .reactor-ring:nth-child(2) { width: 70%;  height: 70%;  animation: powerUp 1.8s ease-out 0.2s infinite; }
   .reactor-ring:nth-child(3) {
-    width: 40%;
-    height: 40%;
+    width: 40%; height: 40%;
     background: var(--stark-blue);
-    box-shadow:
-      0 0 30px var(--stark-blue),
-      0 0 60px var(--arc-white);
+    box-shadow: 0 0 30px var(--stark-blue), 0 0 60px var(--arc-white);
     animation: powerUp 1.8s ease-out 0.4s infinite;
   }
 
-  /* HUD Frame */
   .hud-frame {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 60vh;
+    width: 80vw; height: 60vh;
     border: 1px solid var(--stark-blue);
     animation: hudFrame 1.2s ease-out 0.8s both;
-    box-shadow:
-      0 0 20px var(--holo-glass),
-      inset 0 0 20px var(--holo-glass);
+    box-shadow: 0 0 20px var(--holo-glass), inset 0 0 20px var(--holo-glass);
   }
 
-  /* Corner markers */
   .hud-corner {
-    position: absolute;
-    width: 20px;
-    height: 20px;
+    position: absolute; width: 20px; height: 20px;
     border: 2px solid var(--stark-blue);
   }
 
   .hud-corner::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 4px;
+    content: ''; position: absolute;
+    width: 4px; height: 4px;
     background: var(--arc-white);
     box-shadow: 0 0 10px var(--arc-white);
   }
 
-  .hud-corner.tl {
-    top: -1px;
-    left: -1px;
-    border-right: none;
-    border-bottom: none;
-  }
+  .hud-corner.tl { top: -1px; left: -1px;   border-right: none; border-bottom: none; }
+  .hud-corner.tr { top: -1px; right: -1px;  border-left: none;  border-bottom: none; }
+  .hud-corner.bl { bottom: -1px; left: -1px;  border-right: none; border-top: none; }
+  .hud-corner.br { bottom: -1px; right: -1px; border-left: none;  border-top: none; }
 
-  .hud-corner.tl::after {
-    bottom: -2px;
-    right: -2px;
-  }
+  .hud-corner.tl::after { bottom: -2px; right: -2px; }
+  .hud-corner.tr::after { bottom: -2px; left: -2px; }
+  .hud-corner.bl::after { top: -2px;    right: -2px; }
+  .hud-corner.br::after { top: -2px;    left: -2px; }
 
-  .hud-corner.tr {
-    top: -1px;
-    right: -1px;
-    border-left: none;
-    border-bottom: none;
-  }
-
-  .hud-corner.tr::after {
-    bottom: -2px;
-    left: -2px;
-  }
-
-  .hud-corner.bl {
-    bottom: -1px;
-    left: -1px;
-    border-right: none;
-    border-top: none;
-  }
-
-  .hud-corner.bl::after {
-    top: -2px;
-    right: -2px;
-  }
-
-  .hud-corner.br {
-    bottom: -1px;
-    right: -1px;
-    border-left: none;
-    border-top: none;
-  }
-
-  .hud-corner.br::after {
-    top: -2px;
-    left: -2px;
-  }
-
-  /* Holographic display - CENTERED */
   .holo-display {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     transform-style: preserve-3d;
     animation: hologramBoot 1.2s ease-out 1.5s both;
@@ -446,36 +466,22 @@ jarvisStyle.textContent = `
     padding: 2rem 3rem;
   }
 
-  /* Text backdrop panel - FIXED POSITIONING */
   .text-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.6) 50%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.8) 100%);
     border: 1px solid rgba(0, 255, 136, 0.3);
     border-radius: 10px;
-    box-shadow:
-      0 0 30px rgba(0, 255, 136, 0.2),
-      inset 0 0 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px rgba(0,255,136,0.2), inset 0 0 30px rgba(0,0,0,0.5);
     z-index: -1;
     animation: textPanel 0.5s ease-out 1.8s both;
   }
 
-  /* Welcome text - ENHANCED VISIBILITY */
   .jarvis-text {
     font-family: 'Arial', sans-serif;
     font-weight: 300;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    animation: textHologram 1s ease-out both;
     white-space: nowrap;
     position: relative;
     z-index: 1;
@@ -484,58 +490,40 @@ jarvisStyle.textContent = `
   .jarvis-text.primary {
     font-size: clamp(2rem, 5vw, 3.5rem);
     margin-bottom: 1rem;
-    animation-delay: 2s;
     color: var(--text-accent);
     font-weight: bold;
     text-shadow:
-      0 0 10px var(--text-glow),
-      0 0 20px var(--text-glow),
-      0 0 30px var(--text-glow),
-      0 0 40px var(--text-accent),
-      0 2px 4px rgba(0, 0, 0, 0.8);
+      0 0 10px var(--text-glow), 0 0 20px var(--text-glow),
+      0 0 30px var(--text-glow), 0 0 40px var(--text-accent),
+      0 2px 4px rgba(0,0,0,0.8);
     animation: textHologram 1s ease-out 2s both, textGlow 2s ease-in-out 3s infinite;
   }
 
   .jarvis-text.secondary {
     font-size: clamp(1rem, 2.5vw, 1.5rem);
     color: var(--reactor-orange);
-    animation-delay: 2.5s;
     letter-spacing: 0.4em;
     font-weight: 400;
+    animation: textHologram 1s ease-out 2.5s both;
     text-shadow:
-      0 0 10px var(--reactor-orange),
-      0 0 20px var(--reactor-orange),
-      0 0 30px #ff3300,
-      0 2px 4px rgba(0, 0, 0, 0.8);
+      0 0 10px var(--reactor-orange), 0 0 20px var(--reactor-orange),
+      0 0 30px #ff3300, 0 2px 4px rgba(0,0,0,0.8);
   }
 
-  /* Data visualization bars */
   .data-viz {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100px;
-    height: 200px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
+    position: fixed; top: 50%; transform: translateY(-50%);
+    width: 100px; height: 200px;
+    display: flex; align-items: flex-end; justify-content: space-around;
     opacity: 0;
     animation: fadeIn 0.8s ease-out 2.8s both;
   }
 
-  .data-viz.left {
-    left: 10%;
-  }
-
-  .data-viz.right {
-    right: 10%;
-  }
+  .data-viz.left  { left: 10%; }
+  .data-viz.right { right: 10%; }
 
   .data-bar {
     width: 15px;
-    background: linear-gradient(to top,
-      var(--stark-blue) 0%,
-      var(--arc-white) 100%);
+    background: linear-gradient(to top, var(--stark-blue) 0%, var(--arc-white) 100%);
     animation: dataStream 2.5s ease-in-out infinite;
     opacity: 0.7;
   }
@@ -546,21 +534,8 @@ jarvisStyle.textContent = `
   .data-bar:nth-child(4) { height: 90%; animation-delay: 0.6s; }
   .data-bar:nth-child(5) { height: 70%; animation-delay: 0.8s; }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-
-  /* Status text */
   .status-text {
-    position: fixed;
-    bottom: 10%;
-    left: 50%;
+    position: fixed; bottom: 10%; left: 50%;
     transform: translateX(-50%);
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
@@ -570,20 +545,14 @@ jarvisStyle.textContent = `
     animation: fadeIn 0.8s ease-out 3.2s both;
   }
 
-  /* Cleanup animation */
-  .jarvis-boot.shutting-down {
-    animation: fadeOut 1s ease-out forwards;
-  }
+  .jarvis-boot.shutting-down { animation: fadeOut 1s ease-out forwards; }
 `;
 document.head.appendChild(jarvisStyle);
 
-// Create JARVIS boot sequence
 function initJarvisWelcome() {
-  // Main container
   const jarvis = document.createElement("div");
   jarvis.className = "jarvis-boot";
 
-  // Arc Reactor
   const reactor = document.createElement("div");
   reactor.className = "arc-reactor";
   reactor.innerHTML = `
@@ -593,7 +562,6 @@ function initJarvisWelcome() {
   `;
   jarvis.appendChild(reactor);
 
-  // HUD Frame
   const hudFrame = document.createElement("div");
   hudFrame.className = "hud-frame";
   ["tl", "tr", "bl", "br"].forEach((pos) => {
@@ -603,16 +571,13 @@ function initJarvisWelcome() {
   });
   jarvis.appendChild(hudFrame);
 
-  // Holographic Display with backdrop
   const holoDisplay = document.createElement("div");
   holoDisplay.className = "holo-display";
 
-  // Add backdrop panel
   const backdrop = document.createElement("div");
   backdrop.className = "text-backdrop";
   holoDisplay.appendChild(backdrop);
 
-  // Create text elements
   const primaryText = document.createElement("div");
   primaryText.className = "jarvis-text primary";
   primaryText.textContent = "WELCOME BACK";
@@ -625,7 +590,6 @@ function initJarvisWelcome() {
   holoDisplay.appendChild(secondaryText);
   jarvis.appendChild(holoDisplay);
 
-  // Data visualization
   ["left", "right"].forEach((side) => {
     const dataViz = document.createElement("div");
     dataViz.className = `data-viz ${side}`;
@@ -637,16 +601,13 @@ function initJarvisWelcome() {
     jarvis.appendChild(dataViz);
   });
 
-  // Status text
   const status = document.createElement("div");
   status.className = "status-text";
   status.textContent = "SYSTEM: ONLINE";
   jarvis.appendChild(status);
 
-  // Append to body
   document.body.appendChild(jarvis);
 
-  // Shutdown sequence
   setTimeout(() => {
     jarvis.classList.add("shutting-down");
     setTimeout(() => {
@@ -656,38 +617,35 @@ function initJarvisWelcome() {
   }, 4500);
 }
 
-// Initialize
 if (!document.querySelector(".jarvis-boot")) {
   initJarvisWelcome();
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │         🧿 NEURAL GLYPH CURSOR (Dimensional Rift Edition)       │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* ┌──────────────────────────────────────────────────────────────────┐ */
+/* │   🧿 MODULE 4: NEURAL GLYPH CURSOR (Dimensional Rift Edition)    │ */
+/* └──────────────────────────────────────────────────────────────────┘ */
 
 const CURSOR_CONFIG = {
   enabled: true,
   maxGlyphs: 80,
   glyphLife: 1200,
   colors: {
-    primary: "#00ff41", // Radioactive green
-    accent: "#00ffff", // Cyan
-    flash: "#ff00ff", // Violet
-    core: "#ffffff", // White flash
-    rift: "#ff00ff", // Dimensional rift
+    primary: "#00ff41",
+    accent: "#00ffff",
+    flash: "#ff00ff",
+    core: "#ffffff",
+    rift: "#ff00ff",
   },
-  idleTimeout: 5000, // Start idle animation after 500ms
+  idleTimeout: 5000,
 };
 
 let cursorGlyphs = [];
-let cursorColorIndex = 0;
 let cursorLastPos = null;
 let cursorLastMoveTime = Date.now();
 let cursorIsIdle = false;
 let cursorIdleAnimation = null;
 let cursorVelocity = { x: 0, y: 0 };
 
-// Glyph symbols (Unicode fragments for alien feel)
 const CURSOR_GLYPH_SYMBOLS = [
   "◢",
   "◣",
@@ -711,24 +669,20 @@ const CURSOR_GLYPH_SYMBOLS = [
   "⧉",
 ];
 
-// Context detection
 function getCursorContextColor(x, y) {
-  const element = document.elementFromPoint(x, y);
-  if (!element) return CURSOR_CONFIG.colors.primary;
-
-  const classes = element.className;
-  if (typeof classes === "string") {
-    if (classes.includes("mtk3") || classes.includes("keyword"))
+  const el = document.elementFromPoint(x, y);
+  if (!el) return CURSOR_CONFIG.colors.primary;
+  const c = el.className;
+  if (typeof c === "string") {
+    if (c.includes("mtk3") || c.includes("keyword"))
       return CURSOR_CONFIG.colors.accent;
-    if (classes.includes("mtk10") || classes.includes("string"))
+    if (c.includes("mtk10") || c.includes("string"))
       return CURSOR_CONFIG.colors.primary;
-    if (classes.includes("squiggly-error")) return CURSOR_CONFIG.colors.flash;
+    if (c.includes("squiggly-error")) return CURSOR_CONFIG.colors.flash;
   }
-
   return CURSOR_CONFIG.colors.primary;
 }
 
-// Glyph particle
 class CursorGlyph {
   constructor(x, y, type = "normal", velocity = null) {
     this.x = x;
@@ -743,18 +697,16 @@ class CursorGlyph {
       CURSOR_GLYPH_SYMBOLS[
         Math.floor(Math.random() * CURSOR_GLYPH_SYMBOLS.length)
       ];
-
-    // Velocity for shooting effects
     this.vx = velocity ? velocity.x : (Math.random() - 0.5) * 0.5;
     this.vy = velocity ? velocity.y : (Math.random() - 0.5) * 0.5;
 
-    const contextColor = getCursorContextColor(x, y);
+    const ctx = getCursorContextColor(x, y);
     this.color =
       type === "pulse"
         ? CURSOR_CONFIG.colors.accent
         : type === "rift"
           ? CURSOR_CONFIG.colors.rift
-          : contextColor;
+          : ctx;
 
     this.el = document.createElement("div");
     this.el.className = "neural-glyph";
@@ -776,8 +728,9 @@ class CursorGlyph {
       mixBlendMode: "screen",
     });
 
-    const editor = document.querySelector(".monaco-editor") || document.body;
-    editor.appendChild(this.el);
+    (document.querySelector(".monaco-editor") || document.body).appendChild(
+      this.el,
+    );
   }
 
   update() {
@@ -796,16 +749,12 @@ class CursorGlyph {
 
     const progress = age / maxLife;
 
-    // Position drift
     this.x += this.vx;
     this.y += this.vy;
-    this.vx *= 0.95; // Damping
+    this.vx *= 0.95;
     this.vy *= 0.95;
-
-    // Rotation
     this.rotation += this.rotationSpeed;
 
-    // Glitch jitter
     if (Math.random() < 0.1) {
       this.glitchOffset.x = (Math.random() - 0.5) * 2;
       this.glitchOffset.y = (Math.random() - 0.5) * 2;
@@ -814,13 +763,13 @@ class CursorGlyph {
       this.glitchOffset.y *= 0.8;
     }
 
-    // Opacity and scale
     const opacity =
       this.type === "pulse"
         ? (1 - progress) * 0.6
         : this.type === "rift"
           ? Math.sin(progress * Math.PI)
           : 1 - progress;
+
     const scale =
       this.type === "pulse"
         ? this.scale * (1 + progress * 2)
@@ -837,7 +786,6 @@ class CursorGlyph {
   }
 }
 
-// Pulse ring for big jumps
 class CursorPulseRing {
   constructor(x, y) {
     this.x = x;
@@ -863,8 +811,9 @@ class CursorPulseRing {
       willChange: "transform, opacity",
     });
 
-    const editor = document.querySelector(".monaco-editor") || document.body;
-    editor.appendChild(this.el);
+    (document.querySelector(".monaco-editor") || document.body).appendChild(
+      this.el,
+    );
   }
 
   update() {
@@ -875,17 +824,12 @@ class CursorPulseRing {
     }
 
     const progress = age / this.maxLife;
-    const scale = 1 + progress * 15;
-    const opacity = 1 - progress;
-
-    this.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
-    this.el.style.opacity = opacity;
-
+    this.el.style.transform = `translate(-50%, -50%) scale(${1 + progress * 15})`;
+    this.el.style.opacity = 1 - progress;
     return true;
   }
 }
 
-// Continuous idle animation system
 class CursorIdleAnimation {
   constructor(x, y) {
     this.x = x;
@@ -897,8 +841,6 @@ class CursorIdleAnimation {
     this.coreGlyph = null;
     this.riftActive = false;
     this.lastSpawn = 0;
-
-    // Create core energy
     this.createCore();
   }
 
@@ -924,56 +866,39 @@ class CursorIdleAnimation {
       animation: "neural-core-pulse 2s ease-in-out infinite",
     });
 
-    const editor = document.querySelector(".monaco-editor") || document.body;
-    editor.appendChild(this.coreGlyph);
+    (document.querySelector(".monaco-editor") || document.body).appendChild(
+      this.coreGlyph,
+    );
   }
 
   update() {
     const elapsed = Date.now() - this.startTime;
     const now = Date.now();
 
-    // Phase progression
-    if (elapsed > 8000)
-      this.phase = 3; // Dimensional rift
-    else if (elapsed > 4000)
-      this.phase = 2; // Energy field
-    else if (elapsed > 1500)
-      this.phase = 1; // Orbiting glyphs
-    else this.phase = 0; // Building up
+    this.phase =
+      elapsed > 8000 ? 3 : elapsed > 4000 ? 2 : elapsed > 1500 ? 1 : 0;
 
-    // Core scaling
     const coreScale =
       Math.min(elapsed / 1000, 1) * (1 + Math.sin(elapsed * 0.002) * 0.1);
     this.coreGlyph.style.transform = `translate(-50%, -50%) scale(${coreScale})`;
 
-    // Phase 0: Build up
-    if (this.phase >= 0) {
-      if (now - this.lastSpawn > 300) {
-        this.lastSpawn = now;
-        const angle = (elapsed * 0.002) % (Math.PI * 2);
-        const radius = 30;
-        const gx = this.x + Math.cos(angle) * radius;
-        const gy = this.y + Math.sin(angle) * radius;
-
-        const g = new CursorGlyph(gx, gy, "rift");
-        g.vx = -Math.cos(angle) * 0.5;
-        g.vy = -Math.sin(angle) * 0.5;
-        this.fieldGlyphs.push(g);
-        cursorGlyphs.push(g);
-      }
+    if (this.phase >= 0 && now - this.lastSpawn > 300) {
+      this.lastSpawn = now;
+      const angle = (elapsed * 0.002) % (Math.PI * 2);
+      const gx = this.x + Math.cos(angle) * 30;
+      const gy = this.y + Math.sin(angle) * 30;
+      const g = new CursorGlyph(gx, gy, "rift");
+      g.vx = -Math.cos(angle) * 0.5;
+      g.vy = -Math.sin(angle) * 0.5;
+      this.fieldGlyphs.push(g);
+      cursorGlyphs.push(g);
     }
 
-    // Phase 1: Orbiting glyphs
     if (this.phase >= 1) {
-      // Create orbiting rings
-      const orbitCount = 3;
-      for (let i = 0; i < orbitCount; i++) {
-        const angle =
-          elapsed * 0.001 * (i + 1) + (i * Math.PI * 2) / orbitCount;
-        const radius = 25 + i * 15;
-        const ox = this.x + Math.cos(angle) * radius;
-        const oy = this.y + Math.sin(angle) * radius;
-
+      for (let i = 0; i < 3; i++) {
+        const angle = elapsed * 0.001 * (i + 1) + (i * Math.PI * 2) / 3;
+        const ox = this.x + Math.cos(angle) * (25 + i * 15);
+        const oy = this.y + Math.sin(angle) * (25 + i * 15);
         if (now - this.lastSpawn > 200 && this.orbitGlyphs.length < 12) {
           const g = new CursorGlyph(ox, oy, "rift");
           g.rotationSpeed = 5;
@@ -983,58 +908,46 @@ class CursorIdleAnimation {
       }
     }
 
-    // Phase 2: Energy field pulsation
-    if (this.phase >= 2) {
-      if (now - this.lastSpawn > 150) {
-        this.lastSpawn = now;
-
-        // Radial burst
-        for (let i = 0; i < 6; i++) {
-          const angle = (i / 6) * Math.PI * 2 + elapsed * 0.001;
-          const v = {
-            x: Math.cos(angle) * 1.5,
-            y: Math.sin(angle) * 1.5,
-          };
-
-          const g = new CursorGlyph(this.x, this.y, "rift", v);
-          g.symbol = "⧈";
-          g.color =
-            i % 2 === 0
-              ? CURSOR_CONFIG.colors.accent
-              : CURSOR_CONFIG.colors.rift;
-          this.fieldGlyphs.push(g);
-          cursorGlyphs.push(g);
-        }
+    if (this.phase >= 2 && now - this.lastSpawn > 150) {
+      this.lastSpawn = now;
+      for (let i = 0; i < 6; i++) {
+        const angle = (i / 6) * Math.PI * 2 + elapsed * 0.001;
+        const g = new CursorGlyph(this.x, this.y, "rift", {
+          x: Math.cos(angle) * 1.5,
+          y: Math.sin(angle) * 1.5,
+        });
+        g.symbol = "⧈";
+        g.color =
+          i % 2 === 0 ? CURSOR_CONFIG.colors.accent : CURSOR_CONFIG.colors.rift;
+        this.fieldGlyphs.push(g);
+        cursorGlyphs.push(g);
       }
     }
 
-    // Phase 3: Dimensional rift
     if (this.phase >= 3) {
       if (!this.riftActive) {
         this.riftActive = true;
         this.createRift();
       }
 
-      // Continuous rift emissions
       if (now - this.lastSpawn > 100) {
         this.lastSpawn = now;
-
-        const spiralAngle = elapsed * 0.003;
-        const spiralRadius = 20 + Math.sin(elapsed * 0.002) * 10;
-        const sx = this.x + Math.cos(spiralAngle) * spiralRadius;
-        const sy = this.y + Math.sin(spiralAngle) * spiralRadius;
-
-        const g = new CursorGlyph(sx, sy, "rift");
+        const a = elapsed * 0.003;
+        const r = 20 + Math.sin(elapsed * 0.002) * 10;
+        const g = new CursorGlyph(
+          this.x + Math.cos(a) * r,
+          this.y + Math.sin(a) * r,
+          "rift",
+        );
         g.symbol = Math.random() > 0.5 ? "◊" : "⬡";
         g.vx = (Math.random() - 0.5) * 2;
         g.vy = (Math.random() - 0.5) * 2;
         g.rotationSpeed = (Math.random() - 0.5) * 10;
-        g.scale = 0.5 + Math.random() * 1;
+        g.scale = 0.5 + Math.random();
         this.fieldGlyphs.push(g);
         cursorGlyphs.push(g);
       }
 
-      // Glitch effect on core
       if (Math.random() < 0.1) {
         this.coreGlyph.style.filter = `hue-rotate(${Math.random() * 360}deg) saturate(2)`;
       } else {
@@ -1042,17 +955,13 @@ class CursorIdleAnimation {
       }
     }
 
-    // Cleanup old field glyphs
     this.fieldGlyphs = this.fieldGlyphs.filter((g) => g.update());
-
     return true;
   }
 
   createRift() {
-    // Create rift distortion
     const rift = document.createElement("div");
     rift.className = "neural-rift";
-
     Object.assign(rift.style, {
       position: "absolute",
       left: this.x + "px",
@@ -1063,46 +972,37 @@ class CursorIdleAnimation {
       pointerEvents: "none",
       zIndex: "9997",
       transform: "translate(-50%, -50%)",
-      background: `radial-gradient(circle,
-        transparent 30%,
-        ${CURSOR_CONFIG.colors.rift}22 50%,
-        transparent 70%)`,
+      background: `radial-gradient(circle, transparent 30%, ${CURSOR_CONFIG.colors.rift}22 50%, transparent 70%)`,
       filter: "blur(2px)",
       animation: "neural-rift-pulse 3s ease-in-out infinite",
     });
-
-    const editor = document.querySelector(".monaco-editor") || document.body;
-    editor.appendChild(rift);
-
-    // Remove after some time
+    (document.querySelector(".monaco-editor") || document.body).appendChild(
+      rift,
+    );
     setTimeout(() => rift.remove(), 10000);
   }
 
   destroy() {
-    if (this.coreGlyph) this.coreGlyph.remove();
-    this.orbitGlyphs.forEach((g) => g.el && g.el.remove());
-    this.fieldGlyphs.forEach((g) => g.el && g.el.remove());
+    this.coreGlyph?.remove();
+    this.orbitGlyphs.forEach((g) => g.el?.remove());
+    this.fieldGlyphs.forEach((g) => g.el?.remove());
   }
 }
 
-// Get cursor position
 function getEditorCursorPos() {
   const cursor = document.querySelector(".monaco-editor .cursor");
-  if (!cursor) return null;
-
   const editor = document.querySelector(".monaco-editor");
-  if (!editor) return null;
+  if (!cursor || !editor) return null;
 
-  const editorRect = editor.getBoundingClientRect();
-  const cursorRect = cursor.getBoundingClientRect();
+  const er = editor.getBoundingClientRect();
+  const cr = cursor.getBoundingClientRect();
 
   return {
-    x: cursorRect.left - editorRect.left + cursorRect.width / 2,
-    y: cursorRect.top - editorRect.top + cursorRect.height / 2,
+    x: cr.left - er.left + cr.width / 2,
+    y: cr.top - er.top + cr.height / 2,
   };
 }
 
-// Main animation loop
 function animateCursor() {
   if (CURSOR_CONFIG.enabled) {
     const pos = getEditorCursorPos();
@@ -1114,10 +1014,8 @@ function animateCursor() {
       (Math.abs(pos.x - cursorLastPos.x) > 0.1 ||
         Math.abs(pos.y - cursorLastPos.y) > 0.1)
     ) {
-      // Movement detected
       cursorLastMoveTime = now;
 
-      // Destroy idle animation if active
       if (cursorIsIdle && cursorIdleAnimation) {
         cursorIsIdle = false;
         cursorIdleAnimation.destroy();
@@ -1127,43 +1025,37 @@ function animateCursor() {
       const dx = pos.x - cursorLastPos.x;
       const dy = pos.y - cursorLastPos.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      const speed = distance;
 
-      // Update velocity
       cursorVelocity.x = dx * 0.2;
       cursorVelocity.y = dy * 0.2;
 
-      // Big jump = Neural pulse
       if (distance > 100) {
         cursorGlyphs.push(
           new CursorPulseRing(cursorLastPos.x, cursorLastPos.y),
         );
-
-        // Burst of glyphs at destination
         for (let i = 0; i < 12; i++) {
           const angle = (i / 12) * Math.PI * 2;
-          const v = { x: Math.cos(angle) * 2, y: Math.sin(angle) * 2 };
-          cursorGlyphs.push(new CursorGlyph(pos.x, pos.y, "pulse", v));
+          cursorGlyphs.push(
+            new CursorGlyph(pos.x, pos.y, "pulse", {
+              x: Math.cos(angle) * 2,
+              y: Math.sin(angle) * 2,
+            }),
+          );
         }
-      }
-      // Fast movement = Sharp shards
-      else if (speed > 15) {
-        const numGlyphs = Math.floor(speed / 8);
-        for (let i = 0; i < numGlyphs; i++) {
-          const t = i / numGlyphs;
-          const interpX = cursorLastPos.x + dx * t;
-          const interpY = cursorLastPos.y + dy * t;
-
-          const g = new CursorGlyph(interpX, interpY, "fast", {
-            x: cursorVelocity.x * 0.5,
-            y: cursorVelocity.y * 0.5,
-          });
+      } else if (distance > 15) {
+        const n = Math.floor(distance / 8);
+        for (let i = 0; i < n; i++) {
+          const t = i / n;
+          const g = new CursorGlyph(
+            cursorLastPos.x + dx * t,
+            cursorLastPos.y + dy * t,
+            "fast",
+            { x: cursorVelocity.x * 0.5, y: cursorVelocity.y * 0.5 },
+          );
           g.rotationSpeed = (Math.random() - 0.5) * 8;
           cursorGlyphs.push(g);
         }
-      }
-      // Slow movement = Smooth flow
-      else {
+      } else {
         for (let i = 0; i < 2; i++) {
           cursorGlyphs.push(
             new CursorGlyph(
@@ -1175,16 +1067,13 @@ function animateCursor() {
         }
       }
 
-      // Limit glyphs
       while (cursorGlyphs.length > CURSOR_CONFIG.maxGlyphs) {
         const old = cursorGlyphs.shift();
-        if (old && old.el) old.el.remove();
+        old?.el?.remove();
       }
 
       cursorLastPos = pos;
-    }
-    // Idle detection
-    else if (
+    } else if (
       pos &&
       now - cursorLastMoveTime > CURSOR_CONFIG.idleTimeout &&
       !cursorIsIdle
@@ -1193,72 +1082,55 @@ function animateCursor() {
       cursorIdleAnimation = new CursorIdleAnimation(pos.x, pos.y);
     }
 
-    // Update idle animation
-    if (cursorIsIdle && cursorIdleAnimation) {
-      cursorIdleAnimation.update();
-    }
-
+    if (cursorIsIdle && cursorIdleAnimation) cursorIdleAnimation.update();
     if (pos) cursorLastPos = pos;
   }
 
-  // Update all glyphs
   cursorGlyphs = cursorGlyphs.filter((g) => g.update());
-
   requestAnimationFrame(animateCursor);
 }
 
-// Enhanced cursor core glow
 function addCursorCoreStyle() {
-  const cursorStyle = document.createElement("style");
-  cursorStyle.textContent = `
+  const s = document.createElement("style");
+  s.textContent = `
     .monaco-editor .cursor {
       animation: neural-pulse 2s ease-in-out infinite !important;
-      filter: drop-shadow(0 0 8px ${CURSOR_CONFIG.colors.primary})
-              drop-shadow(0 0 12px ${CURSOR_CONFIG.colors.accent}) !important;
+      filter:
+        drop-shadow(0 0 8px ${CURSOR_CONFIG.colors.primary})
+        drop-shadow(0 0 12px ${CURSOR_CONFIG.colors.accent}) !important;
     }
 
     @keyframes neural-pulse {
       0%, 100% {
-        filter: drop-shadow(0 0 6px ${CURSOR_CONFIG.colors.primary})
-                drop-shadow(0 0 10px ${CURSOR_CONFIG.colors.accent});
+        filter:
+          drop-shadow(0 0 6px  ${CURSOR_CONFIG.colors.primary})
+          drop-shadow(0 0 10px ${CURSOR_CONFIG.colors.accent});
       }
       50% {
-        filter: drop-shadow(0 0 12px ${CURSOR_CONFIG.colors.primary})
-                drop-shadow(0 0 18px ${CURSOR_CONFIG.colors.accent})
-                drop-shadow(0 0 24px ${CURSOR_CONFIG.colors.core});
+        filter:
+          drop-shadow(0 0 12px ${CURSOR_CONFIG.colors.primary})
+          drop-shadow(0 0 18px ${CURSOR_CONFIG.colors.accent})
+          drop-shadow(0 0 24px ${CURSOR_CONFIG.colors.core});
       }
     }
 
     @keyframes neural-core-pulse {
-      0%, 100% {
-        opacity: 0.8;
-        filter: brightness(1);
-      }
-      50% {
-        opacity: 1;
-        filter: brightness(1.5) saturate(1.5);
-      }
+      0%, 100% { opacity: 0.8; filter: brightness(1); }
+      50%      { opacity: 1;   filter: brightness(1.5) saturate(1.5); }
     }
 
     @keyframes neural-rift-pulse {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
-        opacity: 0.4;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
-        opacity: 0.7;
-      }
+      0%, 100% { transform: translate(-50%, -50%) scale(1)   rotate(0deg);   opacity: 0.4; }
+      50%      { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 0.7; }
     }
   `;
-  document.head.appendChild(cursorStyle);
+  document.head.appendChild(s);
 }
 
-// Initialize
 animateCursor();
 addCursorCoreStyle();
 
-// Toggle: Ctrl+Alt+N
+/* Toggle Neural Glyph: Ctrl+Alt+N */
 document.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.altKey && e.key === "n") {
     CURSOR_CONFIG.enabled = !CURSOR_CONFIG.enabled;
@@ -1266,22 +1138,19 @@ document.addEventListener("keydown", (e) => {
       "🧿 Neural Glyph:",
       CURSOR_CONFIG.enabled ? "ACTIVATED" : "DORMANT",
     );
+
     if (!CURSOR_CONFIG.enabled) {
-      cursorGlyphs.forEach((g) => g.el && g.el.remove());
+      cursorGlyphs.forEach((g) => g.el?.remove());
       cursorGlyphs = [];
-      if (cursorIdleAnimation) {
-        cursorIdleAnimation.destroy();
-        cursorIdleAnimation = null;
-      }
+      cursorIdleAnimation?.destroy();
+      cursorIdleAnimation = null;
       cursorIsIdle = false;
-      const rifts = document.querySelectorAll(".neural-rift");
-      rifts.forEach((r) => r.remove());
+      document.querySelectorAll(".neural-rift").forEach((r) => r.remove());
     }
   }
 });
 
 /* ╔══════════════════════════════════════════════════════════════════╗ */
-/* ║                     END OF CUSTOM JAVASCRIPT                     ║ */
-/* ║                                                                  ║ */
+/* ║                   END OF CUSTOM JAVASCRIPT                       ║ */
 /* ║  "Code is poetry, bugs are just typos in the verse!" ~ MrDib 🎨  ║ */
 /* ╚══════════════════════════════════════════════════════════════════╝ */

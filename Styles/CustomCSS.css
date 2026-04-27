@@ -1,8 +1,58 @@
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🌟 CUSTOM ANIMATIONS                         │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*                                                                        */
+/*                    🎨 MrDib's CUSTOM CSS — v6.0                        */
+/*                  "Where Aesthetics Meet Functionality"                  */
+/*                                                                        */
+/*               ✨ Glassmorphism Everywhere Edition ✨                    */
+/*                                                                        */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Glow Cycle Animation - Making text pulse with life! 🌈 */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 1 — CSS VARIABLES                                                   */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+:root {
+  /* Brand colours */
+  --mrdib-gold: #ffd700;
+  --mrdib-green: #00ff00;
+  --mrdib-cyan: #00ffff;
+  --mrdib-purple: #aa00ff;
+  --mrdib-pink: #ff00ff;
+  --mrdib-red: #ff0000;
+  --mrdib-orange: darkorange;
+
+  /* Surfaces */
+  --mrdib-bg-solid: rgba(12, 12, 22, 0.97);
+  --mrdib-bg-glass: rgba(255, 255, 255, 0.05);
+  --mrdib-border: rgba(255, 255, 255, 0.1);
+
+  /* Glass tuning — tweak once, applies everywhere */
+  --glass-blur: 30px;
+  --glass-saturation: 1.5;
+  --glass-tint-settings: rgba(10, 10, 20, 0.4);
+  --glass-tint-keybindings: rgba(5, 15, 8, 0.4);
+  --glass-tint-welcome: rgba(10, 5, 20, 0.4);
+  --glass-tint-extensions: rgba(5, 10, 20, 0.4);
+  --glass-tint-markdown: rgba(8, 8, 20, 0.4);
+
+  /* Shadows */
+  --shadow-cyan: 0 0 8px 2px rgba(0, 255, 255, 0.8);
+  --shadow-green: 0 0 8px 2px rgba(0, 255, 105, 0.8);
+  --shadow-purple: 0 0 8px 2px rgba(255, 0, 255, 0.8);
+
+  /* Local image paths (update if you move files) */
+  --img-wallpaper: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/CustomWallpaper.jpg");
+  --img-sidebar: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Trident.png");
+  --img-palette: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Mask.png");
+  --img-avatar: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Photo.jpeg");
+  --img-gears: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Gears.png");
+  --img-error-lens: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/ErrorLens-01.png");
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 2 — KEYFRAME ANIMATIONS                                            */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
 @keyframes glowCycle {
   0% {
     text-shadow: #00ff00 0 0 4px;
@@ -15,7 +65,6 @@
   }
 }
 
-/* INFO: Tab Animations - Smooth sliding for that buttery feel! 🧈 */
 @keyframes tabSlideIn {
   0% {
     opacity: 0;
@@ -38,28 +87,829 @@
   }
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🔤 TYPOGRAPHY & FONTS                        │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 3 — TYPOGRAPHY & FONTS                                             */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Global Font Stack - Monospace paradise! ⌨️ */
 * {
   font-family:
-    "Cascadia Code", "FiraCode Nerd Font", "FiraCode", "Menlo, Geist Mono",
-    "JetBrains Mono", "Consolas", "Courier New", "monospace" !important;
+    "Cascadia Code", "FiraCode Nerd Font", "FiraCode", "JetBrains Mono",
+    "Consolas", "Courier New", monospace !important;
 }
 
-/* INFO: Icon Font Preservation - Keep those icons crispy! 🎯 */
+/* Preserve icon fonts */
 .codicon,
 .octicon {
   font-family: "Codicon" !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    💻 TERMINAL CUSTOMIZATION                    │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 4 — SYNTAX HIGHLIGHTING                                            */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Terminal Tab Styling - Algerian flair for terminal warriors! ⚔️ */
+.mtk1 {
+  color: #fdfeff !important;
+  font-weight: 700 !important;
+}
+.mtk3 {
+  color: #ffff00 !important;
+  font-weight: 900 !important;
+}
+.mtk4 {
+  color: darkorange !important;
+}
+.mtk10 {
+  font-weight: 900 !important;
+}
+
+.line-numbers {
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  position: relative !important;
+  left: 0px;
+  width: 35px !important;
+  font-family: "Algerian" !important;
+  opacity: 0.7;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 5 — BASE TRANSPARENCY & WALLPAPER                                  */
+/*                                                                        */
+/*  Strategy:                                                             */
+/*    1. Strip all default backgrounds                                    */
+/*    2. Inject wallpaper as ::before on .monaco-workbench                */
+/*    3. Code editors stay fully transparent                              */
+/*    4. Special editors (Settings, Keybindings, etc.) get glass tint     */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* Strip defaults */
+.letterpress,
+html,
+body,
+.monaco-editor-background,
+.editor-background {
+  background: none !important;
+  background-image: none !important;
+}
+
+.letterpress {
+  display: none !important;
+}
+
+/* Workbench & containers */
+.monaco-workbench,
+.editor-group-container {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+.editor-instance,
+.monaco-editor {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Watermark & command center */
+.editor-group-watermark {
+  max-width: none !important;
+}
+.command-center-center {
+  width: auto !important;
+}
+
+/* Wallpaper pseudo-element */
+.monaco-workbench {
+  position: relative;
+}
+
+.monaco-workbench::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--img-wallpaper) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  opacity: 0.3 !important;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 6 — SPECIAL EDITOR BACKGROUNDS                                     */
+/*                                                                        */
+/*  Strategy (same as Command Palette):                                   */
+/*    • JS overlay (Module 1.5) blurs + darkens the WHOLE window          */
+/*    • The special editor gets a DARK, NEARLY-OPAQUE background          */
+/*    • You do NOT see through it — the "glass" effect is the overlay     */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* Settings — dark gold tint (matches Command Palette's dark green) */
+body.has-settings-editor .part.editor,
+body.has-settings-editor .part.editor > .content,
+body.has-settings-editor .part.editor .monaco-grid-view,
+body.has-settings-editor .part.editor .monaco-grid-view > *,
+body.has-settings-editor .part.editor .monaco-scrollable-element,
+body.has-settings-editor .part.editor .split-view-container,
+body.has-settings-editor .part.editor .split-view-view,
+body.has-settings-editor .part.editor .editor-group-container,
+body.has-settings-editor .part.editor .editor-instance,
+body.has-settings-editor .part.editor .overflow-guard,
+body.has-settings-editor .monaco-editor {
+  background: rgba(10, 10, 20, 0.95) !important;
+  background-image: none !important;
+}
+
+/* Keybindings — dark green tint */
+body.has-keybindings-editor .part.editor,
+body.has-keybindings-editor .part.editor > .content,
+body.has-keybindings-editor .part.editor .monaco-grid-view,
+body.has-keybindings-editor .part.editor .monaco-grid-view > *,
+body.has-keybindings-editor .part.editor .monaco-scrollable-element,
+body.has-keybindings-editor .part.editor .split-view-container,
+body.has-keybindings-editor .part.editor .split-view-view,
+body.has-keybindings-editor .part.editor .editor-group-container,
+body.has-keybindings-editor .part.editor .editor-instance,
+body.has-keybindings-editor .part.editor .overflow-guard,
+body.has-keybindings-editor .monaco-editor {
+  background: rgba(5, 15, 8, 0.95) !important;
+  background-image: none !important;
+}
+
+/* Welcome — dark purple tint */
+body.has-welcome-editor .part.editor,
+body.has-welcome-editor .part.editor > .content,
+body.has-welcome-editor .part.editor .monaco-grid-view,
+body.has-welcome-editor .part.editor .monaco-grid-view > *,
+body.has-welcome-editor .part.editor .monaco-scrollable-element,
+body.has-welcome-editor .part.editor .split-view-container,
+body.has-welcome-editor .part.editor .split-view-view,
+body.has-welcome-editor .part.editor .editor-group-container,
+body.has-welcome-editor .part.editor .editor-instance {
+  background: rgba(10, 5, 20, 0.95) !important;
+  background-image: none !important;
+}
+
+/* Extensions — dark blue tint */
+body.has-extension-editor .part.editor,
+body.has-extension-editor .part.editor > .content,
+body.has-extension-editor .part.editor .monaco-grid-view,
+body.has-extension-editor .part.editor .monaco-grid-view > *,
+body.has-extension-editor .part.editor .monaco-scrollable-element,
+body.has-extension-editor .part.editor .split-view-container,
+body.has-extension-editor .part.editor .split-view-view,
+body.has-extension-editor .part.editor .editor-group-container,
+body.has-extension-editor .part.editor .editor-instance {
+  background: rgba(5, 10, 20, 0.95) !important;
+  background-image: none !important;
+}
+
+/* Markdown — dark neutral */
+body.has-markdown-preview .part.editor,
+body.has-markdown-preview .part.editor > .content,
+body.has-markdown-preview .part.editor .monaco-grid-view,
+body.has-markdown-preview .part.editor .monaco-grid-view > *,
+body.has-markdown-preview .part.editor .monaco-scrollable-element,
+body.has-markdown-preview .part.editor .split-view-container,
+body.has-markdown-preview .part.editor .split-view-view,
+body.has-markdown-preview .part.editor .editor-group-container,
+body.has-markdown-preview .part.editor .editor-instance {
+  background: rgba(8, 8, 20, 0.95) !important;
+  background-image: none !important;
+}
+
+/* Tabs container stays transparent on all special editors */
+body.has-settings-editor .part.editor .title,
+body.has-settings-editor .part.editor .title.tabs,
+body.has-settings-editor .part.editor .tabs-and-actions-container,
+body.has-settings-editor .part.editor .tabs-container,
+body.has-keybindings-editor .part.editor .title,
+body.has-keybindings-editor .part.editor .title.tabs,
+body.has-keybindings-editor .part.editor .tabs-and-actions-container,
+body.has-keybindings-editor .part.editor .tabs-container,
+body.has-welcome-editor .part.editor .title,
+body.has-welcome-editor .part.editor .tabs-and-actions-container,
+body.has-extension-editor .part.editor .title,
+body.has-extension-editor .part.editor .tabs-and-actions-container,
+body.has-markdown-preview .part.editor .title,
+body.has-markdown-preview .part.editor .tabs-and-actions-container {
+  background: transparent !important;
+}
+
+/* Themed top border via JS overlay active state */
+body.has-settings-editor.special-editor-active .part.editor {
+  border-top: 1px solid rgba(255, 215, 0, 0.25) !important;
+}
+
+body.has-keybindings-editor.special-editor-active .part.editor {
+  border-top: 1px solid rgba(0, 255, 136, 0.25) !important;
+}
+
+body.has-welcome-editor.special-editor-active .part.editor {
+  border-top: 1px solid rgba(170, 0, 255, 0.25) !important;
+}
+
+body.has-extension-editor.special-editor-active .part.editor {
+  border-top: 1px solid rgba(30, 144, 255, 0.25) !important;
+}
+
+body.has-markdown-preview.special-editor-active .part.editor {
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 6c — FULL-WINDOW DARK BACKGROUND FOR SPECIAL EDITORS              */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+body.has-settings-editor .monaco-workbench {
+  background: rgba(10, 10, 20, 0.95) !important;
+}
+
+body.has-keybindings-editor .monaco-workbench {
+  background: rgba(5, 15, 8, 0.95) !important;
+}
+
+body.has-welcome-editor .monaco-workbench {
+  background: rgba(10, 5, 20, 0.95) !important;
+}
+
+body.has-extension-editor .monaco-workbench {
+  background: rgba(5, 10, 20, 0.95) !important;
+}
+
+body.has-markdown-preview .monaco-workbench {
+  background: rgba(8, 8, 20, 0.95) !important;
+}
+
+/* Target the modal editor block that sits below the editor area */
+body.has-settings-editor .monaco-workbench > .monaco-modal-editor-block,
+body.has-keybindings-editor .monaco-workbench > .monaco-modal-editor-block,
+body.has-welcome-editor .monaco-workbench > .monaco-modal-editor-block,
+body.has-extension-editor .monaco-workbench > .monaco-modal-editor-block,
+body.has-markdown-preview .monaco-workbench > .monaco-modal-editor-block {
+  background: rgba(10, 10, 20, 0.95) !important;
+}
+
+/* Also catch the grid view container that may have gaps */
+body.has-settings-editor .monaco-workbench > .monaco-grid-view,
+body.has-settings-editor .monaco-workbench > .monaco-grid-view > *,
+body.has-keybindings-editor .monaco-workbench > .monaco-grid-view,
+body.has-keybindings-editor .monaco-workbench > .monaco-grid-view > *,
+body.has-welcome-editor .monaco-workbench > .monaco-grid-view,
+body.has-welcome-editor .monaco-workbench > .monaco-grid-view > *,
+body.has-extension-editor .monaco-workbench > .monaco-grid-view,
+body.has-extension-editor .monaco-workbench > .monaco-grid-view > *,
+body.has-markdown-preview .monaco-workbench > .monaco-grid-view,
+body.has-markdown-preview .monaco-workbench > .monaco-grid-view > * {
+  background: rgba(10, 10, 20, 0.95) !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 7 — SETTINGS EDITOR  ⚙️                                            */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* 7a — Inner elements: fully transparent */
+.editor-group-container:has(.settings-editor),
+.editor-group-container:has(.settings-editor) > *,
+.settings-editor,
+.settings-editor .settings-body,
+.settings-editor .settings-editor-tree,
+.settings-editor .settings-tree-container,
+.settings-editor .settings-header-widget,
+.settings-editor .monaco-list,
+.settings-editor .monaco-scrollable-element,
+.settings-editor .monaco-list-rows,
+.settings-editor .setting-item,
+.settings-editor .setting-item-contents {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* 7b — TOC sidebar */
+.settings-editor .settings-toc-container {
+  background: rgba(5, 5, 15, 0.3) !important;
+  border-right: 1px solid rgba(255, 215, 0, 0.1) !important;
+}
+
+.settings-editor .settings-toc-container .monaco-list-row {
+  background: transparent !important;
+  color: rgba(255, 215, 0, 0.6) !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.settings-editor .settings-toc-container .monaco-list-row:hover {
+  background: rgba(255, 215, 0, 0.1) !important;
+  color: #ffd700 !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.2) !important;
+}
+
+.settings-editor .settings-toc-container .monaco-list-row.selected,
+.settings-editor .settings-toc-container .monaco-list-row.focused {
+  background: rgba(255, 215, 0, 0.15) !important;
+  border-left: 3px solid rgba(255, 215, 0, 0.8) !important;
+  color: #ffd700 !important;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* 7c — Category headers */
+.settings-editor .settings-group-title-label {
+  color: #ffd700 !important;
+  font-family: "Algerian", "Cascadia Code" !important;
+  letter-spacing: 0.1em !important;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5) !important;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.15) !important;
+}
+
+/* 7d — Setting rows */
+.settings-editor .setting-item-label {
+  color: #ffd700 !important;
+  font-weight: 600 !important;
+}
+
+.settings-editor .setting-item-description {
+  color: rgba(255, 215, 0, 0.5) !important;
+}
+
+.settings-editor .setting-item:hover .setting-item-contents {
+  background: rgba(255, 215, 0, 0.06) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.12) !important;
+}
+
+.settings-editor .setting-item.focused .setting-item-contents {
+  background: rgba(255, 215, 0, 0.08) !important;
+  border-left: 3px solid rgba(255, 215, 0, 0.6) !important;
+  border-radius: 12px !important;
+}
+
+/* 7e — Input controls */
+.settings-editor .setting-item-control .monaco-inputbox {
+  border: 1px solid rgba(255, 215, 0, 0.3) !important;
+  border-radius: 8px !important;
+  background: rgba(20, 15, 0, 0.5) !important;
+  transition: all 0.3s ease !important;
+}
+
+.settings-editor .setting-item-control .monaco-inputbox:focus-within {
+  border-color: rgba(255, 215, 0, 0.7) !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4) !important;
+}
+
+.settings-editor .setting-item-control select,
+.settings-editor .setting-item-control .monaco-select-box {
+  border: 1px solid rgba(255, 215, 0, 0.3) !important;
+  border-radius: 8px !important;
+  background: rgba(20, 15, 0, 0.5) !important;
+  color: #ffd700 !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 8 — KEYBOARD SHORTCUTS EDITOR  ⌨️                                   */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* 8a — Inner elements: fully transparent */
+.editor-group-container:has(.keybindings-editor),
+.editor-group-container:has(.keybindings-editor) > *,
+.keybindings-editor,
+.keybindings-editor .keybindings-body,
+.keybindings-editor .keybindings-header,
+.keybindings-editor .monaco-list,
+.keybindings-editor .monaco-scrollable-element,
+.keybindings-editor .monaco-list-rows,
+.keybindings-editor .keybinding-item {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* 8b — Keybinding rows */
+.keybindings-editor .keybinding-item {
+  border-radius: 8px !important;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.04) !important;
+  transition: all 0.3s ease !important;
+}
+
+.keybindings-editor .keybinding-item:hover {
+  background: rgba(0, 255, 136, 0.08) !important;
+  border-radius: 25px !important;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2) !important;
+  border-bottom-color: transparent !important;
+}
+
+.keybindings-editor .keybinding-item.selected,
+.keybindings-editor .keybinding-item.focused {
+  background: rgba(0, 255, 136, 0.12) !important;
+  border-left: 4px solid rgba(0, 255, 136, 0.8) !important;
+  border-right: 4px solid rgba(0, 255, 136, 0.8) !important;
+  border-radius: 25px !important;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.25) !important;
+}
+
+/* 8c — Column headers */
+.keybindings-editor .keybindings-header {
+  background: rgba(0, 10, 5, 0.3) !important;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.12) !important;
+}
+
+.keybindings-editor .keybinding-header-item {
+  color: rgba(0, 255, 136, 0.7) !important;
+  font-family: "Algerian", "Cascadia Code" !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+}
+
+/* 8d — Command label */
+.keybindings-editor .keybinding-item .keybinding-item-command-label {
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: color 0.3s ease !important;
+}
+
+.keybindings-editor .keybinding-item:hover .keybinding-item-command-label,
+.keybindings-editor .keybinding-item.focused .keybinding-item-command-label {
+  color: #00ff88 !important;
+}
+
+/* 8e — Key badges */
+.keybindings-editor .monaco-keybinding-key {
+  background: rgba(0, 50, 25, 0.6) !important;
+  border: 1px solid rgba(0, 255, 136, 0.5) !important;
+  border-radius: 4px !important;
+  color: #00ff88 !important;
+  box-shadow: 0 0 4px rgba(0, 255, 136, 0.4) !important;
+  padding: 1px 5px !important;
+}
+
+/* 8f — Source column */
+.keybindings-editor .keybinding-item-source {
+  color: rgba(0, 255, 136, 0.45) !important;
+  font-style: italic !important;
+}
+
+.keybindings-editor .keybinding-item .keybinding-item-source-label {
+  color: #ffd700 !important;
+  font-weight: 700 !important;
+}
+
+/* 8g — When column */
+.keybindings-editor .keybinding-item-when .code {
+  color: rgba(0, 200, 150, 0.6) !important;
+  font-size: 11px !important;
+}
+
+/* 8h — Filter button */
+.keybindings-editor .keybindings-filters-button,
+.keybindings-editor .keybindings-filter-button {
+  border-radius: 25px !important;
+  border: 1px solid rgba(0, 255, 136, 0.4) !important;
+  color: #00ff88 !important;
+  background: rgba(0, 30, 15, 0.6) !important;
+  transition: all 0.3s ease !important;
+  padding: 4px 12px !important;
+}
+
+.keybindings-editor .keybindings-filters-button:hover,
+.keybindings-editor .keybindings-filter-button:hover {
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.6) !important;
+  background: rgba(0, 50, 25, 0.6) !important;
+}
+
+/* 8i — Action icons on hover */
+.keybindings-editor .keybinding-item .action-label.codicon {
+  color: rgba(0, 255, 136, 0.6) !important;
+  transition: all 0.2s ease !important;
+}
+
+.keybindings-editor .keybinding-item:hover .action-label.codicon {
+  color: #00ff88 !important;
+}
+
+.keybindings-editor .keybinding-item .action-label.codicon:hover {
+  transform: scale(1.2) !important;
+  filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.8)) !important;
+}
+
+/* 8j — Scrollbar */
+body.has-keybindings-editor .slider {
+  background: rgba(0, 255, 136, 0.25) !important;
+  width: 2px !important;
+  border-radius: 10px !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 9 — WELCOME / EXTENSIONS / MARKDOWN EDITORS                        */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* Inner elements transparent */
+.editor-group-container:has(.gettingStartedContainer),
+.editor-group-container:has(.gettingStartedContainer) > *,
+.editor-group-container:has(.extension-editor),
+.editor-group-container:has(.extension-editor) > *,
+.editor-group-container:has(.markdown-body),
+.editor-group-container:has(.markdown-body) > * {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 10 — CODE EDITORS (stay transparent when no special editor)        */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+body:not(.has-settings-editor):not(.has-keybindings-editor):not(
+    .has-welcome-editor
+  ):not(.has-extension-editor):not(.has-markdown-preview)
+  .part.editor,
+body:not(.has-settings-editor):not(.has-keybindings-editor):not(
+    .has-welcome-editor
+  ):not(.has-extension-editor):not(.has-markdown-preview)
+  .editor-group-container,
+body:not(.has-settings-editor):not(.has-keybindings-editor):not(
+    .has-welcome-editor
+  ):not(.has-extension-editor):not(.has-markdown-preview)
+  .editor-instance,
+body:not(.has-settings-editor):not(.has-keybindings-editor):not(
+    .has-welcome-editor
+  ):not(.has-extension-editor):not(.has-markdown-preview)
+  .monaco-editor {
+  background: transparent !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 11 — CURSOR & EDITOR EFFECTS                                       */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* Neural glyph performance hints */
+.neural-glyph {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.neural-pulse {
+  will-change: transform, opacity;
+}
+
+/* Cursor glow (code editors only) */
+.monaco-editor {
+  position: relative;
+}
+
+.monaco-editor:not(:has(.settings-editor)):not(
+    :has(.keybindings-editor)
+  )::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+    rgba(0, 255, 65, 0.03) 0%,
+    transparent 15%
+  );
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+/* Enhanced cursor */
+.monaco-editor .cursor {
+  background: linear-gradient(
+    180deg,
+    #00ff41 0%,
+    #00ffff 50%,
+    #00ff41 100%
+  ) !important;
+  width: 2px !important;
+  box-shadow:
+    0 0 8px #00ff41,
+    0 0 12px #00ffff,
+    0 0 20px rgba(0, 255, 65, 0.5) !important;
+}
+
+/* Chromatic aberration on selection */
+.monaco-editor .selected-text {
+  text-shadow:
+    -0.5px 0 rgba(0, 255, 255, 0.3),
+    0.5px 0 rgba(255, 0, 255, 0.3);
+}
+
+.monaco-editor * {
+  will-change: auto;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 12 — SIDEBAR                                                       */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+.part.sidebar {
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+.part.sidebar > .title > .title-label h2 {
+  font-family: "Algerian", "Cascadia Code", "Codicon" !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-items: center !important;
+  font-size: 40px !important;
+  color: ivory !important;
+  text-shadow: gold 4px 4px 3px;
+}
+
+.monaco-workbench .part.sidebar .title-actions .actions-container {
+  display: none !important;
+}
+
+/* Sidebar & auxiliarybar background image */
+.monaco-workbench .part.sidebar::before,
+.monaco-workbench .part.auxiliarybar::before {
+  content: "";
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: var(--img-sidebar) !important;
+  background-position: center center !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
+  opacity: 0.35 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 13 — SCROLLBARS                                                     */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+.slider {
+  position: absolute !important;
+  right: 1px !important;
+  width: 1px !important;
+  background: #bc9abc !important;
+  left: auto !important;
+}
+
+.monaco-scrollable-element > .shadow.top {
+  box-shadow: 0px 0px 100px rgba(255, 0, 0, 0.75) !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 14 — FILE EXPLORER                                                  */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+.monaco-list.list_id_1 > .monaco-scrollable-element > .monaco-list-rows {
+  padding-top: 10px !important;
+}
+
+.monaco-list.list_id_1
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  .monaco-list-row {
+  background: transparent !important;
+  transition: 0.5s ease-in-out !important;
+  margin-top: 5px !important;
+  color: white !important;
+  width: 98.5% !important;
+}
+
+.monaco-list.list_id_1
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  .monaco-list-row.selected {
+  font-family: "Cascadia Code", "Codicon" !important;
+  box-shadow: 0 0 8px 3px rgba(0, 255, 255, 0.5) !important;
+  border-radius: 25px !important;
+  left: 2px !important;
+}
+
+.monaco-list.list_id_1
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  .monaco-list-row:hover {
+  font-family: "Algerian", "Codicon" !important;
+  background-color: rgba(255, 215, 0, 0.25) !important;
+  border-radius: 25px !important;
+  transition: all 0.6s ease-in-out !important;
+}
+
+.monaco-list.list_id_1
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  .monaco-list-row:hover
+  * {
+  font-family: inherit !important;
+  font-weight: 100 !important;
+}
+
+.monaco-list.list_id_1
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  .monaco-list-row
+  > .monaco-tl-row
+  .monaco-tl-contents
+  > .monaco-icon-label {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  animation: glowCycle 10s infinite alternate ease-in-out;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 15 — ACTIVITY BAR                                                   */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* Custom account icon */
+.codicon-accounts-view-bar-icon:before {
+  content: "";
+  width: 75%;
+  height: 75%;
+  position: absolute !important;
+  background-image: var(--img-avatar) !important;
+  background-size: 100% !important;
+  background-position: center center !important;
+  opacity: 1 !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+}
+
+/* Custom settings gear icon */
+.codicon-settings-view-bar-icon:before {
+  content: "";
+  width: 65%;
+  height: 65%;
+  position: absolute !important;
+  background-image: var(--img-gears) !important;
+  background-size: 100% !important;
+  background-position: center center !important;
+  opacity: 0.8 !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+}
+
+.monaco-action-bar .action-label.codicon {
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.monaco-workbench
+  .activitybar
+  > .content
+  :not(.monaco-menu)
+  > .monaco-action-bar
+  .action-label.codicon::before {
+  position: absolute;
+  border-radius: 50%;
+  transition:
+    transform 1s ease-in-out,
+    color 1s ease-in-out,
+    box-shadow 1s ease-in-out !important;
+  color: var(--mrdib-gold) !important;
+}
+
+.monaco-workbench
+  .activitybar
+  > .content
+  :not(.monaco-menu)
+  > .monaco-action-bar
+  .action-label.codicon:hover::before {
+  display: block !important;
+  position: absolute !important;
+  transform: scale(1.5) rotate(10deg) !important;
+  transition:
+    transform 0.5s ease-in-out,
+    color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out !important;
+  color: var(--mrdib-green) !important;
+  box-shadow: 0 0 4px 2px rgba(0, 255, 0, 0.8) !important;
+  border-radius: 50% !important;
+  background-color: #000 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  will-change: transform, color, box-shadow !important;
+  z-index: -1 !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 16 — PANEL & LAYOUT STRUCTURE                                       */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+.monaco-workbench .part > .header-or-footer,
+.monaco-workbench .part > .title {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-items: center !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 17 — TERMINAL PANEL TABS                                            */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
 .monaco-workbench
   .pane-composite-part
   > .header-or-footer
@@ -96,384 +946,11 @@
   border: none !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🎨 SYNTAX HIGHLIGHTING                       │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 18 — EDITOR TABS                                                    */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Token Color Overrides - Making code pop like neon signs! 💡 */
-.mtk1 {
-  color: #fdfeff !important;
-  font-weight: 700 !important;
-}
-
-.mtk3 {
-  color: #ffff00 !important;
-  font-weight: 900 !important;
-}
-
-.mtk4 {
-  color: darkorange !important;
-}
-
-.mtk10 {
-  font-weight: 900 !important;
-}
-
-/* INFO: Line Numbers - Algerian style with a touch of mystery! 🔢 */
-.line-numbers {
-  display: inline-flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  position: relative !important;
-  left: 0px;
-  width: 35px !important;
-  font-size: relative;
-  font-family: "Algerian" !important;
-  opacity: 0.7;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🖼️ EDITOR BACKGROUND & TRANSPARENCY          │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* INFO: Remove Default Backgrounds - Clean slate for our masterpiece! 🎨 */
-.letterpress,
-html,
-body,
-.monaco-editor-background,
-.editor-background {
-  background: none !important;
-  background-image: none !important;
-}
-
-.letterpress {
-  display: none !important;
-}
-
-/* INFO: Transparent Editor Components - See through the matrix! 👁️ */
-.monaco-editor,
-.monaco-workbench,
-.editor-instance,
-.editor-group-container {
-  background: transparent !important;
-  background-image: none !important;
-}
-
-/* INFO: Watermark & Command Center Adjustments */
-.editor-group-watermark {
-  max-width: none !important;
-}
-
-.command-center-center {
-  width: auto !important;
-}
-
-/* INFO: Main Wallpaper Background - Your personal coding cinema! 🎬 */
-.monaco-workbench {
-  position: relative;
-}
-
-.monaco-workbench::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/CustomWallpaper.jpg") !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  opacity: 0.3 !important;
-  pointer-events: none;
-  z-index: -2;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                 🧿 NEURAL GLYPH AESTHETICS                      │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* Glyph particles optimization */
-.neural-glyph {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Pulse rings */
-.neural-pulse {
-  will-change: transform, opacity;
-}
-
-/* Screen distortion near cursor (subtle) */
-.monaco-editor {
-  position: relative;
-}
-
-.monaco-editor::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
-    rgba(0, 255, 65, 0.03) 0%,
-    transparent 15%
-  );
-  mix-blend-mode: screen;
-  z-index: 1;
-}
-
-/* Enhanced cursor appearance */
-.monaco-editor .cursor {
-  background: linear-gradient(
-    180deg,
-    #00ff41 0%,
-    #00ffff 50%,
-    #00ff41 100%
-  ) !important;
-  width: 2px !important;
-  box-shadow:
-    0 0 8px #00ff41,
-    0 0 12px #00ffff,
-    0 0 20px rgba(0, 255, 65, 0.5) !important;
-}
-
-/* Chromatic aberration on selection (optional bonus) */
-.monaco-editor .selected-text {
-  text-shadow:
-    -0.5px 0 rgba(0, 255, 255, 0.3),
-    0.5px 0 rgba(255, 0, 255, 0.3);
-}
-
-/* Smooth performance */
-.monaco-editor * {
-  will-change: auto;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    📐 PANEL & LAYOUT STRUCTURE                  │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* INFO: Panel Header Alignment - Everything in perfect harmony! 🎵 */
-.monaco-workbench .part > .header-or-footer,
-.monaco-workbench .part > .title {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-items: center !important;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🗂️ SIDEBAR STYLING                           │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* INFO: Sidebar Shadow Effect - Depth perception! 🏔️ */
-.part.sidebar {
-  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
-}
-
-/* INFO: Primary Sidebar Title - Making it BOLD and GOLD! 👑 */
-.part.sidebar > .title > .title-label h2 {
-  font-family: "Algerian", "Cascadia Code", "Codicon" !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-items: center !important;
-  font-size: 40px !important;
-  color: ivory !important;
-  text-shadow: gold 4px 4px 3px;
-}
-
-/* INFO: Hide Title Actions - Cleaner look! 🧹 */
-.monaco-workbench .part.sidebar .title-actions .actions-container {
-  display: none !important;
-}
-
-/* INFO: Sidebar Background Image - Trident power! 🔱 */
-.monaco-workbench .part.sidebar::before,
-.monaco-workbench .part.auxiliarybar::before {
-  content: "";
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background-image: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Trident.png") !important;
-  background-position: center center !important;
-  background-size: 100% !important;
-  background-repeat: no-repeat !important;
-  opacity: 0.35 !important;
-  pointer-events: none !important;
-  z-index: -1 !important;
-}
-
-/* INFO: Scrollbar Styling - Minimalist purple! 💜 */
-.slider {
-  position: absolute !important;
-  right: 1px !important;
-  width: 1px !important;
-  background: #bc9abc !important;
-  left: auto !important;
-}
-
-/* INFO: Top Shadow Effect - Red glow of power! 🔴 */
-.monaco-scrollable-element > .shadow.top {
-  box-shadow: 0px 0px 100px rgba(255, 0, 0, 0.75) !important;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    📂 FILE EXPLORER                             │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* INFO: File List Padding - Give those files room to breathe! 🌬️ */
-.monaco-list.list_id_1 > .monaco-scrollable-element > .monaco-list-rows {
-  padding-top: 10px !important;
-}
-
-/* INFO: File Row Styling - Transparent with smooth transitions! 🌊 */
-.monaco-list.list_id_1
-  > .monaco-scrollable-element
-  > .monaco-list-rows
-  .monaco-list-row {
-  background: transparent !important;
-  transition: 0.5s ease-in-out !important;
-  margin-top: 5px !important;
-  color: white !important;
-  width: 98.5% !important;
-}
-
-/* INFO: Selected File - Cyan glow selection! 🟦 */
-.monaco-list.list_id_1
-  > .monaco-scrollable-element
-  > .monaco-list-rows
-  .monaco-list-row.selected {
-  font-family: "Cascadia Code", "Codicon" !important;
-  box-shadow: 0 0 8px 3px rgba(0, 255, 255, 0.5) !important;
-  border-radius: 25px !important;
-  left: 2px !important;
-}
-
-/* INFO: File Hover Effect - Golden transformation! ✨ */
-.monaco-list.list_id_1
-  > .monaco-scrollable-element
-  > .monaco-list-rows
-  .monaco-list-row:hover {
-  font-family: "Algerian", "Codicon" !important;
-  background-color: rgba(255, 215, 0, 0.25) !important;
-  border-radius: 25px !important;
-  transition: all 0.6s ease-in-out !important;
-  * {
-    font-family: inherit !important;
-    font-weight: 100 !important;
-  }
-}
-
-/* INFO: File Labels - Animated glow cycle! 🌈 */
-.monaco-list.list_id_1
-  > .monaco-scrollable-element
-  > .monaco-list-rows
-  .monaco-list-row
-  > .monaco-tl-row
-  .monaco-tl-contents
-  > .monaco-icon-label {
-  font-size: 10px !important;
-  font-weight: 600 !important;
-  color: white !important;
-  animation: glowCycle 10s infinite alternate ease-in-out;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🎯 ACTIVITY BAR                              │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* INFO: Profile Picture - Your digital identity! 👤 */
-.codicon-accounts-view-bar-icon:before {
-  content: "";
-  width: 75%;
-  height: 75%;
-  position: absolute !important;
-  background-image: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Photo.jpeg") !important;
-  background-size: 100% !important;
-  background-position: center center !important;
-  opacity: 1 !important;
-  border-radius: 50% !important;
-  object-fit: cover;
-}
-
-/* INFO: Settings Gear Icon - Custom gear power! ⚙️ */
-.codicon-settings-view-bar-icon:before {
-  content: "";
-  width: 65%;
-  height: 65%;
-  position: absolute !important;
-  background-image: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Gears.png") !important;
-  background-size: 100% !important;
-  background-position: center center !important;
-  opacity: 0.8 !important;
-  border-radius: 50% !important;
-  object-fit: cover;
-}
-
-/* INFO: Activity Bar Icon Base Styling */
-.monaco-action-bar .action-label.codicon {
-  padding: 0 !important;
-  margin: 0 !important;
-  position: relative !important;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-}
-
-/* INFO: Activity Bar Icon Default State - Golden icons! 🏆 */
-.monaco-workbench
-  .activitybar
-  > .content
-  :not(.monaco-menu)
-  > .monaco-action-bar
-  .action-label.codicon::before {
-  position: absolute;
-  border-radius: 50%;
-  transition: transform 1s ease-in-out !important;
-  transition:
-    transform 1s ease-in-out,
-    color 1s ease-in-out,
-    box-shadow 1s ease-in-out !important;
-  color: #ffd700 !important;
-}
-
-/* INFO: Activity Bar Icon Hover - Green glow transformation! 💚 */
-.monaco-workbench
-  .activitybar
-  > .content
-  :not(.monaco-menu)
-  > .monaco-action-bar
-  .action-label.codicon:hover::before {
-  display: block !important;
-  position: absolute !important;
-  transform: scale(1.5) rotate(10deg) !important;
-  transition:
-    transform 0.5s ease-in-out,
-    color 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out !important;
-  color: #00ff00 !important;
-  box-shadow: 0 0 4px 2px rgba(0, 255, 0, 0.8) !important;
-  border-radius: 50% !important;
-  background-color: #000 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  cursor: pointer !important;
-  will-change: transform, color, box-shadow !important;
-  z-index: -1 !important;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🗂️ TAB MANAGEMENT                            │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* INFO: Tab Actions Container Alignment */
+/* Editor actions row */
 .monaco-workbench
   .part.editor
   > .content
@@ -486,7 +963,7 @@ body,
   justify-items: center !important;
 }
 
-/* INFO: Hide Tab Close Button - Cleaner tabs! 🚫 */
+/* Hide close button */
 .monaco-workbench
   .tabs-container
   .tab
@@ -495,7 +972,7 @@ body,
   display: none !important;
 }
 
-/* INFO: Tab Sizing Adjustments */
+/* Tab sizing fixes */
 .monaco-workbench
   .part.editor
   > .content
@@ -514,7 +991,7 @@ body,
   padding: 0 !important;
 }
 
-/* INFO: Tab Color States - From white to green! 🚦 */
+/* Tab colours */
 .monaco-workbench
   .part.editor
   > .content
@@ -543,11 +1020,10 @@ body,
       > .monaco-icon-name-container
       > .label-name
   ).active {
-  color: #00ff00 !important;
+  color: var(--mrdib-green) !important;
   transition: 0.5s ease-in-out !important;
 }
 
-/* INFO: Tab Hover Scale Effect - Zoom in on hover! 🔍 */
 .monaco-workbench
   .part.editor
   > .content
@@ -564,7 +1040,7 @@ body,
   transition: transform 0.5s ease-in-out !important;
 }
 
-/* INFO: Remove Tab Shadows - Clean tab appearance! 🧼 */
+/* Strip tab fade gradient */
 .monaco-workbench
   .part.editor
   > .content:not(.dragged-over)
@@ -607,7 +1083,7 @@ body,
   border: none !important;
 }
 
-/* INFO: Tab Container Animations - Sliding tabs! 🎪 */
+/* Tab bar background & animations */
 .monaco-workbench .tabs-container {
   background-color: transparent !important;
   animation: tabSlideIn 3s !important;
@@ -626,40 +1102,11 @@ body,
   animation: tabSlideOut 3s !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    💬 TOOLTIPS & HOVERS                         │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 19 — COMMAND PALETTE                                                */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Tooltip Base Style - Transparent with cyan text! 🎈 */
-.monaco-editor-hover,
-.monaco-hover {
-  font-family: "Cascadia Code", "Codicon" !important;
-  color: #00ff00 !important;
-  background-color: transparent !important;
-  border: 2px solid rgba(255, 255, 255, 0.1) !important;
-  transition: all 1s ease-in-out !important;
-}
-
-/* INFO: Tooltip Hover State - Glass morphism effect! 🥃 */
-.monaco-editor-hover:hover,
-.monaco-hover:hover {
-  font-family: "Times New Roman", "Codicon" !important;
-  color: #ffd700 !important;
-  padding: 0 0 0.5% !important;
-  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.45) !important;
-  border: 2px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 12px !important;
-  backdrop-filter: blur(3px) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  min-width: 220px !important;
-  transition: all 0.75s ease-in-out !important;
-}
-
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🔍 COMMAND PALETTE                           │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
-
-/* INFO: Command Palette Transparency - Glass effect everywhere! 🪟 */
+/* All layers transparent */
 .quick-input-widget,
 .quick-input-widget .quick-input-list,
 .quick-input-widget .quick-input-list > .monaco-list,
@@ -681,7 +1128,7 @@ body,
   background-color: transparent !important;
 }
 
-/* INFO: Command Palette Main Container - Centered floating panel! 🎭 */
+/* Main widget */
 .quick-input-widget {
   width: auto !important;
   min-width: 62.5vw !important;
@@ -694,20 +1141,17 @@ body,
   transform: translate(-50%, -50%) !important;
   padding: 0.5% !important;
   backdrop-filter: blur(4px) !important;
-  border: 2px solid rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid var(--mrdib-border) !important;
   border-radius: 25px !important;
-  box-shadow: 0 0 8px 2px rgba(0, 255, 255, 0.8) !important;
+  box-shadow: var(--shadow-cyan) !important;
 }
 
-/* INFO: Command Palette Background Image - Mask overlay! 🎭 */
+/* Background mask image */
 .quick-input-widget::before {
   content: "" !important;
   position: absolute !important;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  background-image: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Mask.png") !important;
+  inset: 0;
+  background-image: var(--img-palette) !important;
   background-position: center center !important;
   background-size: 35% !important;
   background-repeat: no-repeat !important;
@@ -716,7 +1160,7 @@ body,
   z-index: 0 !important;
 }
 
-/* INFO: Command Palette Header Sizing */
+/* Input header */
 .quick-input-widget .quick-input-header .quick-input-and-message {
   max-height: 3.5vh !important;
 }
@@ -729,7 +1173,6 @@ body,
   margin: 0 !important;
 }
 
-/* INFO: Command Palette Input Field - Purple glow! 💜 */
 .quick-input-widget
   .quick-input-header
   .quick-input-and-message
@@ -740,7 +1183,7 @@ body,
   > .ibwrapper
   > .input {
   border-radius: 25px !important;
-  box-shadow: 0 0 8px 2px rgba(255, 0, 255, 0.8) !important;
+  box-shadow: var(--shadow-purple) !important;
 }
 
 .quick-input-filter .monaco-inputbox {
@@ -752,7 +1195,7 @@ body,
   margin-bottom: 16px !important;
 }
 
-/* INFO: Command Palette List Container */
+/* List area */
 .quick-input-widget .quick-input-list {
   padding: 0 !important;
   height: auto !important;
@@ -766,7 +1209,6 @@ body,
   padding: 10px 0 !important;
 }
 
-/* INFO: Command Palette List Items */
 .quick-input-widget
   .quick-input-list
   > .monaco-list
@@ -775,6 +1217,7 @@ body,
   padding-bottom: 10px !important;
 }
 
+/* Rows */
 .quick-input-widget
   .quick-input-list
   > .monaco-list
@@ -786,7 +1229,6 @@ body,
   margin: 5px 5px 0 5px !important;
 }
 
-/* INFO: Command Palette Item Hover - Green glow! 💚 */
 .quick-input-widget
   .quick-input-list
   > .monaco-list
@@ -794,16 +1236,23 @@ body,
   > .monaco-list-rows
   > .monaco-list-row:hover {
   font-family: "Algerian", "Codicon" !important;
-  box-shadow: 0 0 8px 2px rgba(0, 255, 105, 0.8) !important;
+  box-shadow: var(--shadow-green) !important;
   border-radius: 25px !important;
   transition: all 0.6s ease-in-out !important;
-  * {
-    font-family: inherit !important;
-    height: auto !important;
-  }
 }
 
-/* INFO: Command Palette Focused Item - Purple borders! 🟪 */
+.quick-input-widget
+  .quick-input-list
+  > .monaco-list
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  > .monaco-list-row:hover
+  * {
+  font-family: inherit !important;
+  height: auto !important;
+}
+
+/* Focused row */
 .quick-input-widget
   .quick-input-list
   > .monaco-list
@@ -814,16 +1263,22 @@ body,
   border-left: 4px solid rgba(255, 0, 255, 0.8) !important;
   border-right: 4px solid rgba(255, 0, 255, 0.8) !important;
   border-radius: 25px !important;
-  color: #ffd700 !important;
+  color: var(--mrdib-gold) !important;
   filter: drop-shadow(6px 0 16px rgba(0, 255, 105, 1)) !important;
   transition: all 0.6s ease-in-out !important;
-  * {
-    font-family: inherit !important;
-    height: auto !important;
-  }
 }
 
-/* INFO: Command Palette Focused Item Background Gradient */
+.quick-input-widget
+  .quick-input-list
+  > .monaco-list
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  > .monaco-list-row.focused
+  * {
+  font-family: inherit !important;
+  height: auto !important;
+}
+
 .quick-input-widget
   .quick-input-list
   > .monaco-list
@@ -832,10 +1287,7 @@ body,
   > .monaco-list-row.focused::before {
   content: "" !important;
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+  inset: 0 !important;
   z-index: -1 !important;
   background: linear-gradient(
     to right,
@@ -845,7 +1297,7 @@ body,
   ) !important;
 }
 
-/* INFO: Command Palette Action Bar Padding */
+/* Row action bar padding */
 .quick-input-widget
   .quick-input-list
   > .monaco-list
@@ -860,11 +1312,37 @@ body,
   padding-top: 3px !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🔔 NOTIFICATIONS                             │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 20 — TOOLTIPS & HOVERS                                             */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Notification Container Transparency - Crystal clear! 💎 */
+.monaco-editor-hover,
+.monaco-hover {
+  font-family: "Cascadia Code", "Codicon" !important;
+  color: var(--mrdib-green) !important;
+  background-color: transparent !important;
+  border: 2px solid var(--mrdib-border) !important;
+  transition: all 1s ease-in-out !important;
+}
+
+.monaco-editor-hover:hover,
+.monaco-hover:hover {
+  font-family: "Times New Roman", "Codicon" !important;
+  color: var(--mrdib-gold) !important;
+  padding: 0 0 0.5% !important;
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.45) !important;
+  border: 2px solid var(--mrdib-border) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(3px) !important;
+  background: var(--mrdib-bg-glass) !important;
+  min-width: 220px !important;
+  transition: all 0.75s ease-in-out !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 21 — NOTIFICATIONS                                                  */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
 .monaco-workbench
   > .notifications-toasts
   .notification-toast-container
@@ -888,14 +1366,12 @@ body,
   background: transparent !important;
 }
 
-/* INFO: Notification Visibility Transition */
 .monaco-workbench > .notifications-toasts.visible {
   transition: all 1s ease-in-out !important;
 }
 
-/* INFO: Notification Hover State - Glass morphism! 🪟 */
 .monaco-workbench > .notifications-toasts.visible:hover {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: var(--mrdib-bg-glass) !important;
   backdrop-filter: blur(2px) !important;
   -webkit-backdrop-filter: blur(2px) !important;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
@@ -903,17 +1379,15 @@ body,
   transition: all 0.75s ease-in-out !important;
 }
 
-/* INFO: Notification Source Label - Golden Times New Roman! 📰 */
 .monaco-workbench
   .notifications-list-container
   .notification-list-item
   .notification-list-item-source {
   background-color: transparent !important;
-  color: #ffd700;
+  color: var(--mrdib-gold);
   font-family: "Times New Roman", "Codicon" !important;
 }
 
-/* INFO: Notification Buttons - Algerian style! 🎪 */
 .monaco-workbench
   .notifications-list-container
   .notification-list-item
@@ -924,14 +1398,13 @@ body,
   font-family: "Algerian", "Codicon" !important;
 }
 
-/* INFO: Notification Button Hover - Green glow with rotation! 💚 */
 .monaco-workbench
   .notifications-list-container
   .notification-list-item
   .notification-list-item-buttons-container
   .monaco-text-button:hover {
   background-color: transparent !important;
-  color: #00ff00 !important;
+  color: var(--mrdib-green) !important;
   transform: scale(1.05) rotate(-2deg) !important;
   transition:
     transform 0.5s ease-in-out,
@@ -944,31 +1417,28 @@ body,
   pointer-events: auto !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🎯 WORD HIGHLIGHTS                           │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 22 — WORD HIGHLIGHTS & SELECTION                                    */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Word Highlight - Cyan glow for matching words! 🔷 */
 .monaco-editor .wordHighlight {
   background-color: rgba(0, 255, 200, 0.13) !important;
   border-radius: 2px;
   box-shadow: 0 0 8px 2px rgba(0, 200, 255, 1) !important;
 }
 
-/* INFO: Selected Text - Green glow for selections! 💚 */
 .monaco-editor .selected-text {
   background-color: rgba(0, 255, 200, 0.13) !important;
   border-radius: 2px;
   box-shadow: 0 0 8px rgba(0, 255, 100, 1) !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    ⚠️ ERROR LENS ICONS                          │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 23 — ERROR LENS ICONS                                               */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Error Lens Custom Icon - Death to bugs! ☠️ */
 .monaco-editor .ced-1-TextEditorDecorationType33-2 {
-  background: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/ErrorLens-01.png") !important;
+  background: var(--img-error-lens) !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -976,11 +1446,10 @@ body,
   border-radius: 50% !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🎨 BORDERS & DIVIDERS                        │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 24 — BORDERS & DIVIDERS                                             */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Vertical Borders - Subtle white dividers! │ */
 .monaco-sash.vertical.mac[style*="left: 280px"],
 .monaco-sash.vertical.mac[style*="left: 1580px"],
 .monaco-workbench .activitybar.right.bordered:before,
@@ -988,19 +1457,19 @@ body,
   border-left: 2px solid rgb(255 255 255 / 13%) !important;
 }
 
-/* ┌─────────────────────────────────────────────────────────────────┐ */
-/* │                    🛠️ UTILITY ICONS                             │ */
-/* └─────────────────────────────────────────────────────────────────┘ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 25 — UTILITY                                                        */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* INFO: Toolbar Icons - Keep them visible! 👁️ */
 .codicon-toolbar-more,
 .codicon-word-wrap {
   display: block !important;
 }
 
-/* ╔══════════════════════════════════════════════════════════════════╗ */
-/* ║                        END OF CUSTOM CSS                         ║ */
-/* ║                                                                  ║ */
-/* ║  "Style is not just what it looks like, it's how it works!"      ║ */
-/* ║                            ~ MrDib 🎨                            ║ */
-/* ╚══════════════════════════════════════════════════════════════════╝ */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*                                                                        */
+/*                          END OF CUSTOM CSS                             */
+/*        "Style is not just what it looks like, it's how it works!"      */
+/*                              ~ MrDib 🎨                                */
+/*                                                                        */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
