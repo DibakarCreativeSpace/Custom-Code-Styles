@@ -16,7 +16,7 @@ fi
 # │ 2. CUSTOM PATH VARIABLES (for reuse below)                                   │
 # └──────────────────────────────────────────────────────────────────────────────┘
 export DOCS_DIR="$HOME/Documents/Documents - DIBAKAR’s MacBook Pro"
-export MONGO_HOME="$DOCS_DIR/Utilities/MongoDB/mongodb-macos-aarch64--8.2.3"
+export MONGO_HOME="$DOCS_DIR/Utilities/MongoDB/mongodb-macos-aarch64--8.3.1"
 export MONGO_DATA="$DOCS_DIR/Utilities/MongoDB/data/db"
 
 
