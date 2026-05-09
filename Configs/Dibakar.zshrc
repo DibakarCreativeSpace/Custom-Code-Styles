@@ -527,7 +527,9 @@ cheat() {
       echo -e "  \033[1;32m_ <cmd>\033[0m        → sudo <cmd>"
       echo -e "\n\033[1;36m  Reload / Edit:\033[0m"
       echo -e "  \033[1;32mreload\033[0m         → Source zshrc"
+      echo -e "  \033[1;32mzshconfig\033[0m      → Edit in TextEdit"
       echo -e "  \033[1;32mzshvim\033[0m         → Edit in nvim"
+      echo -e "  \033[1;32mzshcode\033[0m        → Edit in VS Code"
       echo -e "  \033[1;32mp10kconfig\033[0m     → Reconfigure prompt"
       ;;
 
@@ -575,8 +577,15 @@ Run() {
         return 1
       fi
       echo -e "\n\033[1;32m▶ Running Django server...\033[0m\n"
-      python3 manage.py runserver
+      python3 manage.py runserver &
+      DJANGO_PID=$!
+      trap "kill $DJANGO_PID 2>/dev/null" EXIT
+      sleep 3
+      echo -e "\033[1;36m🌐 Opening browser...\033[0m"
+      open http://localhost:8000 2>/dev/null || xdg-open http://localhost:8000 2>/dev/null || true
+      wait $DJANGO_PID
       ;;
+
     2)
       if [ ! -f "package.json" ]; then
         echo -e "\n\033[1;31m✖ No 'package.json' found in $(pwd)\033[0m"
@@ -584,8 +593,9 @@ Run() {
         return 1
       fi
       echo -e "\n\033[1;32m▶ Running npm dev server...\033[0m\n"
-      npm run dev
+      npm run dev -- --open
       ;;
+
     *)
       echo -e "\n\033[1;31m✖ Invalid choice. Please enter 1 or 2.\033[0m"
       ;;
