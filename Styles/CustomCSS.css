@@ -1,10 +1,10 @@
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
-/*                                                                        */
-/*                    🎨 MrDib's CUSTOM CSS — v6.0                        */
-/*                  "Where Aesthetics Meet Functionality"                  */
-/*                                                                        */
-/*               ✨ Glassmorphism Everywhere Edition ✨                    */
-/*                                                                        */
+/*                                                                             */
+/*                    🎨 MrDib's CUSTOM CSS — v6.0                             */
+/*                  "Where Aesthetics Meet Functionality"                      */
+/*                                                                             */
+/*               ✨ Glassmorphism Everywhere Edition ✨                         */
+/*                                                                             */
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
@@ -130,7 +130,7 @@
   left: 0px;
   width: 35px !important;
   font-family: "Algerian" !important;
-  opacity: 0.7;
+  opacity: 1;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
@@ -700,24 +700,108 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
-/*  § 12 — SIDEBAR                                                       */
+/*  § 12 — SIDEBAR (ALL SECTIONS)                                        */
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
 .part.sidebar {
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
-.part.sidebar > .title > .title-label h2 {
-  font-family: "Algerian", "Cascadia Code", "Codicon" !important;
+/* Main heading container with glassmorphism */
+.part.sidebar > .composite.title.has-actions {
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 30px !important;
+  min-height: 65px !important;
+  padding: 10px 16px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+  overflow: visible !important;
+  box-shadow:
+    0 0 20px rgba(255, 215, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
+  margin: 12px !important;
+  /* ← CRITICAL FIX: Constrain width to sidebar */
+  width: calc(100% - 24px) !important;
+  max-width: none !important;
+}
+
+/* Hover state */
+.part.sidebar > .composite.title.has-actions:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 215, 0, 0.6) !important;
+  box-shadow:
+    0 0 30px rgba(255, 215, 0, 0.4),
+    0 0 60px rgba(0, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Constrain the title-label */
+.part.sidebar > .composite.title.has-actions > .title-label {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important; /* ← IMPORTANT for ellipsis */
+  position: relative !important;
+  z-index: 2 !important;
+  height: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Enhanced h2 styling */
+.part.sidebar > .composite.title.has-actions > .title-label h2 {
+  font-family: "Cascadia Code", "Codicon" !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  justify-items: center !important;
-  font-size: 40px !important;
-  color: ivory !important;
-  text-shadow: gold 4px 4px 3px;
+  justify-content: center !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important; /* ← Reduced further */
+  color: #fff8e7 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  width: 100% !important; /* ← CRITICAL */
+  max-width: 100% !important; /* ← CRITICAL */
+  min-width: 0 !important; /* ← Important for flex */
+  text-shadow:
+    0 0 4px rgba(255, 215, 0, 0.9),
+    0 0 10px rgba(255, 215, 0, 0.6),
+    0 0 20px rgba(255, 215, 0, 0.3),
+    0 2px 2px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.4s ease !important;
 }
 
+/* Hover text effect */
+.part.sidebar > .composite.title.has-actions:hover > .title-label h2 {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 6px rgba(255, 215, 0, 1),
+    0 0 14px rgba(255, 215, 0, 0.8),
+    0 0 28px rgba(0, 255, 200, 0.4),
+    0 2px 2px rgba(0, 0, 0, 0.6) !important;
+  transform: scale(1.04) !important;
+}
+
+/* Hide action buttons */
 .monaco-workbench .part.sidebar .title-actions .actions-container {
   display: none !important;
 }
@@ -818,6 +902,22 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
 /*  § 15 — ACTIVITY BAR                                                   */
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
+/* Just increase icon size */
+.part.activitybar .action-label.codicon {
+  font-size: 22px !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  transition: all 0.2s ease !important;
+}
+
+.part.activitybar .action-item:hover .action-label.codicon {
+  color: #ffd700 !important;
+  transform: scale(1.2) !important;
+}
+
+.part.activitybar .action-item.checked .action-label.codicon {
+  color: #ffd700 !important;
+}
+
 /* Custom account icon */
 .codicon-accounts-view-bar-icon:before {
   content: "";
@@ -828,20 +928,6 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   background-size: 100% !important;
   background-position: center center !important;
   opacity: 1 !important;
-  border-radius: 50% !important;
-  object-fit: cover;
-}
-
-/* Custom settings gear icon */
-.codicon-settings-view-bar-icon:before {
-  content: "";
-  width: 65%;
-  height: 65%;
-  position: absolute !important;
-  background-image: var(--img-gears) !important;
-  background-size: 100% !important;
-  background-position: center center !important;
-  opacity: 0.8 !important;
   border-radius: 50% !important;
   object-fit: cover;
 }
@@ -947,10 +1033,181 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
-/*  § 18 — EDITOR TABS                                                    */
+/*  § 18 — EDITOR TABS (GLASSMORPHIC EDITION)                            */
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-/* Editor actions row */
+/* 18a — Tab container with glass effect */
+.monaco-workbench .tabs-container {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  ) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding: 4px 8px !important;
+  gap: 4px !important;
+  animation: tabSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* 18b — Individual tab styling */
+.monaco-workbench .part.editor .editor-group-container .title.tabs .tab {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  margin: 0 2px !important;
+  padding: 6px 12px !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 18b-i — Tab glow effect (before state) */
+.monaco-workbench
+  .part.editor
+  .editor-group-container
+  .title.tabs
+  .tab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(255, 215, 0, 0.1),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 18c — Inactive tab hover */
+.monaco-workbench
+  .part.editor
+  .editor-group-container
+  .title.tabs
+  .tab:not(.active):hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+.monaco-workbench
+  .part.editor
+  .editor-group-container
+  .title.tabs
+  .tab:not(.active):hover::before {
+  opacity: 1 !important;
+}
+
+/* 18d — Active tab styling */
+.monaco-workbench
+  .part.editor
+  .editor-group-container.active
+  > .title
+  .tabs-container
+  > .tab.active {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.15) 0%,
+    rgba(0, 255, 200, 0.08) 100%
+  ) !important;
+  border: 1.5px solid rgba(255, 215, 0, 0.4) !important;
+  color: #ffd700 !important;
+  box-shadow:
+    0 0 16px rgba(255, 215, 0, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  font-weight: 600 !important;
+}
+
+.monaco-workbench
+  .part.editor
+  .editor-group-container.active
+  > .title
+  .tabs-container
+  > .tab.active::before {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.3),
+    transparent 50%,
+    rgba(0, 255, 200, 0.2)
+  ) !important;
+  opacity: 1 !important;
+}
+
+/* 18e — Tab label styling */
+.monaco-workbench
+  .part.editor
+  > .content
+  .editor-group-container.active
+  > .title
+  .tabs-container
+  > .tab
+  .monaco-icon-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: color 0.3s ease !important;
+  position: relative;
+  z-index: 1;
+}
+
+.monaco-workbench
+  .part.editor
+  > .content
+  .editor-group-container.active
+  > .title
+  .tabs-container
+  > .tab.active
+  .monaco-icon-label {
+  color: #ffd700 !important;
+}
+
+.monaco-workbench
+  .part.editor
+  > .content
+  .editor-group-container.active
+  > .title
+  .tabs-container
+  > .tab:hover
+  .monaco-icon-label {
+  color: #ffffff !important;
+}
+
+/* 18f — Close button styling */
+.monaco-workbench
+  .tabs-container
+  .tab
+  .tab-actions
+  .action-label.codicon-close {
+  opacity: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.monaco-workbench
+  .tabs-container
+  .tab:hover
+  .tab-actions
+  .action-label.codicon-close {
+  opacity: 0.6 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.monaco-workbench
+  .tabs-container
+  .tab
+  .tab-actions
+  .action-label.codicon-close:hover {
+  opacity: 1 !important;
+  color: #ff6b6b !important;
+  transform: scale(1.2) !important;
+  filter: drop-shadow(0 0 4px rgba(255, 107, 107, 0.6)) !important;
+}
+
+/* 18g — Editor actions row */
 .monaco-workbench
   .part.editor
   > .content
@@ -961,86 +1218,112 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   flex-direction: row !important;
   align-items: center !important;
   justify-items: center !important;
+  gap: 8px !important;
+  margin-left: auto !important;
 }
 
-/* Hide close button */
-.monaco-workbench
-  .tabs-container
-  .tab
-  .tab-actions
-  .action-label.codicon-close {
-  display: none !important;
-}
-
-/* Tab sizing fixes */
+/* 18h — Action buttons styling */
 .monaco-workbench
   .part.editor
-  > .content
   .editor-group-container
   > .title
-  .tabs-container
-  > .tab.sizing-fixed.close-action-off:not(.sticky-compact),
+  .editor-actions
+  .monaco-action-bar
+  .action-label.codicon {
+  color: rgba(255, 255, 255, 0.5) !important;
+  transition: all 0.2s ease !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+}
+
 .monaco-workbench
   .part.editor
-  > .content
   .editor-group-container
   > .title
-  .tabs-container
-  > .tab.sizing-shrink.close-action-off:not(.sticky-compact) {
-  margin: 0 !important;
-  padding: 0 !important;
+  .editor-actions
+  .monaco-action-bar
+  .action-label.codicon:hover {
+  color: #ffd700 !important;
+  background: rgba(255, 215, 0, 0.1) !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3) !important;
+  transform: scale(1.1) !important;
 }
 
-/* Tab colours */
+/* 18i — Breadcrumbs styling */
+.monaco-breadcrumbs {
+  background: transparent !important;
+  padding: 4px 12px !important;
+  font-size: 12px !important;
+}
+
+.monaco-breadcrumb-item {
+  color: rgba(255, 255, 255, 0.5) !important;
+  transition: all 0.2s ease !important;
+  padding: 2px 4px !important;
+  border-radius: 4px !important;
+}
+
+.monaco-breadcrumb-item:hover {
+  color: #ffd700 !important;
+  background: rgba(255, 215, 0, 0.08) !important;
+}
+
+.monaco-breadcrumb-item.focused {
+  color: #00ff88 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.4) !important;
+}
+
+/* 18j — Breadcrumb separator */
+.monaco-breadcrumb-item .codicon-breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.2) !important;
+  margin: 0 4px !important;
+}
+
+/* 18k — Tab drag preview */
+.monaco-drag-image .tab {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.2) 0%,
+    rgba(0, 255, 200, 0.1) 100%
+  ) !important;
+  border: 1.5px solid rgba(255, 215, 0, 0.6) !important;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4) !important;
+  border-radius: 12px !important;
+}
+
+/* 18l — Tab animations */
+.monaco-workbench .tabs-container .tab {
+  animation: tabSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+.monaco-workbench .tabs-container .tab.closing {
+  animation: tabSlideOut 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+/* 18m — Unsaved indicator */
+.monaco-workbench .tabs-container .tab.dirty::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 215, 0, 0.8);
+  z-index: 2;
+}
+
+/* 18n — Tab scrollable element */
 .monaco-workbench
   .part.editor
-  > .content
-  .editor-group-container.active
-  > .title
-  .tabs-container
-  > .tab:has(
-    .monaco-icon-label
-      > .monaco-icon-label-container
-      > .monaco-icon-name-container
-      > .label-name
-  ) {
-  color: #f2f0ef !important;
-  transition: 0.5s ease-in-out !important;
+  .editor-group-container
+  .title
+  .monaco-scrollable-element {
+  background: transparent !important;
 }
 
-.monaco-workbench
-  .part.editor
-  > .content
-  .editor-group-container.active
-  > .title
-  .tabs-container
-  > .tab:has(
-    .monaco-icon-label
-      > .monaco-icon-label-container
-      > .monaco-icon-name-container
-      > .label-name
-  ).active {
-  color: var(--mrdib-green) !important;
-  transition: 0.5s ease-in-out !important;
-}
-
-.monaco-workbench
-  .part.editor
-  > .content
-  .editor-group-container.active
-  > .title
-  .tabs-container
-  > .tab:has(
-    .monaco-icon-label
-      > .monaco-icon-label-container
-      > .monaco-icon-name-container
-      > .label-name
-  ):hover {
-  transform: scale(1.2) !important;
-  transition: transform 0.5s ease-in-out !important;
-}
-
-/* Strip tab fade gradient */
+/* Strip tab fade gradient — Enhanced version */
 .monaco-workbench
   .part.editor
   > .content:not(.dragged-over)
@@ -1081,25 +1364,6 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
-}
-
-/* Tab bar background & animations */
-.monaco-workbench .tabs-container {
-  background-color: transparent !important;
-  animation: tabSlideIn 3s !important;
-}
-
-.monaco-workbench .part.editor .editor-group-container .title.tabs .tab {
-  background-color: transparent !important;
-  animation: tabSlideIn 3s !important;
-}
-
-.monaco-workbench
-  .part.editor
-  .editor-group-container
-  .title.tabs
-  .tab.closing {
-  animation: tabSlideOut 3s !important;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
@@ -1464,6 +1728,301 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
 .codicon-toolbar-more,
 .codicon-word-wrap {
   display: block !important;
+}
+
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+/*  § 26 — TITLEBAR (GLASSMORPHIC TOP BAR)                               */
+/* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
+
+/* 26a — Main titlebar */
+.part.titlebar {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 20, 30, 0.88) 0%,
+    rgba(25, 25, 35, 0.9) 50%,
+    rgba(20, 20, 30, 0.88) 100%
+  ) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+}
+
+.part.titlebar:hover {
+  border-bottom-color: rgba(255, 215, 0, 0.3) !important;
+  box-shadow: 0 6px 28px rgba(255, 215, 0, 0.25) !important;
+}
+
+/* 26b — Container layout */
+.titlebar-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 0 16px 0 90px !important;
+  height: 100% !important;
+}
+
+/* 26c — Left navigation buttons */
+.titlebar-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.titlebar-left .action-label.codicon {
+  color: rgba(255, 215, 0, 0.6) !important;
+  padding: 6px 10px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.titlebar-left .action-label.codicon:not(.disabled):hover {
+  color: #ffd700 !important;
+  background: rgba(255, 215, 0, 0.12) !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3) !important;
+  transform: scale(1.08) !important;
+}
+
+.titlebar-left .action-label.codicon.disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+}
+
+/* 26d — Center section (search box area) */
+.titlebar-center {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 300px !important;
+  max-width: 800px !important;
+}
+
+.titlebar-center .window-title {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.titlebar-center .command-center {
+  width: 100% !important;
+}
+
+.titlebar-center .command-center .monaco-toolbar {
+  width: 100% !important;
+}
+
+.titlebar-center .command-center .monaco-action-bar {
+  width: 100% !important;
+}
+
+.titlebar-center .command-center .actions-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  gap: 12px !important;
+}
+
+.command-center-center {
+  flex: 0 1 auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.command-center-center .monaco-toolbar {
+  width: auto !important;
+}
+
+.command-center-center .monaco-action-bar {
+  width: auto !important;
+}
+
+/* 26e — Search label styling */
+.command-center-quick-pick {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 215, 0, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 10px 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 30px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  flex: 0 1 auto !important;
+  width: auto !important;
+}
+
+.command-center-quick-pick:hover {
+  background: rgba(255, 215, 0, 0.1) !important;
+  border-color: rgba(255, 215, 0, 0.4) !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.2) !important;
+}
+
+.search-label {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  font-family: "Cascadia Code", monospace !important;
+  white-space: nowrap !important;
+}
+
+.command-center-quick-pick:hover .search-label {
+  color: #ffd700 !important;
+}
+
+/* 26f — Agent status pill */
+.agent-status-pill {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 200, 0.1) 0%,
+    rgba(0, 255, 100, 0.06) 100%
+  ) !important;
+  border: 1px solid rgba(0, 255, 150, 0.25) !important;
+  border-radius: 20px !important;
+  padding: 8px 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.3s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.agent-status-pill:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 200, 0.15) 0%,
+    rgba(0, 255, 100, 0.1) 100%
+  ) !important;
+  border-color: rgba(0, 255, 150, 0.4) !important;
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.25) !important;
+}
+
+/* 26g — Agent status label */
+.agent-status-label {
+  color: rgba(0, 255, 150, 0.7) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  font-family: "Cascadia Code", monospace !important;
+  white-space: nowrap !important;
+  transition: color 0.3s ease !important;
+}
+
+.agent-status-pill:hover .agent-status-label {
+  color: #00ffaa !important;
+}
+
+/* 26h — Agent status input area */
+.agent-status-input-area {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+/* 26i — Agent status badges */
+.agent-status-badge-section {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.agent-status-badge-section .action-label.codicon {
+  color: rgba(0, 255, 150, 0.6) !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.agent-status-badge-section .action-label.codicon:hover {
+  color: #00ffaa !important;
+  background: rgba(0, 255, 150, 0.12) !important;
+  box-shadow: 0 0 8px rgba(0, 255, 150, 0.3) !important;
+  transform: scale(1.15) !important;
+}
+
+.agent-status-sparkle-dropdown {
+  color: rgba(0, 255, 150, 0.5) !important;
+}
+
+/* 26j — Right section */
+.titlebar-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+/* 26k — Open in Agents button */
+.open-in-agents-titlebar-widget {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 100, 0.12) 0%,
+    rgba(0, 255, 200, 0.08) 100%
+  ) !important;
+  border: 1px solid rgba(0, 255, 100, 0.25) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.open-in-agents-titlebar-widget:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 100, 0.18) 0%,
+    rgba(0, 255, 200, 0.12) 100%
+  ) !important;
+  border-color: rgba(0, 255, 100, 0.4) !important;
+  box-shadow: 0 0 12px rgba(0, 255, 100, 0.25) !important;
+}
+
+.open-in-agents-titlebar-widget-label {
+  color: rgba(0, 255, 100, 0.75) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease !important;
+}
+
+.open-in-agents-titlebar-widget:hover .open-in-agents-titlebar-widget-label {
+  color: #00ff88 !important;
+}
+
+.open-in-agents-titlebar-widget-icon {
+  display: inline-block !important;
+  width: 12px !important;
+  height: 12px !important;
+  background: rgba(0, 255, 100, 0.6) !important;
+  border-radius: 2px !important;
+}
+
+/* 26l — Action buttons on right */
+.titlebar-right .action-label.codicon {
+  color: rgba(255, 255, 255, 0.5) !important;
+  padding: 6px 10px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.titlebar-right .action-label.codicon:hover {
+  color: #ffd700 !important;
+  background: rgba(255, 215, 0, 0.12) !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3) !important;
+  transform: scale(1.1) !important;
+}
+
+/* 26m — Drag region */
+.titlebar-drag-region {
+  -webkit-app-region: drag !important;
+  user-select: none !important;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
