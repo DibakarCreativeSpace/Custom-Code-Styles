@@ -213,12 +213,17 @@
   mix-blend-mode: normal !important;
 }
 
-/* Native VS Code icons must keep Codicon after the Lucy typography layer.
-   This targets only Codicon elements and their glyph pseudo-elements; xterm
-   content and terminal text keep their configured Cascadia/Meslo font stack. */
+/* Keep icon hosts neutral: VS Code assigns native Codicon or contributed
+   extension fonts per icon class. Lucy must not replace those assignments. */
 html body .monaco-workbench .codicon,
 html body .monaco-workbench .action-label.codicon,
 html body .monaco-workbench .codicon::before,
 html body .monaco-workbench .action-label.codicon::before {
-  font-family: "Codicon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+}
+
+/* The previous activity-bar hover layer placed the glyph at z-index -1. */
+html body .monaco-workbench .part.activitybar .action-label.codicon:hover::before {
+  z-index: 0 !important;
 }

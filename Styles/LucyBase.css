@@ -91,16 +91,12 @@
 /*  § 3 — TYPOGRAPHY & FONTS                                             */
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
-* {
+/* Keep Lucy typography on text-bearing nodes without replacing contributed
+   icon fonts such as GitLens, Octicons, or other extension glyph sets. */
+*:not(.codicon):not(.octicon) {
   font-family:
     "Cascadia Code", "FiraCode Nerd Font", "FiraCode", "JetBrains Mono",
     "Consolas", "Courier New", monospace !important;
-}
-
-/* Preserve icon fonts */
-.codicon,
-.octicon {
-  font-family: "Codicon" !important;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
@@ -897,7 +893,9 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   > .monaco-scrollable-element
   > .monaco-list-rows
   .monaco-list-row:hover
-  * {
+  > .monaco-tl-row
+  .monaco-tl-contents
+  > .monaco-icon-label {
   font-family: inherit !important;
   font-weight: 100 !important;
 }
@@ -958,18 +956,16 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   justify-content: center;
 }
 
+/* Keep the native activity-bar glyph in its centered Codicon flex box.
+   Only color it; absolute positioning here can hide the icon underneath the
+   activity-bar hover layer. */
 .monaco-workbench
   .activitybar
   > .content
   :not(.monaco-menu)
   > .monaco-action-bar
   .action-label.codicon::before {
-  position: absolute;
   border-radius: 50%;
-  transition:
-    transform 1s ease-in-out,
-    color 1s ease-in-out,
-    box-shadow 1s ease-in-out !important;
   color: var(--mrdib-gold) !important;
 }
 
@@ -979,34 +975,19 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   :not(.monaco-menu)
   > .monaco-action-bar
   .action-label.codicon:hover::before {
-  display: block !important;
-  position: absolute !important;
-  transform: scale(1.5) rotate(10deg) !important;
-  transition:
-    transform 0.5s ease-in-out,
-    color 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out !important;
   color: var(--mrdib-green) !important;
   box-shadow: 0 0 4px 2px rgba(0, 255, 0, 0.8) !important;
-  border-radius: 50% !important;
-  background-color: #000 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  cursor: pointer !important;
-  will-change: transform, color, box-shadow !important;
-  z-index: -1 !important;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 /*  § 16 — PANEL & LAYOUT STRUCTURE                                       */
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 
+/* Keep native part title geometry. Sidebar and panel headers are shaped in
+   LucyWorkbench.css; changing every part title to a column collapses icon rows. */
 .monaco-workbench .part > .header-or-footer,
 .monaco-workbench .part > .title {
-  display: flex !important;
-  flex-direction: column !important;
   align-items: center !important;
-  justify-items: center !important;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
@@ -1020,7 +1001,7 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   > .composite-bar
   > .monaco-action-bar
   .action-item.checked
-  .action-label,
+  .action-label:not(.codicon),
 .monaco-workbench
   .pane-composite-part
   > .header-or-footer
@@ -1028,7 +1009,7 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   > .composite-bar
   > .monaco-action-bar
   .action-item:hover:active
-  .action-label,
+  .action-label:not(.codicon),
 .monaco-workbench
   .pane-composite-part
   > .title
@@ -1036,7 +1017,7 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   > .composite-bar
   > .monaco-action-bar
   .action-item.checked
-  .action-label,
+  .action-label:not(.codicon),
 .monaco-workbench
   .pane-composite-part
   > .title
@@ -1044,7 +1025,7 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   > .composite-bar
   > .monaco-action-bar
   .action-item
-  .action-label {
+  .action-label:not(.codicon) {
   font-family: "Algerian", "Cascadia Code" !important;
   border: none !important;
 }

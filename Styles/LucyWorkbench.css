@@ -165,10 +165,10 @@
   border-bottom: 1px solid var(--lucy-line) !important;
 }
 
-.monaco-workbench .part.sidebar .pane-composite-part > .title .action-label,
-.monaco-workbench .part.sidebar .pane-composite-part > .header-or-footer .action-label,
-.monaco-workbench .part.auxiliarybar .pane-composite-part > .title .action-label,
-.monaco-workbench .part.auxiliarybar .pane-composite-part > .header-or-footer .action-label {
+.monaco-workbench .part.sidebar .pane-composite-part > .title .action-label:not(.codicon),
+.monaco-workbench .part.sidebar .pane-composite-part > .header-or-footer .action-label:not(.codicon),
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .title .action-label:not(.codicon),
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .header-or-footer .action-label:not(.codicon) {
   color: var(--lucy-muted) !important;
   font: 700 9px/1 "Cascadia Code", "SFMono-Regular", monospace !important;
   letter-spacing: 0.08em !important;
@@ -344,10 +344,10 @@
   border-bottom: 1px solid var(--lucy-line) !important;
 }
 
-.monaco-workbench .part.panel > .title .action-label,
-.monaco-workbench .part.panel > .header-or-footer .action-label,
-.monaco-workbench .part.panel .pane-composite-part > .title .action-label,
-.monaco-workbench .part.panel .pane-composite-part > .header-or-footer .action-label {
+.monaco-workbench .part.panel > .title .action-label:not(.codicon),
+.monaco-workbench .part.panel > .header-or-footer .action-label:not(.codicon),
+.monaco-workbench .part.panel .pane-composite-part > .title .action-label:not(.codicon),
+.monaco-workbench .part.panel .pane-composite-part > .header-or-footer .action-label:not(.codicon) {
   color: var(--lucy-muted) !important;
   font: 700 10px/1 "Cascadia Code", "SFMono-Regular", monospace !important;
   letter-spacing: 0.08em !important;
