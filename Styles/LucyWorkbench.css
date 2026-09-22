@@ -1,0 +1,422 @@
+/*
+ * Lucy Workbench — static, low-cost command-center chrome
+ *
+ * This layer concentrates the Lucy treatment on the activity bar, every
+ * sidebar view, auxiliary views, panel headers, lists, inputs, badges, menus,
+ * and transient workbench windows. It deliberately avoids backdrop-filter,
+ * mix-blend-mode, keyframes, perpetual animation, and transition: all.
+ */
+
+:root {
+  --lucy-cyan: rgba(0, 238, 255, 0.92);
+  --lucy-cyan-soft: rgba(0, 238, 255, 0.18);
+  --lucy-green: rgba(0, 255, 157, 0.94);
+  --lucy-green-soft: rgba(0, 255, 157, 0.14);
+  --lucy-gold: rgba(255, 215, 0, 0.9);
+  --lucy-ink: rgba(205, 255, 240, 0.94);
+  --lucy-muted: rgba(157, 211, 214, 0.68);
+  --lucy-surface: rgba(3, 18, 25, 0.92);
+  --lucy-surface-soft: rgba(5, 30, 37, 0.7);
+  --lucy-line: rgba(0, 238, 255, 0.2);
+  --lucy-line-soft: rgba(0, 255, 157, 0.12);
+  --lucy-radius: 6px;
+}
+
+/* Core workbench surfaces: opaque enough to reduce compositor pressure while
+   keeping the wallpaper visible through the existing base layer. */
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.auxiliarybar,
+.monaco-workbench .part.panel {
+  background:
+    linear-gradient(135deg, rgba(0, 255, 190, 0.035), transparent 38%),
+    linear-gradient(315deg, rgba(0, 150, 255, 0.03), transparent 46%),
+    var(--lucy-surface) !important;
+  border-color: var(--lucy-line) !important;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.34) !important;
+  isolation: isolate !important;
+}
+
+.monaco-workbench .part.sidebar::after,
+.monaco-workbench .part.auxiliarybar::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  border: 1px solid rgba(0, 255, 157, 0.08) !important;
+  z-index: -1 !important;
+}
+
+/* Sidebar and auxiliary-bar identity headers. */
+.monaco-workbench .part.sidebar > .composite.title.has-actions,
+.monaco-workbench .part.auxiliarybar > .composite.title.has-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 46px !important;
+  width: calc(100% - 16px) !important;
+  margin: 8px !important;
+  padding: 0 10px 0 13px !important;
+  border: 1px solid var(--lucy-line) !important;
+  border-radius: var(--lucy-radius) !important;
+  background:
+    linear-gradient(90deg, rgba(0, 255, 157, 0.1), transparent 44%),
+    rgba(2, 24, 30, 0.88) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 9px rgba(0, 238, 255, 0.1) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  transition: background-color 90ms ease, border-color 90ms ease !important;
+}
+
+.monaco-workbench .part.sidebar > .composite.title.has-actions::after,
+.monaco-workbench .part.auxiliarybar > .composite.title.has-actions::after {
+  content: "LUCY // ACTIVE VIEW" !important;
+  flex: 0 0 auto !important;
+  margin-left: 8px !important;
+  color: var(--lucy-green) !important;
+  font: 700 8px/1 "Cascadia Code", "SFMono-Regular", monospace !important;
+  letter-spacing: 0.12em !important;
+  text-shadow: 0 0 5px rgba(0, 255, 157, 0.36) !important;
+  white-space: nowrap !important;
+}
+
+.monaco-workbench .part.sidebar > .composite.title.has-actions:hover,
+.monaco-workbench .part.auxiliarybar > .composite.title.has-actions:hover {
+  background:
+    linear-gradient(90deg, rgba(0, 255, 157, 0.15), transparent 48%),
+    rgba(4, 34, 40, 0.94) !important;
+  border-color: rgba(0, 255, 157, 0.48) !important;
+}
+
+.monaco-workbench .part.sidebar > .composite.title.has-actions > .title-label,
+.monaco-workbench .part.auxiliarybar > .composite.title.has-actions > .title-label {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.monaco-workbench .part.sidebar > .composite.title.has-actions > .title-label h2,
+.monaco-workbench .part.auxiliarybar > .composite.title.has-actions > .title-label h2 {
+  display: block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  color: var(--lucy-ink) !important;
+  font: 700 12px/1.2 "Cascadia Code", "SFMono-Regular", monospace !important;
+  letter-spacing: 0.16em !important;
+  text-shadow: 0 0 5px rgba(0, 238, 255, 0.42) !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+/* Activity bar: compact neon controls with no idle animation. */
+.monaco-workbench .part.activitybar {
+  background: rgba(2, 15, 21, 0.96) !important;
+  border-right: 1px solid var(--lucy-line) !important;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.28) !important;
+}
+
+.monaco-workbench .part.activitybar .action-item {
+  margin: 3px 4px !important;
+  border-radius: var(--lucy-radius) !important;
+}
+
+.monaco-workbench .part.activitybar .action-label.codicon {
+  color: var(--lucy-muted) !important;
+  font-size: 20px !important;
+  text-shadow: none !important;
+  transition: color 90ms ease, background-color 90ms ease, transform 90ms ease !important;
+}
+
+.monaco-workbench .part.activitybar .action-item:hover .action-label.codicon {
+  color: var(--lucy-cyan) !important;
+  background: var(--lucy-cyan-soft) !important;
+  transform: translateY(-1px) !important;
+}
+
+.monaco-workbench .part.activitybar .action-item.checked .action-label.codicon,
+.monaco-workbench .part.activitybar .action-item.checked:hover .action-label.codicon {
+  color: var(--lucy-green) !important;
+  background: var(--lucy-green-soft) !important;
+  box-shadow: inset 2px 0 0 var(--lucy-green) !important;
+}
+
+/* View headers for Explorer, Search, Source Control, Run and Debug, Extensions,
+   Outline, Timeline, Testing, and other composite sidebar views. */
+.monaco-workbench .part.sidebar .pane-composite-part > .title,
+.monaco-workbench .part.sidebar .pane-composite-part > .header-or-footer,
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .title,
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .header-or-footer {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  min-height: 32px !important;
+  padding: 0 8px !important;
+  background: rgba(0, 20, 27, 0.62) !important;
+  border-top: 1px solid var(--lucy-line-soft) !important;
+  border-bottom: 1px solid var(--lucy-line) !important;
+}
+
+.monaco-workbench .part.sidebar .pane-composite-part > .title .action-label,
+.monaco-workbench .part.sidebar .pane-composite-part > .header-or-footer .action-label,
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .title .action-label,
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .header-or-footer .action-label {
+  color: var(--lucy-muted) !important;
+  font: 700 9px/1 "Cascadia Code", "SFMono-Regular", monospace !important;
+  letter-spacing: 0.08em !important;
+  transition: color 90ms ease, background-color 90ms ease !important;
+}
+
+.monaco-workbench .part.sidebar .pane-composite-part > .title .action-item:hover .action-label,
+.monaco-workbench .part.sidebar .pane-composite-part > .header-or-footer .action-item:hover .action-label,
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .title .action-item:hover .action-label,
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .header-or-footer .action-item:hover .action-label {
+  color: var(--lucy-cyan) !important;
+  background: var(--lucy-cyan-soft) !important;
+}
+
+/* All list-based sidebar and panel views share one fast row language. */
+.monaco-workbench .part.sidebar .monaco-list .monaco-list-row,
+.monaco-workbench .part.auxiliarybar .monaco-list .monaco-list-row,
+.monaco-workbench .part.panel .monaco-list .monaco-list-row {
+  min-height: 26px !important;
+  width: calc(100% - 16px) !important;
+  margin: 1px 8px !important;
+  padding: 0 5px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--lucy-radius) !important;
+  background: transparent !important;
+  color: var(--lucy-ink) !important;
+  transition: background-color 80ms ease, border-color 80ms ease, color 80ms ease !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-list .monaco-list-row:hover,
+.monaco-workbench .part.auxiliarybar .monaco-list .monaco-list-row:hover,
+.monaco-workbench .part.panel .monaco-list .monaco-list-row:hover {
+  background: rgba(0, 238, 255, 0.09) !important;
+  border-color: rgba(0, 238, 255, 0.24) !important;
+  color: #ffffff !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-list .monaco-list-row.selected,
+.monaco-workbench .part.sidebar .monaco-list .monaco-list-row.focused,
+.monaco-workbench .part.sidebar .monaco-list .monaco-list-row[aria-selected="true"],
+.monaco-workbench .part.auxiliarybar .monaco-list .monaco-list-row.selected,
+.monaco-workbench .part.auxiliarybar .monaco-list .monaco-list-row.focused,
+.monaco-workbench .part.auxiliarybar .monaco-list .monaco-list-row[aria-selected="true"],
+.monaco-workbench .part.panel .monaco-list .monaco-list-row.selected,
+.monaco-workbench .part.panel .monaco-list .monaco-list-row.focused,
+.monaco-workbench .part.panel .monaco-list .monaco-list-row[aria-selected="true"] {
+  background: rgba(0, 255, 157, 0.13) !important;
+  border-color: rgba(0, 255, 157, 0.42) !important;
+  box-shadow: inset 2px 0 0 var(--lucy-green) !important;
+  color: #ffffff !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-list .monaco-list-row .monaco-icon-label,
+.monaco-workbench .part.sidebar .monaco-list .monaco-tl-contents,
+.monaco-workbench .part.auxiliarybar .monaco-list .monaco-list-row .monaco-icon-label,
+.monaco-workbench .part.panel .monaco-list .monaco-list-row .monaco-icon-label {
+  color: inherit !important;
+  font: 500 11px/1.35 "Cascadia Code", "SFMono-Regular", monospace !important;
+  text-shadow: none !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-list .monaco-list-row .codicon,
+.monaco-workbench .part.auxiliarybar .monaco-list .monaco-list-row .codicon,
+.monaco-workbench .part.panel .monaco-list .monaco-list-row .codicon {
+  color: var(--lucy-cyan) !important;
+  text-shadow: none !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-tl-indent,
+.monaco-workbench .part.auxiliarybar .monaco-tl-indent {
+  border-color: rgba(0, 238, 255, 0.12) !important;
+}
+
+/* Transparent view bodies let the wallpaper and static panel surfaces compose
+   without creating nested blurred layers. */
+.monaco-workbench .part.sidebar .pane-composite-part > .content,
+.monaco-workbench .part.auxiliarybar .pane-composite-part > .content,
+.monaco-workbench .part.sidebar .viewlet,
+.monaco-workbench .part.auxiliarybar .viewlet,
+.monaco-workbench .part.sidebar .search-view,
+.monaco-workbench .part.sidebar .explorer-folders-view,
+.monaco-workbench .part.sidebar .scm-view,
+.monaco-workbench .part.sidebar .debug-view-content,
+.monaco-workbench .part.sidebar .extensions-viewlet,
+.monaco-workbench .part.panel > .content {
+  background: transparent !important;
+}
+
+/* Explorer, Search, Source Control, Debug, Testing, and Extensions inputs. */
+.monaco-workbench .part.sidebar .monaco-inputbox,
+.monaco-workbench .part.auxiliarybar .monaco-inputbox,
+.monaco-workbench .part.panel .monaco-inputbox,
+.monaco-workbench .part.sidebar .search-box,
+.monaco-workbench .part.sidebar .scm-input,
+.monaco-workbench .part.sidebar .extensions-search-container {
+  border: 1px solid var(--lucy-line) !important;
+  border-radius: var(--lucy-radius) !important;
+  background: rgba(1, 16, 22, 0.82) !important;
+  box-shadow: inset 0 0 8px rgba(0, 255, 157, 0.035) !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-inputbox:focus-within,
+.monaco-workbench .part.auxiliarybar .monaco-inputbox:focus-within,
+.monaco-workbench .part.panel .monaco-inputbox:focus-within,
+.monaco-workbench .part.sidebar .search-box:focus-within {
+  border-color: rgba(0, 255, 157, 0.64) !important;
+  box-shadow: 0 0 7px rgba(0, 255, 157, 0.14) !important;
+}
+
+.monaco-workbench .part.sidebar input,
+.monaco-workbench .part.auxiliarybar input,
+.monaco-workbench .part.panel input {
+  color: var(--lucy-ink) !important;
+  caret-color: var(--lucy-green) !important;
+  font: 500 11px "Cascadia Code", "SFMono-Regular", monospace !important;
+}
+
+/* Section labels and counters across every sidebar view. */
+.monaco-workbench .part.sidebar .pane-header,
+.monaco-workbench .part.sidebar .section-header,
+.monaco-workbench .part.auxiliarybar .pane-header,
+.monaco-workbench .part.panel .pane-header {
+  color: var(--lucy-cyan) !important;
+  font: 700 9px/1.2 "Cascadia Code", "SFMono-Regular", monospace !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+.monaco-workbench .part.sidebar .badge,
+.monaco-workbench .part.sidebar .monaco-count-badge,
+.monaco-workbench .part.sidebar .notification-badge,
+.monaco-workbench .part.auxiliarybar .badge,
+.monaco-workbench .part.panel .badge {
+  min-width: 16px !important;
+  border: 1px solid rgba(0, 255, 157, 0.34) !important;
+  border-radius: 9px !important;
+  background: rgba(0, 105, 88, 0.54) !important;
+  color: var(--lucy-green) !important;
+  font: 700 9px/16px "Cascadia Code", "SFMono-Regular", monospace !important;
+  text-shadow: none !important;
+}
+
+/* Extensions cards and Source Control groups. */
+.monaco-workbench .part.sidebar .extensions-viewlet .extension-list-item,
+.monaco-workbench .part.sidebar .extension-list-item,
+.monaco-workbench .part.sidebar .scm-view .scm-provider,
+.monaco-workbench .part.sidebar .scm-view .scm-resource-group {
+  border: 1px solid rgba(0, 238, 255, 0.1) !important;
+  border-radius: var(--lucy-radius) !important;
+  background: rgba(2, 22, 29, 0.52) !important;
+  transition: background-color 80ms ease, border-color 80ms ease !important;
+}
+
+.monaco-workbench .part.sidebar .extensions-viewlet .extension-list-item:hover,
+.monaco-workbench .part.sidebar .extension-list-item:hover,
+.monaco-workbench .part.sidebar .scm-view .scm-resource-group:hover {
+  border-color: rgba(0, 238, 255, 0.34) !important;
+  background: rgba(0, 238, 255, 0.08) !important;
+}
+
+/* Panel headers for Problems, Output, Debug Console, Ports, and Timeline.
+   LucyTerminal.css supplies the specialized terminal header after this layer. */
+.monaco-workbench .part.panel > .title,
+.monaco-workbench .part.panel > .header-or-footer,
+.monaco-workbench .part.panel .pane-composite-part > .title,
+.monaco-workbench .part.panel .pane-composite-part > .header-or-footer {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  min-height: 34px !important;
+  padding: 0 10px !important;
+  background: rgba(2, 18, 24, 0.9) !important;
+  border-bottom: 1px solid var(--lucy-line) !important;
+}
+
+.monaco-workbench .part.panel > .title .action-label,
+.monaco-workbench .part.panel > .header-or-footer .action-label,
+.monaco-workbench .part.panel .pane-composite-part > .title .action-label,
+.monaco-workbench .part.panel .pane-composite-part > .header-or-footer .action-label {
+  color: var(--lucy-muted) !important;
+  font: 700 10px/1 "Cascadia Code", "SFMono-Regular", monospace !important;
+  letter-spacing: 0.08em !important;
+  transition: color 90ms ease, background-color 90ms ease !important;
+}
+
+.monaco-workbench .part.panel .action-item.checked .action-label,
+.monaco-workbench .part.panel .action-item:hover .action-label {
+  color: var(--lucy-cyan) !important;
+  background: var(--lucy-cyan-soft) !important;
+}
+
+/* Menus, command palette, hover cards, and quick-pick windows. */
+.monaco-menu-container .monaco-menu,
+.quick-input-widget,
+.suggest-widget,
+.parameter-hints-widget,
+.monaco-editor-hover,
+.monaco-hover {
+  border: 1px solid var(--lucy-line) !important;
+  border-radius: var(--lucy-radius) !important;
+  background: rgba(2, 18, 25, 0.98) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 238, 255, 0.1) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.quick-input-list .monaco-list-row,
+.monaco-menu .monaco-list-row {
+  min-height: 28px !important;
+  border-radius: 4px !important;
+  color: var(--lucy-ink) !important;
+  transition: background-color 80ms ease, color 80ms ease !important;
+}
+
+.quick-input-list .monaco-list-row.focused,
+.monaco-menu .monaco-list-row.focused {
+  background: rgba(0, 255, 157, 0.14) !important;
+  color: #ffffff !important;
+}
+
+/* Keep the browser-like workbench surfaces static and cheap. */
+.monaco-workbench .tabs-container,
+.monaco-workbench .part.titlebar,
+.monaco-workbench .editor-group-container,
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.auxiliarybar,
+.monaco-workbench .part.panel {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.monaco-workbench .part.sidebar .monaco-list-row,
+.monaco-workbench .part.auxiliarybar .monaco-list-row,
+.monaco-workbench .part.panel .monaco-list-row,
+.monaco-workbench .part.sidebar .action-label,
+.monaco-workbench .part.auxiliarybar .action-label,
+.monaco-workbench .part.panel .action-label,
+.monaco-workbench .tabs-container,
+.monaco-workbench .tabs-container .tab {
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .monaco-workbench .part.sidebar *,
+  .monaco-workbench .part.auxiliarybar *,
+  .monaco-workbench .part.panel * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,214 @@
+/*
+ * Lucy — Terminal Interface
+ *
+ * Static, compositor-friendly terminal styling. It uses VS Code's native
+ * terminal canvas and ANSI palette, so terminal output remains fast while the
+ * panel gets a dark cyan command-deck appearance.
+ *
+ * Deliberately avoids backdrop-filter, mix-blend-mode, filters, keyframes,
+ * continuous animation, and transition: all.
+ */
+
+:root {
+  --lucy-terminal-ink: rgba(185, 255, 232, 0.96);
+  --lucy-terminal-cyan: rgba(0, 238, 255, 0.88);
+  --lucy-terminal-green: rgba(0, 255, 157, 0.92);
+  --lucy-terminal-gold: rgba(255, 215, 0, 0.82);
+  --lucy-terminal-border: rgba(0, 238, 255, 0.28);
+  --lucy-terminal-panel: rgba(2, 14, 20, 0.96);
+  --lucy-terminal-surface: rgba(4, 25, 31, 0.86);
+}
+
+/* Integrated terminal panel: a compact LUCY command deck. */
+.monaco-workbench .part.panel:has(.terminal-outer-container),
+.monaco-workbench .part.panel:has(.terminal-wrapper) {
+  background:
+    linear-gradient(135deg, rgba(0, 255, 190, 0.035), transparent 38%),
+    linear-gradient(315deg, rgba(0, 150, 255, 0.035), transparent 42%),
+    var(--lucy-terminal-panel) !important;
+  border-top: 1px solid var(--lucy-terminal-border) !important;
+  box-shadow:
+    0 -8px 20px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(0, 255, 190, 0.12) !important;
+}
+
+/* The original stylesheet makes every part title vertical; the terminal deck
+   needs a compact horizontal command header. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) > .title,
+.monaco-workbench .part.panel:has(.terminal-wrapper) > .title {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 38px !important;
+  padding: 0 10px 0 12px !important;
+  background:
+    linear-gradient(90deg, rgba(0, 255, 180, 0.08), transparent 35%),
+    rgba(2, 18, 24, 0.94) !important;
+  border-bottom: 1px solid rgba(0, 238, 255, 0.18) !important;
+}
+
+/* Small, static identity marker; it does not create a timer or DOM node. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) > .title::before,
+.monaco-workbench .part.panel:has(.terminal-wrapper) > .title::before {
+  content: "◈  LUCY // COMMAND" !important;
+  flex: 0 0 auto !important;
+  margin-right: 12px !important;
+  color: var(--lucy-terminal-green) !important;
+  font-family: "Cascadia Code", "MesloLGS NF", monospace !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.11em !important;
+  line-height: 1 !important;
+  text-shadow: 0 0 5px rgba(0, 255, 157, 0.38) !important;
+  white-space: nowrap !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) > .content,
+.monaco-workbench .part.panel:has(.terminal-wrapper) > .content,
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-outer-container,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-wrapper {
+  background: transparent !important;
+}
+
+/* Keep the terminal tab row clean and readable. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tabs-container,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tabs-container {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tabs-container [role="tab"],
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tabs-container [role="tab"],
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tab,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tab {
+  min-height: 25px !important;
+  margin: 4px 3px !important;
+  padding: 2px 9px !important;
+  border: 1px solid rgba(0, 238, 255, 0.14) !important;
+  border-radius: 6px !important;
+  background: rgba(0, 45, 54, 0.48) !important;
+  color: rgba(185, 255, 232, 0.74) !important;
+  font-family: "Cascadia Code", "MesloLGS NF", monospace !important;
+  font-size: 10px !important;
+  transition:
+    background-color 100ms ease,
+    border-color 100ms ease,
+    color 100ms ease !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tabs-container [role="tab"][aria-selected="true"],
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tabs-container [role="tab"][aria-selected="true"],
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tab.active,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tab.active {
+  border-color: rgba(0, 255, 157, 0.58) !important;
+  background: rgba(0, 105, 88, 0.34) !important;
+  color: var(--lucy-terminal-ink) !important;
+  box-shadow: 0 0 7px rgba(0, 255, 157, 0.2) !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tabs-container [role="tab"]:hover,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tabs-container [role="tab"]:hover,
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tab:hover,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tab:hover {
+  border-color: rgba(0, 238, 255, 0.46) !important;
+  background: rgba(0, 93, 108, 0.38) !important;
+  color: var(--lucy-terminal-cyan) !important;
+}
+
+/* Terminal header actions: cyan at rest, green/gold on interaction. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) .action-label.codicon,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .action-label.codicon {
+  color: rgba(0, 238, 255, 0.66) !important;
+  border-radius: 5px !important;
+  transition:
+    color 100ms ease,
+    background-color 100ms ease,
+    transform 100ms ease !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .action-item:hover .action-label.codicon,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .action-item:hover .action-label.codicon {
+  color: var(--lucy-terminal-gold) !important;
+  background: rgba(255, 215, 0, 0.1) !important;
+  transform: scale(1.06) !important;
+}
+
+/* A restrained terminal frame. It is static and does not use blur or a scan
+   animation, so the LUCY feel does not become an idle CPU workload. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm {
+  position: relative !important;
+  border: 1px solid rgba(0, 238, 255, 0.2) !important;
+  border-radius: 8px !important;
+  background: rgba(1, 12, 17, 0.74) !important;
+  box-shadow:
+    inset 0 0 16px rgba(0, 255, 180, 0.045),
+    0 0 9px rgba(0, 238, 255, 0.08) !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm-viewport,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm-viewport {
+  background: transparent !important;
+  scrollbar-color: rgba(0, 238, 255, 0.36) transparent !important;
+  scrollbar-width: thin !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm-viewport::-webkit-scrollbar,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm-viewport::-webkit-scrollbar {
+  width: 7px !important;
+  height: 7px !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm-viewport::-webkit-scrollbar-track,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm-viewport::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm-viewport::-webkit-scrollbar-thumb,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm-viewport::-webkit-scrollbar-thumb {
+  border: 2px solid transparent !important;
+  border-radius: 6px !important;
+  background: rgba(0, 238, 255, 0.32) !important;
+  background-clip: padding-box !important;
+}
+
+/* A single static edge light reinforces the command-deck frame. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm::before,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  border: 1px solid rgba(0, 255, 157, 0.08) !important;
+  border-radius: 8px !important;
+}
+
+/* Terminal selection and search accents remain visible against the dark deck. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm-selection,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm-selection {
+  background: rgba(0, 238, 255, 0.25) !important;
+}
+
+.terminal-find-widget {
+  border: 1px solid rgba(0, 238, 255, 0.38) !important;
+  border-radius: 7px !important;
+  background: rgba(2, 20, 27, 0.96) !important;
+  box-shadow: 0 0 10px rgba(0, 238, 255, 0.2) !important;
+}
+
+.terminal-find-widget .monaco-inputbox {
+  border-color: rgba(0, 255, 157, 0.34) !important;
+}
+
+/* Avoid accidental heavyweight effects if another theme targets terminal nodes. */
+.monaco-workbench .part.panel:has(.terminal-outer-container) .xterm,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .xterm,
+.monaco-workbench .part.panel:has(.terminal-outer-container) .terminal-tabs-container,
+.monaco-workbench .part.panel:has(.terminal-wrapper) .terminal-tabs-container {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+}

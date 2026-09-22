@@ -1,0 +1,220 @@
+/*
+ * Lucy — Low-Power Visual Profile
+ *
+ * Loaded after LucyBase.css and LucyLite.js.
+ * Keeps the wallpaper, palette, typography, borders, icons, and glass-like
+ * translucency while replacing the most expensive blur, shadow, and animation
+ * surfaces with static or short event-driven equivalents.
+ */
+
+:root {
+  --glass-blur: 0px !important;
+  --glass-saturation: 1 !important;
+  --shadow-cyan: 0 0 5px 1px rgba(0, 255, 255, 0.42) !important;
+  --shadow-green: 0 0 5px 1px rgba(0, 255, 105, 0.42) !important;
+  --shadow-purple: 0 0 5px 1px rgba(255, 0, 255, 0.42) !important;
+}
+
+/* Keep the wallpaper and transparent workbench composition. */
+.monaco-workbench,
+.monaco-workbench > .monaco-grid-view,
+.monaco-workbench.floating-panels,
+.monaco-workbench.floating-panels > .monaco-grid-view,
+.editor-group-container,
+.editor-instance,
+.monaco-editor {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* The wallpaper itself remains a single static image layer. */
+.monaco-workbench::before {
+  background-attachment: scroll !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Keep the green/cyan caret identity without a large multi-shadow stack. */
+.monaco-editor .cursor {
+  animation: none !important;
+  filter: none !important;
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.72) !important;
+}
+
+.monaco-editor:not(:has(.settings-editor)):not(:has(.keybindings-editor))::after {
+  content: none !important;
+  background: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.monaco-editor .selected-text {
+  text-shadow: none !important;
+}
+
+/* Replace broad compositor blur with translucent color surfaces. */
+.part.sidebar > .composite.title.has-actions,
+.monaco-workbench .tabs-container,
+.quick-input-widget,
+.monaco-editor-hover,
+.monaco-hover,
+.monaco-workbench > .notifications-toasts.visible:hover,
+.part.titlebar {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Sidebar: retain the gold/cyan LUCY panel, use one small shadow. */
+.part.sidebar {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.42) !important;
+}
+
+.part.sidebar > .composite.title.has-actions {
+  box-shadow:
+    0 0 9px rgba(255, 215, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease !important;
+}
+
+.part.sidebar > .composite.title.has-actions:hover {
+  box-shadow:
+    0 0 14px rgba(255, 215, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.part.sidebar > .composite.title.has-actions > .title-label h2,
+.part.sidebar > .composite.title.has-actions:hover > .title-label h2 {
+  text-shadow:
+    0 0 5px rgba(255, 215, 0, 0.62),
+    0 2px 2px rgba(0, 0, 0, 0.48) !important;
+  transition:
+    color 120ms ease,
+    transform 120ms ease !important;
+}
+
+/* Remove the unusually large custom scroll-shadow repaint. */
+.monaco-scrollable-element > .shadow.top {
+  box-shadow: none !important;
+}
+
+/* Explorer rows keep their hover color but do not animate every property. */
+.monaco-list.list_id_1 > .monaco-scrollable-element > .monaco-list-rows .monaco-list-row {
+  transition:
+    background-color 100ms ease,
+    color 100ms ease !important;
+}
+
+.monaco-list.list_id_1
+  > .monaco-scrollable-element
+  > .monaco-list-rows
+  .monaco-tl-contents
+  > .monaco-icon-label {
+  animation: none !important;
+  text-shadow: 0 0 3px rgba(0, 255, 145, 0.42) !important;
+}
+
+/* Activity-bar hover remains responsive without a general transition. */
+.part.activitybar .action-label.codicon {
+  transition: color 100ms ease, transform 100ms ease !important;
+}
+
+/* Tabs: same cards, gradients, borders, and active colors; no blur/slide loop. */
+.monaco-workbench .tabs-container {
+  animation: none !important;
+  transition: none !important;
+}
+
+.monaco-workbench .part.editor .editor-group-container .title.tabs .tab {
+  transition:
+    background-color 100ms ease,
+    border-color 100ms ease,
+    transform 100ms ease !important;
+}
+
+.monaco-workbench
+  .part.editor
+  .editor-group-container
+  .title.tabs
+  .tab:not(.active):hover {
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.18) !important;
+}
+
+.monaco-workbench .tabs-container .tab,
+.monaco-workbench .tabs-container .tab.closing,
+.monaco-workbench .tabs-container .tab.dirty::before {
+  animation: none !important;
+}
+
+/* Command palette keeps its Mask.png artwork and cyan frame, without blur. */
+.quick-input-widget {
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.42) !important;
+  transition: none !important;
+}
+
+/* Tooltips and notifications stay translucent, but do not trigger backdrop blur. */
+.monaco-editor-hover:hover,
+.monaco-hover:hover {
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.32) !important;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease !important;
+}
+
+.monaco-workbench > .notifications-toasts.visible,
+.monaco-workbench > .notifications-toasts.visible:hover {
+  transition: opacity 120ms ease !important;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.24) !important;
+}
+
+/* Title bar keeps the dark glass color and gold edge without native blur. */
+.part.titlebar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.38) !important;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease !important;
+}
+
+.part.titlebar:hover {
+  box-shadow: 0 3px 12px rgba(255, 215, 0, 0.14) !important;
+}
+
+/* A single short transition is enough for the custom chrome. */
+.monaco-workbench .action-label.codicon::before,
+.monaco-workbench .action-label.codicon:hover::before {
+  transition: color 100ms ease, transform 100ms ease !important;
+}
+
+/* No permanent custom animation remains in the Lite profile. */
+.lucy-lite-core::before,
+.lucy-lite-core::after {
+  animation: none !important;
+}
+
+/*
+ * Final compositor guard for selectors inherited from the original base layer.
+ * The impossible ID raises specificity without touching the pooled Lucy layer,
+ * so expensive blur, blend, animation, and slow all-property transitions stay
+ * disabled even when a base selector is marked !important.
+ */
+html body .monaco-workbench *:not(#lucy-compositor-guard),
+html body .monaco-workbench *:not(#lucy-compositor-guard)::before,
+html body .monaco-workbench *:not(#lucy-compositor-guard)::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  mix-blend-mode: normal !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

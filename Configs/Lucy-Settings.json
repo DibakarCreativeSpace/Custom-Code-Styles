@@ -21,14 +21,18 @@
   "markdown.preview.fontSize": 25,
   "markdown.preview.lineHeight": 1.6,
   "markdown.preview.fontFamily": "SF Pro Text",
+  "workbench.sideBar.location": "right",
+  "chat.viewSessions.orientation": "stacked",
 
   //? 💎 Transparency & Visual Effects - That sexy glass effect!
   //! May cause productivity boost due to sheer awesomeness 🥃
+  // Native transparency stays enabled for the wallpaper; macOS vibrancy is disabled
+  // because the CSS-only translucent surfaces are cheaper to composite.
   "apc.electron": {
-    "opacity": 0.98,
+    "opacity": 1,
     "transparent": true,
     "backgroundColor": "#00000000",
-    "vibrancy": "ultra-dark"
+    "vibrancy": "window",
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -49,7 +53,7 @@
   "files.associations": {
     "*.html": "html",
     ".php_cs": "php",
-    ".php_cs.dist": "php"
+    ".php_cs.dist": "php",
   },
 
   //? 🗺️ Explorer Settings - Navigate like a pro!
@@ -63,7 +67,7 @@
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true
+    "**/.factorypath": true,
   },
 
   //? 👁️ Watcher Exclusions - Don't watch what doesn't matter
@@ -76,7 +80,20 @@
     "**/.cache/**": true,
     "**/build/**": true,
     "**/.venv/**": true,
-    "**/__pycache__/**": true
+    "**/__pycache__/**": true,
+    "**/*.pyc": true,
+    "**/*.pyo": true,
+    "**/*.mo": true,
+    "**/*.po": true,
+    "**/.pytest_cache/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/.tox/**": true,
+    "**/.nox/**": true,
+    "**/htmlcov/**": true,
+    "**/coverage/**": true,
+    "**/.coverage": true,
+    "**/.DS_Store": true,
   },
   "editor.minimap.enabled": false,
   "editor.renderLineHighlight": "none",
@@ -90,14 +107,11 @@
 
   //? ✨ LEGENDARY CURSOR SETTINGS - The cursor that conquered a thousand bugs!
   //! Witness the glowing beacon of productivity! 🌟
-  "editor.cursorBlinking": "expand",
-  "editor.cursorSmoothCaretAnimation": "on",
-  "apc.stylesheet": {
-    ".monaco-editor .cursor": "background: #ffffff !important; box-shadow: 0 0 8px 1px #00ff00; width: 2px !important;"
-  },
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": "off",
 
-  //? 🏄 Smooth Scrolling - Butter smooth, like your code should be
-  "editor.smoothScrolling": true,
+  //? 🏄 Instant Scrolling - visual polish stays in the custom chrome
+  "editor.smoothScrolling": false,
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
   "editor.mouseWheelZoom": false,
@@ -109,7 +123,7 @@
   "editor.guides.indentation": true,
   "editor.guides.highlightActiveIndentation": false,
   "editor.formatOnSave": true,
-  "editor.formatOnType": true,
+  "editor.formatOnType": false,
 
   //? 🔦 Selection & Highlighting - Illuminate your code journey
   "editor.selectionHighlight": true,
@@ -127,7 +141,7 @@
 
   //? 📝 Snippet settings - Because even snippets deserve formatting
   "[snippets]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "vscode.json-language-features",
   },
 
   //? 🎈 Hover Settings - Patience is a virtue
@@ -160,15 +174,40 @@
   //? 🎨 Custom Color Palette - Painted with love and precision
   "workbench.colorCustomizations": {
     "editorIndentGuide.background1": "#1E1E1E",
-    "terminal.background": "#00000000",
+    "terminal.background": "#031117F2",
+    "terminal.foreground": "#B9FFE8",
+    "terminalCursor.foreground": "#00FFB7",
+    "terminalCursor.background": "#031117",
+    "terminal.border": "#00E6B84D",
+    "terminal.dropBackground": "#0A3B3666",
+    "terminal.selectionBackground": "#00E5FF38",
+    "terminal.inactiveSelectionBackground": "#00E5FF20",
+    "terminal.findMatchBackground": "#FFD70055",
+    "terminal.findMatchHighlightBackground": "#00FFFF55",
+    "terminal.ansiBlack": "#061116",
+    "terminal.ansiRed": "#FF5370",
+    "terminal.ansiGreen": "#00FF9D",
+    "terminal.ansiYellow": "#FFD166",
+    "terminal.ansiBlue": "#59B9FF",
+    "terminal.ansiMagenta": "#C792EA",
+    "terminal.ansiCyan": "#00E5FF",
+    "terminal.ansiWhite": "#D7FFF4",
+    "terminal.ansiBrightBlack": "#527A7A",
+    "terminal.ansiBrightRed": "#FF6B81",
+    "terminal.ansiBrightGreen": "#54FFB0",
+    "terminal.ansiBrightYellow": "#FFE38A",
+    "terminal.ansiBrightBlue": "#8BD3FF",
+    "terminal.ansiBrightMagenta": "#E4B6FF",
+    "terminal.ansiBrightCyan": "#7AFFFF",
+    "terminal.ansiBrightWhite": "#F1FFFB",
     "editorLineNumber.foreground": "#858585",
-    "editorLineNumber.activeForeground": "#00ff00"
+    "editorLineNumber.activeForeground": "#00ff00",
   },
   "workbench.tree.indent": 10,
   "workbench.statusBar.visible": false,
   "workbench.startupEditor": "none",
-  "workbench.tips.enabled": true,
-  "workbench.list.smoothScrolling": true,
+  "workbench.tips.enabled": false,
+  "workbench.list.smoothScrolling": false,
 
   //? 📑 Tab Management - Organizing tabs like a boss since 2024
   "workbench.editor.enablePreview": false,
@@ -193,23 +232,18 @@
 
   //? 🎮 VS Code Animations - Level up your coding experience!
   //! Side effects may include increased dopamine levels
-  "animations.Enabled": true,
-  "animations.CursorAnimation": true,
-  "animations.Command-Palette": "Fade",
-  "animations.Active": "Indent",
-  "animations.Install-Method": "Apc Customize UI++",
-  "animations.CursorAnimationOptions": {
-    "TrailLength": 20
-  },
+  "animations.Enabled": false,
+  "animations.CursorAnimation": false,
 
-  //? 🎪 Modern Custom UI - Replaces the broken Legacy Loader
-  //? ⚠️ Update version number if VSCode Animations extension updates
-  "apc.imports": [
-    "file:///Users/dibakar/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
-  ],
+  //? 🎪 Lucy Workbench UI - static, low-power custom layers
+  //? ⚡ No animation-extension runtime import is used by this profile
+  "apc.imports": [],
   "vscode_custom_css.imports": [
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/CustomCSS.css",
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/CustomJavascript.js"
+    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyBase.css",
+    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyPerformance.css",
+    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyWorkbench.css",
+    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyTerminal.css",
+    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyLite.js",
   ],
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -220,13 +254,15 @@
   //? 🖥️ Terminal Aesthetics - Making terminal sessions sexy since forever
   "terminal.integrated.fontFamily": "Cascadia Code, MesloLGS NF",
   "terminal.integrated.fontSize": 15,
-  "terminal.integrated.lineHeight": 1.2,
-  "terminal.integrated.tabs.title": "${process} ~ MrDib",
+  "terminal.integrated.lineHeight": 1.25,
+  "terminal.integrated.tabs.title": "${process}  //  LUCY",
+  "terminal.integrated.tabs.description": "${workspaceFolder}",
 
   //? ⚡ Terminal Behavior - Smooth as silk, fast as lightning
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
-  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.cursorWidth": 2,
+  "terminal.integrated.smoothScrolling": false,
   "debug.terminal.clearBeforeReusing": true,
   "python.terminal.focusAfterLaunch": true,
   "terminal.integrated.defaultProfile.osx": "zsh",
@@ -246,7 +282,7 @@
   //? 🌐 HTML Configuration - Making the web beautiful
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
 
   //? 🐍 Python Configuration - Snake charming at its finest
@@ -256,7 +292,7 @@
     // "editor.defaultFormatter": "ms-python.autopep8",
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.tabSize": 4,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
   "python.analysis.typeCheckingMode": "off",
   "python.createEnvironment.trigger": "off",
@@ -264,30 +300,30 @@
   //? ☕ Java Configuration - Brewing perfect code since 1995
   "[java]": {
     "editor.defaultFormatter": "redhat.java",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
   "java.import.generatesMetadataFilesAtProjectRoot": true,
 
   //? 🔩 C Language Configuration - Old school cool
   "[c]": {
-    "editor.defaultFormatter": "xaver.clang-format"
+    "editor.defaultFormatter": "xaver.clang-format",
   },
 
   //? 🐚 Shell Script Configuration - Unix philosophy approved!
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
 
   "[dockerfile]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
 
   "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
 
   "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
 
   //? 🌊 Shell Format Languages - Format ALL the things!
@@ -302,13 +338,13 @@
     "properties",
     "spring-boot-properties",
     "azcli",
-    "bats"
+    "bats",
   ],
 
   //? 📓 Notebook Configuration - Jupyter never looked so good
   "notebook.defaultFormatter": "xaver.clang-format",
   "notebook.formatOnSave.enabled": true,
-  "notebook.formatOnCellExecution": true,
+  "notebook.formatOnCellExecution": false,
 
   //? 🏃 Emmet Language Support - HTML zen coding everywhere!
   "emmet.includeLanguages": {
@@ -318,7 +354,7 @@
     "vue-html": "html",
     "vue": "html",
     "react": "html",
-    "javascript": "html"
+    "javascript": "html",
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -406,7 +442,7 @@
     "kit": "kitc --run",
     "v": "v run",
     "spwn": "spwn build",
-    "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml"
+    "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -416,7 +452,7 @@
 
   //? 🌿 Git Core Configuration - Version control at light speed
   "git.path": "/usr/bin/git",
-  "git.autofetch": true,
+  "git.autofetch": false,
   "git.enableCommitSigning": true,
   "git.confirmSync": false,
   "git.confirmForcePush": false,
@@ -437,12 +473,12 @@
   "git.rebaseWhenSync": true,
   "git.allowNoVerifyCommit": true,
   "git.pullBeforeCheckout": true,
-  "gitlens.currentLine.enabled": true,
-  "gitlens.codeLens.enabled": true,
-  "gitlens.hovers.enabled": true,
-  "gitlens.statusBar.enabled": true,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.hovers.enabled": false,
+  "gitlens.statusBar.enabled": false,
   "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": true
+    "suppressCommitHasNoPreviousCommitWarning": true,
   },
 
   //? 🎨 SCM Visual Settings - Clean and minimal
@@ -462,7 +498,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
+      "italic": false,
     },
     {
       "tag": "?",
@@ -471,7 +507,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": true
+      "italic": true,
     },
     {
       "tag": "!",
@@ -480,7 +516,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
+      "italic": false,
     },
     {
       "tag": ["TODO", "TO-DO", "To-Do"],
@@ -490,7 +526,7 @@
       "backgroundColor": "transparent",
       "bold": true,
       "italic": false,
-      "multiline": true
+      "multiline": true,
     },
     {
       "tag": ["FIXME", "FIX-ME", "FIX"],
@@ -500,7 +536,7 @@
       "backgroundColor": "transparent",
       "bold": true,
       "italic": false,
-      "multiline": true
+      "multiline": true,
     },
     {
       "tag": "BUG",
@@ -509,7 +545,7 @@
       "underline": true,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
+      "italic": false,
     },
     {
       "tag": "HACK",
@@ -518,7 +554,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": true
+      "italic": true,
     },
     {
       "tag": "NOTE",
@@ -527,7 +563,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
+      "italic": false,
     },
     {
       "tag": "INFO",
@@ -536,7 +572,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
+      "italic": false,
     },
     {
       "tag": "IDEA",
@@ -545,7 +581,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
+      "italic": false,
     },
     {
       "tag": "WARNING",
@@ -554,7 +590,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
+      "italic": false,
     },
     {
       "tag": "REVIEW",
@@ -563,8 +599,8 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false
-    }
+      "italic": false,
+    },
   ],
 
   "editor.tokenColorCustomizations": {
@@ -572,10 +608,10 @@
       {
         "scope": "comment",
         "settings": {
-          "fontStyle": "italic"
-        }
-      }
-    ]
+          "fontStyle": "italic",
+        },
+      },
+    ],
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -588,7 +624,7 @@
   "errorLens.fontWeight": "800",
   "errorLens.gutterIconsEnabled": true,
   "errorLens.severityText": ["☠️", "☠️", "☠️", "☠️"],
-  "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
+  "errorLens.enabledDiagnosticLevels": ["warning", "error"],
 
   // ┌─────────────────────────────────────────────────────────────────┐
   // │                  🧘 ZEN MODE - FOCUS MAXIMIZER                  │
@@ -609,8 +645,28 @@
   // │                   Find anything, anywhere, instantly            │
   // └─────────────────────────────────────────────────────────────────┘
 
-  //? 🔎 Search Configuration - Sherlock Holmes mode activated
-  "search.useIgnoreFiles": false,
+  //? 🔎 Search Configuration - fast, scoped, and generated-artifact aware
+  "search.useIgnoreFiles": true,
+  "search.followSymlinks": false,
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.cache": true,
+    "**/.venv": true,
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/*.pyo": true,
+    "**/*.mo": true,
+    "**/*.po": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/coverage": true,
+    "**/htmlcov": true,
+  },
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
 
@@ -633,7 +689,7 @@
     "yaml": false,
     "yml": false,
     "json": false,
-    "jsonc": false
+    "jsonc": false,
   },
 
   //? 💡 Copilot Editor Settings - Fine-tuned for maximum intelligence
@@ -648,13 +704,13 @@
   "editor.quickSuggestions": {
     "other": "on",
     "comments": "on",
-    "strings": "on"
+    "strings": "on",
   },
   "editor.acceptSuggestionOnCommitCharacter": true,
   "editor.acceptSuggestionOnEnter": "on",
-  "editor.suggest.preview": true,
-  "editor.suggest.showInlineDetails": true,
-  "editor.wordBasedSuggestions": "matchingDocuments",
+  "editor.suggest.preview": false,
+  "editor.suggest.showInlineDetails": false,
+  "editor.wordBasedSuggestions": "currentDocument",
 
   // ┌─────────────────────────────────────────────────────────────────┐
   // │                    🔮 MISCELLANEOUS MAGIC                       │
@@ -684,7 +740,7 @@
     "workbench.editor.showTabs",
     "explorer.autoReveal",
     "git.autofetch",
-    "window.zoomLevel"
+    "window.zoomLevel",
   ],
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -700,11 +756,9 @@
       "path": "/Users/dibakar/Documents/Documents - DIBAKAR’s MacBook Pro/Code/CustomCode/Dictionaries/mrdib-words.txt",
       "description": "Tech terms, frameworks, Indian languages, and MrDib's favorites 🏆",
       "addWords": true,
-      "scope": "user"
-    }
+      "scope": "user",
+    },
   },
-  "workbench.sideBar.location": "right",
-  "chat.viewSessions.orientation": "stacked"
 
   // ╔══════════════════════════════════════════════════════════════════╗
   // ║                     🎊 END OF CONFIGURATION 🎊                   ║

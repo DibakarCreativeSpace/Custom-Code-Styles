@@ -1,7 +1,7 @@
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 /*                                                                             */
-/*                    🎨 MrDib's CUSTOM CSS — v6.0                             */
-/*                  "Where Aesthetics Meet Functionality"                      */
+/*                    🎨 Lucy's CUSTOM CSS — v6.0                             */
+/*                  "Where Aesthetics Meet Performance"                      */
 /*                                                                             */
 /*               ✨ Glassmorphism Everywhere Edition ✨                         */
 /*                                                                             */
@@ -41,12 +41,12 @@
   --shadow-purple: 0 0 8px 2px rgba(255, 0, 255, 0.8);
 
   /* Local image paths (update if you move files) */
-  --img-wallpaper: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/CustomWallpaper.jpg");
-  --img-sidebar: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Trident.png");
-  --img-palette: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Mask.png");
-  --img-avatar: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Photo.jpeg");
-  --img-gears: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Gears.png");
-  --img-error-lens: url("/Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/ErrorLens-01.png");
+  --img-wallpaper: url("../Assets/Images/CustomWallpaper.jpg");
+  --img-sidebar: url("../Assets/Images/Trident.png");
+  --img-palette: url("../Assets/Images/Mask.png");
+  --img-avatar: url("../Assets/Images/Photo.jpeg");
+  --img-gears: url("../Assets/Images/Gears.png");
+  --img-error-lens: url("../Assets/Images/ErrorLens-01.png");
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
