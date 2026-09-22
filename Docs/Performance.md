@@ -2,7 +2,7 @@
 
 ## What was removed from the active path
 
-- The VS Code Animations extension's injected `updateHandler.js` import.
+- The VS Code Animations extension's injected runtime import (`updateHandler.js`).
 - The previous heavy `CustomJavascript.js` layer with recurring observers, intervals, and boot/watchdog work.
 - Broad idle animation and blur behavior from the final Lucy overrides.
 

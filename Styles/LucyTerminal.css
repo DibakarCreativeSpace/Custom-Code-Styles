@@ -212,3 +212,13 @@
   -webkit-backdrop-filter: none !important;
   mix-blend-mode: normal !important;
 }
+
+/* Native VS Code icons must keep Codicon after the Lucy typography layer.
+   This targets only Codicon elements and their glyph pseudo-elements; xterm
+   content and terminal text keep their configured Cascadia/Meslo font stack. */
+html body .monaco-workbench .codicon,
+html body .monaco-workbench .action-label.codicon,
+html body .monaco-workbench .codicon::before,
+html body .monaco-workbench .action-label.codicon::before {
+  font-family: "Codicon" !important;
+}
