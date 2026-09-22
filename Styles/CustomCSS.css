@@ -2025,6 +2025,20 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   user-select: none !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════
+   PERMANENT MODERN UI SHELL TRANSPARENCY
+   Prevent VS Code's modern shell layer from covering the wallpaper.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.monaco-workbench,
+.monaco-workbench.floating-panels,
+.monaco-workbench > .monaco-grid-view,
+.monaco-workbench.floating-panels > .monaco-grid-view {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
 /*                                                                        */
 /*                          END OF CUSTOM CSS                             */

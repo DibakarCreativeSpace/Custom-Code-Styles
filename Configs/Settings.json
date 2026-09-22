@@ -1,7 +1,7 @@
 {
   // ╔══════════════════════════════════════════════════════════════════╗
   // ║                   🎨 MrDib's VS CODE MASTERPIECE                 ║
-  // ║              ⚡ Professional AI-Enhanced Edition v4.0 ⚡         ║
+  // ║              ⚡ Professional AI-Enhanced Edition v4.0 ⚡          ║
   // ║        "Where Code Meets Art, Productivity & Intelligence" 🚀    ║
   // ╚══════════════════════════════════════════════════════════════════╝
 
@@ -15,8 +15,12 @@
   "window.title": "MrDib ${activeEditorMedium} ${rootPath}",
   "window.newWindowDimensions": "inherit",
   "window.nativeFullScreen": true,
-  "window.zoomLevel": 1.4,
-  "editor.fontSize": 13,
+  "window.zoomLevel": 0.4,
+  "editor.lineHeight": 1.6,
+  "editor.fontSize": 25,
+  "markdown.preview.fontSize": 25,
+  "markdown.preview.lineHeight": 1.6,
+  "markdown.preview.fontFamily": "SF Pro Text",
 
   //? 💎 Transparency & Visual Effects - That sexy glass effect!
   //! May cause productivity boost due to sheer awesomeness 🥃
@@ -96,7 +100,7 @@
   "editor.smoothScrolling": true,
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
-  "editor.mouseWheelZoom": true,
+  "editor.mouseWheelZoom": false,
 
   //? 📐 Indentation Perfection - Because spaces matter (literally!)
   "editor.tabSize": 2,
@@ -160,9 +164,6 @@
     "editorLineNumber.foreground": "#858585",
     "editorLineNumber.activeForeground": "#00ff00"
   },
-
-  //? 🏗️ Layout Architecture - Feng Shui for your workspace
-  "workbench.sideBar.location": "right",
   "workbench.tree.indent": 10,
   "workbench.statusBar.visible": false,
   "workbench.startupEditor": "none",
@@ -250,11 +251,14 @@
 
   //? 🐍 Python Configuration - Snake charming at its finest
   "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+  "python-envs.defaultEnvManager": "ms-python.python:system",
   "[python]": {
+    // "editor.defaultFormatter": "ms-python.autopep8",
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.tabSize": 4,
     "editor.formatOnSave": true
   },
+  "python.analysis.typeCheckingMode": "off",
   "python.createEnvironment.trigger": "off",
 
   //? ☕ Java Configuration - Brewing perfect code since 1995
@@ -433,10 +437,6 @@
   "git.rebaseWhenSync": true,
   "git.allowNoVerifyCommit": true,
   "git.pullBeforeCheckout": true,
-
-  //? 💪 GitLens - Git superpowers activated!
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "gitlens.currentLine.enabled": true,
   "gitlens.codeLens.enabled": true,
   "gitlens.hovers.enabled": true,
@@ -579,141 +579,6 @@
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
-  // │               ⚓ COMMENT ANCHORS - PLAIN TEXT STYLING           │
-  // │           Better Comments vibes — but for .txt notes            │
-  // └─────────────────────────────────────────────────────────────────┘
-
-  "commentAnchors.tags.anchors": {
-    "*": {
-      "scope": "file",
-      "highlightColor": "#39FF14",
-      "iconColor": "#39FF14",
-      "styleComment": true,
-      "styleMode": "comment"
-    },
-    "?": {
-      "scope": "file",
-      "highlightColor": "AA00FF",
-      "iconColor": "#AA00FF",
-      "styleMode": "comment"
-    },
-    "!": {
-      "scope": "file",
-      "highlightColor": "#FF00FF",
-      "iconColor": "#FF00FF",
-      "styleMode": "comment"
-    },
-    "@": {
-      "scope": "file",
-      "highlightColor": "#FFB000",
-      "iconColor": "#FFB000",
-      "styleMode": "comment"
-    },
-    "#": {
-      "scope": "file",
-      "highlightColor": "#00FFFF",
-      "iconColor": "#00FFFF",
-      "styleMode": "comment"
-    },
-    "$": {
-      "scope": "file",
-      "highlightColor": "#FFFF00",
-      "iconColor": "#FFFF00",
-      "styleMode": "comment"
-    },
-    "%": {
-      "scope": "file",
-      "highlightColor": "#FF69B4",
-      "iconColor": "#FF69B4",
-      "styleMode": "comment"
-    },
-    "^": {
-      "scope": "file",
-      "highlightColor": "#0080FF",
-      "iconColor": "#0080FF",
-      "styleMode": "comment"
-    },
-    "&": {
-      "scope": "file",
-      "highlightColor": "#FFAA44",
-      "iconColor": "#FFAA44",
-      "styleMode": "comment"
-    },
-    "+": {
-      "scope": "file",
-      "highlightColor": "#00AA66",
-      "iconColor": "#00AA66",
-      "styleMode": "comment"
-    },
-    "=": {
-      "scope": "file",
-      "highlightColor": "#FF7F50",
-      "iconColor": "#FF7F50",
-      "styleMode": "comment"
-    },
-    "~": {
-      "scope": "file",
-      "highlightColor": "#00FF88",
-      "iconColor": "#00FF88",
-      "styleMode": "comment"
-    },
-    "TODO": {
-      "scope": "file",
-      "highlightColor": "#FF8800",
-      "iconColor": "#FF8800",
-      "styleMode": "comment"
-    },
-    "FIXME": {
-      "scope": "file",
-      "highlightColor": "#DC143C",
-      "iconColor": "#DC143C",
-      "styleMode": "comment"
-    },
-    "BUG": {
-      "scope": "file",
-      "highlightColor": "#8B00FF",
-      "iconColor": "#8B00FF",
-      "styleMode": "comment"
-    },
-    "HACK": {
-      "scope": "file",
-      "highlightColor": "#00CED1",
-      "iconColor": "#00CED1",
-      "styleMode": "comment"
-    },
-    "NOTE": {
-      "scope": "file",
-      "highlightColor": "#1E90FF",
-      "iconColor": "#1E90FF",
-      "styleMode": "comment"
-    },
-    "INFO": {
-      "scope": "file",
-      "highlightColor": "#00FFFF",
-      "iconColor": "#00FFFF",
-      "styleMode": "comment"
-    },
-    "IDEA": {
-      "scope": "file",
-      "highlightColor": "#EAB308",
-      "iconColor": "#EAB308",
-      "styleMode": "comment"
-    },
-    "WARNING": {
-      "scope": "file",
-      "highlightColor": "#FF0000",
-      "iconColor": "#FF0000",
-      "styleMode": "comment"
-    }
-  },
-  "commentAnchors.tags.displayInRuler": false,
-  "commentAnchors.tags.displayInGutter": false,
-  "commentAnchors.tags.separators": [" ", ": ", " - "],
-  "commentAnchors.workspace.matchFiles": "**/*.txt",
-  "commentAnchors.workspace.excludeFiles": "**/.git/**,**/node_modules/**,**/*.md",
-  "commentAnchors.tagHighlights.enabled": true,
-
-  // ┌─────────────────────────────────────────────────────────────────┐
   // │               ⚠️ ERROR LENS - BUG DESTROYER 9000                │
   // │                  Making errors impossible to miss!              │
   // └─────────────────────────────────────────────────────────────────┘
@@ -761,17 +626,15 @@
   //? 🎯 GitHub Copilot - Your AI pair programming partner
   //! May cause addiction to AI-powered coding! Extremely powerful!
   "github.copilot.enable": {
-    "*": true,
-    "plaintext": true,
-    "markdown": true,
-    "scminput": true,
-    "yaml": true,
-    "yml": true,
-    "json": true,
-    "jsonc": true
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+    "yaml": false,
+    "yml": false,
+    "json": false,
+    "jsonc": false
   },
-
-  "chat.viewSessions.orientation": "stacked",
 
   //? 💡 Copilot Editor Settings - Fine-tuned for maximum intelligence
   "github.copilot.editor.enableCodeActions": true,
@@ -839,7 +702,9 @@
       "addWords": true,
       "scope": "user"
     }
-  }
+  },
+  "workbench.sideBar.location": "right",
+  "chat.viewSessions.orientation": "stacked"
 
   // ╔══════════════════════════════════════════════════════════════════╗
   // ║                     🎊 END OF CONFIGURATION 🎊                   ║
@@ -849,7 +714,7 @@
   // ║                                                                  ║
   // ║  Remember: A well-configured editor is half the code written! 💪 ║
   // ║                                                                  ║
-  // ║              ⚡ Now with AI superpowers! ⚡                      ║
+  // ║              ⚡ Now with AI superpowers! ⚡                       ║
   // ║        GitHub Copilot + IntelliSense = Coding Nirvana 🧠         ║
   // ╚══════════════════════════════════════════════════════════════════╝
 }

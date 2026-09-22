@@ -1,11 +1,11 @@
 # ╔══════════════════════════════════════════════════════════════════════════════╗
-# ║                           ~/.zshrc — Dibakar                                ║
-# ║                Advanced Zsh · Oh My Zsh · Powerlevel10k                     ║
+# ║                           ~/.zshrc — Dibakar                                 ║
+# ║                Advanced Zsh · Oh My Zsh · Powerlevel10k                      ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 1. POWERLEVEL10K INSTANT PROMPT                                             │
+# │ 1. POWERLEVEL10K INSTANT PROMPT                                              │
 # └──────────────────────────────────────────────────────────────────────────────┘
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -13,13 +13,12 @@ fi
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 2. CORE PATHS / PROJECT ROOTS                                               │
+# │ 2. CORE PATHS / PROJECT ROOTS                                                │
 # └──────────────────────────────────────────────────────────────────────────────┘
 export DOCS_DIR="$HOME/Documents/Documents - DIBAKAR’s MacBook Pro"
 export CODE_ROOT="$DOCS_DIR/Code"
 export CODE_BACKUPS_DIR="$CODE_ROOT/Backups"
 export CUSTOM_CODE_DIR="$CODE_ROOT/CustomCode"
-export CODE_PROFILES_DIR="$CODE_ROOT/CodeProfiles"
 
 export MONGO_HOME="$DOCS_DIR/Utilities/MongoDB/mongodb-macos-aarch64--8.3.1"
 export MONGO_DATA="$DOCS_DIR/Utilities/MongoDB/data/db"
@@ -29,7 +28,7 @@ export VSCODE_PRISTINE_BACKUP="$CODE_BACKUPS_DIR/workbench.pristine.html"
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 3. PATH SETUP                                                               │
+# │ 3. PATH SETUP                                                                │
 # └──────────────────────────────────────────────────────────────────────────────┘
 typeset -U path PATH
 
@@ -45,7 +44,7 @@ export PATH
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 4. ENVIRONMENT VARIABLES                                                    │
+# │ 4. ENVIRONMENT VARIABLES                                                     │
 # └──────────────────────────────────────────────────────────────────────────────┘
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -64,7 +63,7 @@ export LESS="-R"
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 5. HISTORY / SHELL BEHAVIOR                                                 │
+# │ 5. HISTORY / SHELL BEHAVIOR                                                  │
 # └──────────────────────────────────────────────────────────────────────────────┘
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
@@ -88,7 +87,7 @@ setopt NO_BEEP
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 6. OH MY ZSH                                                               │
+# │ 6. OH MY ZSH                                                                 │
 # └──────────────────────────────────────────────────────────────────────────────┘
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -127,7 +126,7 @@ source "$ZSH/oh-my-zsh.sh"
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 7. SMALL HELPERS                                                           │
+# │ 7. SMALL HELPERS                                                             │
 # └──────────────────────────────────────────────────────────────────────────────┘
 command_exists() {
   command -v "$1" >/dev/null 2>&1
@@ -153,7 +152,7 @@ hr() {
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 8. ALIASES                                                                 │
+# │ 8. ALIASES                                                                   │
 # └──────────────────────────────────────────────────────────────────────────────┘
 alias c='clear'
 alias h='history'
@@ -172,7 +171,6 @@ alias code.='code .'
 alias coderoot='cd "$CODE_ROOT"'
 alias codecustom='cd "$CUSTOM_CODE_DIR"'
 alias codebackups='cd "$CODE_BACKUPS_DIR"'
-alias codeprofiles='cd "$CODE_PROFILES_DIR"'
 
 alias docs='cd "$DOCS_DIR"'
 alias proj='cd ~/Projects'
@@ -226,6 +224,66 @@ alias ni='npm install'
 alias nid='npm install --save-dev'
 alias nig='npm install -g'
 
+# ┌──────────────────────────────────────────────────────────────────────────────┐
+# │ PROJECT AUTOMATION SHORTCUTS                                                 │
+# └──────────────────────────────────────────────────────────────────────────────┘
+# These system-wide shortcuts execute `make <target>` in the current directory.
+# They are project-agnostic and reusable across repositories and tech stacks.
+# A shortcut works when the current project's Makefile defines its target.
+
+# Common project targets.
+alias mh='make help'
+alias mi='make install'
+alias md='make dev'
+alias mb='make build'
+alias mcheck='make check'
+alias mdoctor='make doctor'
+alias mhealth='make health'
+alias mstatus='make status'
+alias mcache='make clean-cache'
+alias mc='make clean'
+
+# Test and verification targets.
+alias mfeatures='make test-features'
+alias mtest-api='make test-api'
+# Prefer the complete `test` target; use `test-api` for API/UI Makefiles that
+# do not expose a separate full-suite target.
+mt() {
+  if command make -qp 2>/dev/null | command grep -q '^test:'; then
+    command make test "$@"
+  else
+    command make test-api "$@"
+  fi
+}
+
+# Full-stack project orchestration targets.
+alias msetup='make setup-env'
+alias mapi='make api-only'
+alias mui='make ui-only'
+alias mci='make ci'
+alias mstop='make stop'
+
+# Backend/API targets for Django, Python, and other API services.
+alias mrunserver='make runserver'
+alias mshell='make shell'
+alias murls='make urls'
+alias mping='make ping'
+alias mcompile='make compile'
+alias mfreeze='make freeze'
+alias moutdated='make outdated'
+alias msecurity='make security-check'
+
+# Frontend/UI targets for React, Vite, and other Node-based interfaces.
+alias mp='make preview'
+alias mopen='make open'
+alias mclean-build='make clean-build'
+alias mdeps-check='make deps-check'
+alias mdeps-update='make deps-update'
+alias maudit='make audit'
+alias mlint='make lint'
+alias mformat='make format'
+alias mbundle='make bundle-size'
+
 alias MongoStart='cd "$MONGO_HOME/bin" && ./mongod --dbpath "$MONGO_DATA"'
 alias MongoStop='pkill mongod'
 alias MongoStatus='pgrep -fl mongod'
@@ -236,7 +294,7 @@ alias code-status='code_status'
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 9. FILE / UTIL FUNCTIONS                                                   │
+# │ 9. FILE / UTIL FUNCTIONS                                                     │
 # └──────────────────────────────────────────────────────────────────────────────┘
 mkcd() {
   mkdir -p "$1" && cd "$1"
@@ -324,7 +382,7 @@ psgrep() {
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 10. VS CODE SAFE MODE / BACKUP TOOLING                                      │
+# │ 10. VS CODE SAFE MODE / BACKUP TOOLING                                       │
 # └──────────────────────────────────────────────────────────────────────────────┘
 code_save_pristine() {
   command mkdir -p "$CODE_BACKUPS_DIR" || return 1
@@ -393,7 +451,7 @@ code_safe() {
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 11. RUN SELECTOR                                                          │
+# │ 11. RUN SELECTOR                                                             │
 # └──────────────────────────────────────────────────────────────────────────────┘
 unalias Run 2>/dev/null
 Run() {
@@ -438,7 +496,7 @@ Run() {
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 12. BIG HELP MENUS                                                         │
+# │ 12. BIG HELP MENUS                                                           │
 # └──────────────────────────────────────────────────────────────────────────────┘
 help() {
   cat <<'EOF'
@@ -487,6 +545,14 @@ Python / Node
   activate                 source venv/bin/activate
   Dev / Build / Start      npm run dev / build / start
   ni / nid / nig           npm install / devDependency / global
+
+Project Automation Shortcuts
+  mh / mi / md / mc        help / install / dev / clean
+  mb / mt / mcheck         build / test / project checks
+  mapi / mui               API-only / UI-only
+  mci / mdoctor            CI / environment doctor
+  mstatus / mstop          service status / stop servers
+  cheat make               show the complete shortcut list
 
 MongoDB
   MongoStart               start mongod
@@ -554,6 +620,43 @@ nig     npm install -g
 
 EOF
       ;;
+    make|project|projects)
+      cat <<'EOF'
+
+🧰 Project Automation Shortcuts
+
+Common:
+  mi          make install
+  md          make dev
+  mh          make help
+  msetup      make setup-env
+  mapi        make api-only
+  mui         make ui-only
+  mb          make build
+  mcheck      make check
+  mt          make test (or test-api when `test` is unavailable)
+  mfeatures   make test-features
+  mtest-api   make test-api
+  mci         make ci
+  mdoctor     make doctor
+  mhealth     make health
+  mstatus     make status
+  mcache      make clean-cache
+  mc          make clean
+  mstop       make stop
+
+Backend/API:
+  mrunserver / mshell / murls / mping / mcompile
+  mfreeze / moutdated / msecurity
+
+Frontend/UI:
+  mp / mopen / mclean-build / mdeps-check / mdeps-update
+  maudit / mlint / mformat / mbundle
+
+Run these inside a project directory containing the relevant Makefile.
+
+EOF
+      ;;
     python|pip)
       cat <<'EOF'
 
@@ -613,6 +716,7 @@ EOF
   cheat git
   cheat code
   cheat npm
+  cheat make
   cheat python
   cheat mongo
   cheat nav
@@ -625,7 +729,7 @@ EOF
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 13. TOOL INTEGRATIONS                                                       │
+# │ 13. TOOL INTEGRATIONS                                                        │
 # └──────────────────────────────────────────────────────────────────────────────┘
 if command_exists zoxide; then
   eval "$(zoxide init --cmd cd zsh)"
@@ -637,7 +741,7 @@ fi
 
 
 # ┌──────────────────────────────────────────────────────────────────────────────┐
-# │ 14. NICE WELCOME                                                          │
+# │ 14. NICE WELCOME                                                             │
 # └──────────────────────────────────────────────────────────────────────────────┘
 echo -e "\n\033[1;36m👋 Welcome back, Dibakar!\033[0m"
 echo -e "\033[1;90m   $(date '+%A, %d %B %Y · %I:%M %p')\033[0m"
