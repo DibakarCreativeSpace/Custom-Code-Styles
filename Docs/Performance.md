@@ -8,7 +8,7 @@
 
 ## What remains
 
-- A single wallpaper image layer.
+- A single static wallpaper layer supplied by `LucyWallpaper.css`, using a compact copy of the existing artwork and no browser-resolved `file://` image request.
 - Native VS Code terminal rendering with static CSS framing.
 - Short hover/focus transitions for navigation feedback.
 - One event-driven cursor core and one click pulse, both pooled and destroyed cleanly.

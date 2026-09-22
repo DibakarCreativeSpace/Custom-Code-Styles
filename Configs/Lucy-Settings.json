@@ -240,6 +240,7 @@
   "apc.imports": [],
   "vscode_custom_css.imports": [
     "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyBase.css",
+    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyWallpaper.css",
     "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyPerformance.css",
     "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyWorkbench.css",
     "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyTerminal.css",

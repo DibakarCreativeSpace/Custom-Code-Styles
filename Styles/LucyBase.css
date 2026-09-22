@@ -41,12 +41,12 @@
   --shadow-purple: 0 0 8px 2px rgba(255, 0, 255, 0.8);
 
   /* Local image paths (update if you move files) */
-  --img-wallpaper: url("../Assets/Images/CustomWallpaper.jpg");
-  --img-sidebar: url("../Assets/Images/Trident.png");
-  --img-palette: url("../Assets/Images/Mask.png");
-  --img-avatar: url("../Assets/Images/Photo.jpeg");
-  --img-gears: url("../Assets/Images/Gears.png");
-  --img-error-lens: url("../Assets/Images/ErrorLens-01.png");
+  --img-wallpaper: url("file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Assets/Images/CustomWallpaper.jpg");
+  --img-sidebar: url("file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Assets/Images/Trident.png");
+  --img-palette: url("file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Assets/Images/Mask.png");
+  --img-avatar: url("file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Assets/Images/Photo.jpeg");
+  --img-gears: url("file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Assets/Images/Gears.png");
+  --img-error-lens: url("file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Assets/Images/ErrorLens-01.png");
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
@@ -181,6 +181,7 @@ body,
 /* Wallpaper pseudo-element */
 .monaco-workbench {
   position: relative;
+  isolation: isolate !important;
 }
 
 .monaco-workbench::before {
@@ -190,9 +191,11 @@ body,
   background-image: var(--img-wallpaper) !important;
   background-size: cover !important;
   background-position: center center !important;
+  background-repeat: no-repeat !important;
   opacity: 0.3 !important;
   pointer-events: none;
-  z-index: -2;
+  display: block !important;
+  z-index: 0 !important;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */
@@ -625,6 +628,18 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
 body:not(.has-settings-editor):not(.has-keybindings-editor):not(
     .has-welcome-editor
   ):not(.has-extension-editor):not(.has-markdown-preview)
+  .part.editor > .content,
+body:not(.has-settings-editor):not(.has-keybindings-editor):not(
+    .has-welcome-editor
+  ):not(.has-extension-editor):not(.has-markdown-preview)
+  .part.editor > .content > .monaco-grid-view,
+body:not(.has-settings-editor):not(.has-keybindings-editor):not(
+    .has-welcome-editor
+  ):not(.has-extension-editor):not(.has-markdown-preview)
+  .part.editor > .content > .monaco-grid-view > *,
+body:not(.has-settings-editor):not(.has-keybindings-editor):not(
+    .has-welcome-editor
+  ):not(.has-extension-editor):not(.has-markdown-preview)
   .editor-group-container,
 body:not(.has-settings-editor):not(.has-keybindings-editor):not(
     .has-welcome-editor
@@ -635,6 +650,8 @@ body:not(.has-settings-editor):not(.has-keybindings-editor):not(
   ):not(.has-extension-editor):not(.has-markdown-preview)
   .monaco-editor {
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
 
 /* 〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰 */

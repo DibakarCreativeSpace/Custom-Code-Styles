@@ -14,7 +14,7 @@ The live profile is configured through:
 ~/Library/Application Support/Code/User/settings.json
 ```
 
-Its custom imports point to `Styles/LucyBase.css`, `Styles/LucyPerformance.css`, `Styles/LucyWorkbench.css`, `Styles/LucyTerminal.css`, and `Styles/LucyLite.js`.
+Its custom imports point to `Styles/LucyBase.css`, `Styles/LucyWallpaper.css`, `Styles/LucyPerformance.css`, `Styles/LucyWorkbench.css`, `Styles/LucyTerminal.css`, and `Styles/LucyLite.js`. The wallpaper layer uses a compact embedded copy of the existing artwork so the patched workbench does not depend on a browser-resolved `file://` image URL.
 
 ## Recovery
 

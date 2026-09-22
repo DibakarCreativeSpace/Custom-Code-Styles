@@ -28,11 +28,12 @@ CustomCode/
 
 The VS Code profile loads these files in order:
 
-1. `Styles/LucyBase.css` — existing visual identity and wallpaper, with repository-relative asset paths.
-2. `Styles/LucyPerformance.css` — low-power overrides for the original style system.
-3. `Styles/LucyWorkbench.css` — Lucy activity bar, sidebar views, panel headers, lists, inputs, badges, menus, and quick surfaces.
-4. `Styles/LucyTerminal.css` — static integrated-terminal command deck labeled `LUCY // COMMAND`.
-5. `Styles/LucyLite.js` — pooled cursor core and event-driven click pulse.
+1. `Styles/LucyBase.css` — existing visual identity, typography, transparent workbench foundation, and artwork.
+2. `Styles/LucyWallpaper.css` — compact embedded copy of the existing wallpaper for reliable renderer loading.
+3. `Styles/LucyPerformance.css` — low-power overrides for the original style system.
+4. `Styles/LucyWorkbench.css` — Lucy activity bar, sidebar views, panel headers, lists, inputs, badges, menus, and quick surfaces.
+5. `Styles/LucyTerminal.css` — static integrated-terminal command deck labeled `LUCY // COMMAND`.
+6. `Styles/LucyLite.js` — pooled cursor core and event-driven click pulse.
 
 `Configs/Lucy-Settings.json` is the final settings snapshot corresponding to the active profile. The live file remains VS Code's user settings file.
 
