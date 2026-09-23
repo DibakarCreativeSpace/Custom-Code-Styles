@@ -32,7 +32,7 @@
     "opacity": 1,
     "transparent": true,
     "backgroundColor": "#00000000",
-    "vibrancy": "window",
+    "vibrancy": "window"
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -53,7 +53,7 @@
   "files.associations": {
     "*.html": "html",
     ".php_cs": "php",
-    ".php_cs.dist": "php",
+    ".php_cs.dist": "php"
   },
 
   //? 🗺️ Explorer Settings - Navigate like a pro!
@@ -67,7 +67,7 @@
     "**/.classpath": true,
     "**/.project": true,
     "**/.settings": true,
-    "**/.factorypath": true,
+    "**/.factorypath": true
   },
 
   //? 👁️ Watcher Exclusions - Don't watch what doesn't matter
@@ -93,7 +93,7 @@
     "**/htmlcov/**": true,
     "**/coverage/**": true,
     "**/.coverage": true,
-    "**/.DS_Store": true,
+    "**/.DS_Store": true
   },
   "editor.minimap.enabled": false,
   "editor.renderLineHighlight": "none",
@@ -141,7 +141,7 @@
 
   //? 📝 Snippet settings - Because even snippets deserve formatting
   "[snippets]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
 
   //? 🎈 Hover Settings - Patience is a virtue
@@ -201,7 +201,7 @@
     "terminal.ansiBrightCyan": "#7AFFFF",
     "terminal.ansiBrightWhite": "#F1FFFB",
     "editorLineNumber.foreground": "#858585",
-    "editorLineNumber.activeForeground": "#00ff00",
+    "editorLineNumber.activeForeground": "#00ff00"
   },
   "workbench.tree.indent": 10,
   "workbench.statusBar.visible": false,
@@ -239,12 +239,13 @@
   //? ⚡ No animation-extension runtime import is used by this profile
   "apc.imports": [],
   "vscode_custom_css.imports": [
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyBase.css",
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyWallpaper.css",
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyPerformance.css",
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyWorkbench.css",
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyTerminal.css",
-    "file:///Users/dibakar/Documents/Documents%20-%20DIBAKAR%E2%80%99s%20MacBook%20Pro/Code/CustomCode/Styles/LucyLite.js",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyBase.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyWallpaper.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyPerformance.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyWorkbench.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyTerminal.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyLite.js",
+    "file:///Users/dibakar/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.9/dist/updateHandler.js"
   ],
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -283,7 +284,7 @@
   //? 🌐 HTML Configuration - Making the web beautiful
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
 
   //? 🐍 Python Configuration - Snake charming at its finest
@@ -293,7 +294,7 @@
     // "editor.defaultFormatter": "ms-python.autopep8",
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.tabSize": 4,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
   "python.analysis.typeCheckingMode": "off",
   "python.createEnvironment.trigger": "off",
@@ -301,30 +302,30 @@
   //? ☕ Java Configuration - Brewing perfect code since 1995
   "[java]": {
     "editor.defaultFormatter": "redhat.java",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": true
   },
   "java.import.generatesMetadataFilesAtProjectRoot": true,
 
   //? 🔩 C Language Configuration - Old school cool
   "[c]": {
-    "editor.defaultFormatter": "xaver.clang-format",
+    "editor.defaultFormatter": "xaver.clang-format"
   },
 
   //? 🐚 Shell Script Configuration - Unix philosophy approved!
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
 
   "[dockerfile]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
 
   "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
 
   "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
 
   //? 🌊 Shell Format Languages - Format ALL the things!
@@ -339,7 +340,7 @@
     "properties",
     "spring-boot-properties",
     "azcli",
-    "bats",
+    "bats"
   ],
 
   //? 📓 Notebook Configuration - Jupyter never looked so good
@@ -355,7 +356,7 @@
     "vue-html": "html",
     "vue": "html",
     "react": "html",
-    "javascript": "html",
+    "javascript": "html"
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -443,7 +444,7 @@
     "kit": "kitc --run",
     "v": "v run",
     "spwn": "spwn build",
-    "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
+    "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml"
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -479,7 +480,7 @@
   "gitlens.hovers.enabled": false,
   "gitlens.statusBar.enabled": false,
   "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": true,
+    "suppressCommitHasNoPreviousCommitWarning": true
   },
 
   //? 🎨 SCM Visual Settings - Clean and minimal
@@ -499,7 +500,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
+      "italic": false
     },
     {
       "tag": "?",
@@ -508,7 +509,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": true,
+      "italic": true
     },
     {
       "tag": "!",
@@ -517,7 +518,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
+      "italic": false
     },
     {
       "tag": ["TODO", "TO-DO", "To-Do"],
@@ -527,7 +528,7 @@
       "backgroundColor": "transparent",
       "bold": true,
       "italic": false,
-      "multiline": true,
+      "multiline": true
     },
     {
       "tag": ["FIXME", "FIX-ME", "FIX"],
@@ -537,7 +538,7 @@
       "backgroundColor": "transparent",
       "bold": true,
       "italic": false,
-      "multiline": true,
+      "multiline": true
     },
     {
       "tag": "BUG",
@@ -546,7 +547,7 @@
       "underline": true,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
+      "italic": false
     },
     {
       "tag": "HACK",
@@ -555,7 +556,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": true,
+      "italic": true
     },
     {
       "tag": "NOTE",
@@ -564,7 +565,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
+      "italic": false
     },
     {
       "tag": "INFO",
@@ -573,7 +574,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
+      "italic": false
     },
     {
       "tag": "IDEA",
@@ -582,7 +583,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
+      "italic": false
     },
     {
       "tag": "WARNING",
@@ -591,7 +592,7 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
+      "italic": false
     },
     {
       "tag": "REVIEW",
@@ -600,8 +601,8 @@
       "underline": false,
       "backgroundColor": "transparent",
       "bold": true,
-      "italic": false,
-    },
+      "italic": false
+    }
   ],
 
   "editor.tokenColorCustomizations": {
@@ -609,10 +610,10 @@
       {
         "scope": "comment",
         "settings": {
-          "fontStyle": "italic",
-        },
-      },
-    ],
+          "fontStyle": "italic"
+        }
+      }
+    ]
   },
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -666,7 +667,7 @@
     "**/.mypy_cache": true,
     "**/.ruff_cache": true,
     "**/coverage": true,
-    "**/htmlcov": true,
+    "**/htmlcov": true
   },
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
@@ -690,7 +691,7 @@
     "yaml": false,
     "yml": false,
     "json": false,
-    "jsonc": false,
+    "jsonc": false
   },
 
   //? 💡 Copilot Editor Settings - Fine-tuned for maximum intelligence
@@ -705,7 +706,7 @@
   "editor.quickSuggestions": {
     "other": "on",
     "comments": "on",
-    "strings": "on",
+    "strings": "on"
   },
   "editor.acceptSuggestionOnCommitCharacter": true,
   "editor.acceptSuggestionOnEnter": "on",
@@ -741,7 +742,7 @@
     "workbench.editor.showTabs",
     "explorer.autoReveal",
     "git.autofetch",
-    "window.zoomLevel",
+    "window.zoomLevel"
   ],
 
   // ┌─────────────────────────────────────────────────────────────────┐
@@ -752,14 +753,14 @@
 
   //? 📚 External Spell Dictionary - Clean & Organized!
   "cSpell.customDictionaries": {
-    "mrdib-dictionary": {
+    "lucy-dictionary": {
       "name": "MrDib's Epic Dictionary",
-      "path": "/Users/dibakar/Documents/Documents - DIBAKAR’s MacBook Pro/Code/CustomCode/Dictionaries/mrdib-words.txt",
+      "path": "/Users/dibakar/Library/Mobile Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Dictionaries/lucy-dictionary.txt",
       "description": "Tech terms, frameworks, Indian languages, and MrDib's favorites 🏆",
       "addWords": true,
-      "scope": "user",
-    },
-  },
+      "scope": "user"
+    }
+  }
 
   // ╔══════════════════════════════════════════════════════════════════╗
   // ║                     🎊 END OF CONFIGURATION 🎊                   ║
