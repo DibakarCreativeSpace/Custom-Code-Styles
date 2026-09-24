@@ -239,12 +239,12 @@
   //? ⚡ No animation-extension runtime import is used by this profile
   "apc.imports": [],
   "vscode_custom_css.imports": [
-    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyBase.css",
-    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyWallpaper.css",
-    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyPerformance.css",
-    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyWorkbench.css",
-    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyTerminal.css",
-    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Styles/LucyLite.js",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Importants/Code/CustomCode/Styles/LucyBase.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Importants/Code/CustomCode/Styles/LucyWallpaper.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Importants/Code/CustomCode/Styles/LucyPerformance.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Importants/Code/CustomCode/Styles/LucyWorkbench.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Importants/Code/CustomCode/Styles/LucyTerminal.css",
+    "file:///Users/dibakar/Library/Mobile%20Documents/com~apple~CloudDocs/Importants/Code/CustomCode/Styles/LucyLite.js",
     "file:///Users/dibakar/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.9/dist/updateHandler.js"
   ],
 
