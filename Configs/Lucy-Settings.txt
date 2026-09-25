@@ -755,7 +755,7 @@
   "cSpell.customDictionaries": {
     "lucy-dictionary": {
       "name": "MrDib's Epic Dictionary",
-      "path": "/Users/dibakar/Library/Mobile Documents/com~apple~CloudDocs/Documents/Importants/Code/CustomCode/Dictionaries/lucy-dictionary.txt",
+      "path": "/Users/dibakar/Library/Mobile Documents/com~apple~CloudDocs/Importants/Code/CustomCode/Dictionaries/lucy-dictionary.txt",
       "description": "Tech terms, frameworks, Indian languages, and MrDib's favorites 🏆",
       "addWords": true,
       "scope": "user"
